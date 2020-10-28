@@ -14,18 +14,6 @@ export const Card = () => ({
   template: '<CardRow :card="card"/>',
 })
 
-export const CardWithPlus = () => ({
-  data() {
-    return {
-      card: {
-        name: 'Adventure Awaits',
-        rating: 'D+',
-      },
-    }
-  },
-  template: '<CardRow :card="card"/>',
-})
-
 export const LongNamedHighRatedCard = () => ({
   data() {
     return {
@@ -37,4 +25,3 @@ export const LongNamedHighRatedCard = () => ({
   },
   template: '<CardRow :card="card"/>',
 })
-

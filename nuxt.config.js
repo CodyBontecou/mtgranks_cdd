@@ -47,7 +47,6 @@ export default {
 
   storybook: {
     // Options
-    fullscreen: true,
   },
 
   i18n: {
