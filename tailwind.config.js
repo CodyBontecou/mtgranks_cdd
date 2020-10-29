@@ -18,6 +18,10 @@ module.exports = {
       spacing: {
         6: '1.5rem',
       },
+      lineHeight: {
+        12: '12px',
+        18: '18px',
+      },
     },
   },
   variants: {

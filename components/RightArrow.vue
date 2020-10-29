@@ -3,7 +3,6 @@
     <path
       d="M8.334 14.667L12.5 10.5 8.334 6.333v8.334z"
       fill="#000"
-      fill-opacity=".5"
     />
   </svg>
 </template>
