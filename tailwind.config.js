@@ -17,10 +17,18 @@ module.exports = {
       },
       spacing: {
         6: '1.5rem',
+        170: '170px',
       },
       lineHeight: {
         12: '12px',
         18: '18px',
+        29: '29px',
+        130: '130%',
+        160: '160%',
+      },
+      fontSize: {
+        '2xs': '9px',
+        12: '12px',
       },
     },
   },

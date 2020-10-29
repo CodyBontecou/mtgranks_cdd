@@ -13,7 +13,8 @@ export const RatorBubble = () => ({
       },
     }
   },
-  template: '<RatorBubble :rating="card.rating" :rator="rator"/>',
+  template: '<RatorBubble :rating="card.rating" :name="rator.name"/>',
 })
 
 export const VerticalReviewCard = () => '<VerticalReview />'
+export const HorizontalReviewCard = () => '<HorizontalReview />'

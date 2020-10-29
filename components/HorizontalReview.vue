@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col w-170">
-    <div class="flex pb-4">
-      <RatorBubble v-for="rating in ratings" :rating="rating.rating" :name="rating.rator.name"  />
-    </div>
-    <p class="text-12 text-white leading-160 font-medium">
+  <div class="flex flex-row items-center">
+    <p class="text-sm text-white leading-160 font-medium w-56">
       {{ ratings[0].reason }}
     </p>
+    <div class="flex">
+      <RatorBubble v-for="rating in ratings" :rating="rating.rating" :name="rating.rator.name"  />
+    </div>
   </div>
 </template>
 
