@@ -6,7 +6,7 @@
       'bg-persian-green': highRating === true,
     }"
   >
-    <span class="rating text-white text-lg ml-2">
+    <span class="rating text-white text-lg font-medium">
       {{ rating }}
     </span>
   </div>
@@ -40,3 +40,11 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.rating {
+  margin-left: 0.65rem;
+  font-size: 15px;
+  line-height: 19px;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link to="" class="flex items-end hover:shadow rounded">
+  <nuxt-link to="#" class="flex items-end hover:text-gray-600">
     <RatingBubble :rating="card.rating" />
     <span class="cardName pl-6 mb-2 justify-self-end">{{ cardName }}</span>
   </nuxt-link>
@@ -27,13 +27,6 @@ export default {
 </script>
 
 <style scoped>
-.rating {
-  margin-left: 0.65rem;
-  font-size: 15px;
-  line-height: 19px;
-  font-weight: 500;
-}
-
 .cardName {
   font-size: 15px;
   line-height: 19px;
