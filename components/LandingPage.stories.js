@@ -2,7 +2,7 @@ export default {
   title: 'Landing Page',
 }
 
-export const Set = () => ({
+export const OldSet = () => ({
   data() {
     return {
       set: {
@@ -12,5 +12,7 @@ export const Set = () => ({
       },
     }
   },
-  template: '<Set :set="set"/>',
+  template: '<OldSet :set="set"/>',
 })
+
+
