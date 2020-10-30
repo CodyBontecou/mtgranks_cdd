@@ -15,4 +15,16 @@ export const OldSet = () => ({
   template: '<OldSet :set="set"/>',
 })
 
-
+export const NewSet = () => ({
+  data() {
+    return {
+      set: {
+        name: 'Zendikar Rising',
+        code: 'ZNR',
+        icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/znr.svg',
+        cardCount: '220',
+      },
+    }
+  },
+  template: '<NewSet :set="set" color="black-gold"/>',
+})

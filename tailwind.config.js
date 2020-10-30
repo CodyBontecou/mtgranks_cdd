@@ -7,15 +7,13 @@ module.exports = {
         gray: {
           1: '#f2f2f2',
         },
-        column: {
-          red: '#E76F51',
-          green: '#2A9D8F',
-          blue: '#E76F51',
-          black: '#E76F51',
-          white: '#E76F51',
-          multi: '#E76F51',
-          colorless: '#E76F51',
-          lands: '#E76F51',
+        gradient: {
+          'black-gold':
+            'linear-gradient(141.77deg, #E9C46A 2.6%, #264653 43.75%)',
+          'black-green':
+            'linear-gradient(141.77deg, #264653 3.65%, #2A9D8F 43.75%)',
+          'orange-yellow':
+            'linear-gradient(141.77deg, rgba(255, 90, 61, 0.8) 17.19%, #E9C46A 100%)',
         },
       },
       spacing: {
@@ -36,9 +34,11 @@ module.exports = {
         160: '160%',
       },
       fontSize: {
+        8: '8px',
         '2xs': '9px',
         10: '10px',
         12: '12px',
+        14: '14px',
         18: '18px',
       },
       borderRadius: {
