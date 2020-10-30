@@ -1,7 +1,12 @@
 <template>
   <div class="flex flex-col w-170">
     <div class="flex pb-4">
-      <RatorBubble v-for="rating in ratings" :rating="rating.rating" :name="rating.rator.name"  />
+      <RatorBubble
+        v-for="(rating, i) in ratings"
+        :key="i"
+        :rating="rating.rating"
+        :name="rating.rator.name"
+      />
     </div>
     <p class="text-12 text-white leading-160 font-medium">
       {{ ratings[0].reason }}

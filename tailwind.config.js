@@ -4,6 +4,9 @@ module.exports = {
       colors: {
         charcoal: '#264653',
         'persian-green': '#2A9D8F',
+        gray: {
+          1: '#f2f2f2',
+        },
         column: {
           red: '#E76F51',
           green: '#2A9D8F',
@@ -17,18 +20,28 @@ module.exports = {
       },
       spacing: {
         6: '1.5rem',
+        14: '14px',
+        20: '20px',
+        38: '38px',
+        66: '66px',
         170: '170px',
       },
       lineHeight: {
         12: '12px',
         18: '18px',
+        21: '21px',
         29: '29px',
         130: '130%',
         160: '160%',
       },
       fontSize: {
         '2xs': '9px',
+        10: '10px',
         12: '12px',
+        18: '18px',
+      },
+      borderRadius: {
+        10: '10px',
       },
     },
   },

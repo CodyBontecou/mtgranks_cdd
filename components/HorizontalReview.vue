@@ -4,7 +4,12 @@
       {{ ratings[0].reason }}
     </p>
     <div class="flex">
-      <RatorBubble v-for="rating in ratings" :rating="rating.rating" :name="rating.rator.name"  />
+      <RatorBubble
+        v-for="(rating, i) in ratings"
+        :key="i"
+        :rating="rating.rating"
+        :name="rating.rator.name"
+      />
     </div>
   </div>
 </template>
