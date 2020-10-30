@@ -22,6 +22,7 @@ module.exports = {
         6: '1.5rem',
         14: '14px',
         20: '20px',
+        22: '22px',
         38: '38px',
         66: '66px',
         170: '170px',
@@ -42,6 +43,9 @@ module.exports = {
       },
       borderRadius: {
         10: '10px',
+      },
+      boxShadow: {
+        1: '0px 0.892729px 2.67819px rgba(0, 0, 0, 0.05), 0px 10px 20px rgba(0, 0, 0, 0.15)',
       },
     },
   },

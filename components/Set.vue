@@ -7,7 +7,7 @@
         class="flex items-center justify-center bg-charcoal w-12 h-38 rounded ml-20 mr-3"
       >
         <img
-          class="fill-current text-white h-8 w-6"
+          class="filter-white text-white h-8 w-6"
           :src="set.icon"
           :alt="`set.name set icon`"
         />
@@ -34,3 +34,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.filter-white {
+  filter: brightness(0) invert(1);
+}
+</style>

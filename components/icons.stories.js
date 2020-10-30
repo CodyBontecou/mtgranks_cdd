@@ -4,7 +4,7 @@ export default {
 
 export const DownArrow = () => '<DownArrow />'
 export const RightArrow = () => '<RightArrow />'
+export const SearchIcon = () => '<SearchIcon />'
 export const ThinRightArrow = () => '<ThinRightArrow />'
 export const BaseCircle = () => '<BaseCircle />'
-export const RightArrowCircle = () =>
-  '<RightArrowCircle />'
+export const RightArrowCircle = () => '<RightArrowCircle />'
