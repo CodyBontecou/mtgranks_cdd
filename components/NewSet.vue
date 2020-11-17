@@ -1,6 +1,9 @@
 <template>
-  <button class="new-set-container outline-none focus:outline-none" :class="`bg-gradient-${color}`">
-    <nuxt-link to="#" class="flex h-full w-full py-20 px-3">
+  <button
+    class="new-set-container outline-none focus:outline-none"
+    :class="`bg-gradient-${color}`"
+  >
+    <nuxt-link :to="setRoute" class="flex h-full w-full py-20 px-3">
       <div class="flex flex-col justify-between">
         <div class="flex flex-col justify-start items-start text-white">
           <div class="text-8 font-normal">{{ set.code }}</div>
@@ -30,6 +33,15 @@ export default {
     set: {
       type: Object,
       required: true,
+    },
+  },
+  // TODO: Move this to a Mixin
+  computed: {
+    setRoute() {
+      return this.set.name
+        .replaceAll(' ', '-')
+        .replaceAll("'", '')
+        .toLowerCase()
     },
   },
 }

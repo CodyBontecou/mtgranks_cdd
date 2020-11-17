@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link to="#" class="flex items-end hover:text-gray-600">
+  <nuxt-link :to="cardRoute" class="flex items-end hover:text-gray-600">
     <RatingBubble :rating="card.rating" />
     <span class="cardName pl-6 mb-2 justify-self-end">{{ cardName }}</span>
   </nuxt-link>
@@ -21,6 +21,13 @@ export default {
       } else {
         return this.card.name
       }
+    },
+    cardRoute() {
+      return this.card.name
+        .replaceAll(' ', '-')
+        .replaceAll(',', '')
+        .replaceAll("'", '')
+        .toLowerCase()
     },
   },
 }

@@ -1,6 +1,6 @@
 <template>
   <button class="w-full rounded-10 h-66 bg-gray-1">
-    <nuxt-link to="#">
+    <nuxt-link :to="setRoute">
       <div class="flex justify-between">
         <div class="flex">
           <div
@@ -32,6 +32,14 @@ export default {
     set: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    setRoute() {
+      return this.set.name
+        .replaceAll(' ', '-')
+        .replaceAll("'", '')
+        .toLowerCase()
     },
   },
 }
