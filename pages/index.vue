@@ -2,11 +2,17 @@
   <div class="">
     <Header page="home"></Header>
     <h2 class="mt-6 font-bold text-22">Latest Sets</h2>
-    <div class="mt-6 whitespace-no-wrap overflow-x-scroll">
+    <div
+      class="mt-6 -mx-20 whitespace-no-wrap overflow-x-scroll no-scrollbar"
+    >
       <NewSet
         v-for="(set, i) in sets"
         :key="i"
         class="mr-2 inline-block whitespace-normal text-left"
+        :class="{
+          'ml-20': i === 0,
+          'mr-20': i === 2,
+        }"
         :set="set"
         :color="set.color"
       />
@@ -45,3 +51,15 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+/* Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+</style>

@@ -14,8 +14,8 @@
     </div>
 
     <!--  Top bar HOME -->
-    <div v-if="page === 'home'" class="flex justify-center items-start">
-      <div class="font-bold text-36">mtgranks</div>
+    <div v-if="page === 'home'" class="flex justify-center items-center">
+      <div class="font-bold text-36 leading-42">mtgranks</div>
       <div class="absolute mr-20 right-0 flex">
         <GlobeIcon />
         <DownArrow class="ml-1" />
