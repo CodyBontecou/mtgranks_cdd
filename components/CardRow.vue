@@ -25,6 +25,7 @@ export default {
     cardRoute() {
       return this.card.name
         .replaceAll(' ', '-')
+        .replaceAll(':', '')
         .replaceAll(',', '')
         .replaceAll("'", '')
         .toLowerCase()

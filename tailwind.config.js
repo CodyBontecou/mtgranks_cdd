@@ -7,6 +7,10 @@ module.exports = {
         gray: {
           1: '#f2f2f2',
         },
+        ash: '#264653',
+        teal: '#2A9D8F',
+        mandarin: '#F4A261',
+        peach: '#E76F51',
       },
       spacing: {
         6: '1.5rem',
@@ -42,6 +46,12 @@ module.exports = {
       },
       boxShadow: {
         1: '0px 0.892729px 2.67819px rgba(0, 0, 0, 0.05), 0px 10px 20px rgba(0, 0, 0, 0.15)',
+      },
+      minHeight: {
+        8: '8px',
+      },
+      minWidth: {
+        8: '8px',
       },
     },
   },

@@ -4,7 +4,8 @@
       <div class="flex justify-between">
         <div class="flex">
           <div
-            class="flex items-center justify-center bg-charcoal w-12 h-38 rounded ml-20 mr-3"
+            class="flex items-center justify-center w-12 h-38 rounded ml-20 mr-3"
+            :class="`bg-${color}`"
           >
             <img
               class="filter-white text-white h-8 w-6"
@@ -16,7 +17,7 @@
             <div class="text-10 font-semibold">
               {{ set.code }}
             </div>
-            <div class="text-18 font-semibold">{{ set.name }}</div>
+            <div class="text-18 font-semibold">{{ setName }}</div>
           </div>
         </div>
         <RightArrowCircle class="mr-20 self-center" />
@@ -29,17 +30,36 @@
 export default {
   name: 'Set',
   props: {
+    color: {
+      type: String,
+      required: true,
+      default: 'charcoal',
+    },
     set: {
       type: Object,
       required: true,
     },
   },
+  // TODO: Move this to a Mixin
   computed: {
+    setName() {
+      if (this.set.name.length > 22) {
+        return this.set.name.substring(0, 19) + '...'
+      } else {
+        return this.set.name
+      }
+    },
     setRoute() {
-      return this.set.name
-        .replaceAll(' ', '-')
-        .replaceAll("'", '')
-        .toLowerCase()
+      try {
+        return this.set.name
+          .replaceAll(' ', '-')
+          .replaceAll(':', '')
+          .replaceAll("'", '')
+          .toLowerCase()
+      } catch (e) {
+        console.log(e)
+        return ''
+      }
     },
   },
 }
