@@ -12,3 +12,4 @@ export const CircleWithGradient = () =>
   '<BaseCircle color="gradient-black-green" />'
 export const RightArrowCircle = () => '<RightArrowCircle />'
 export const ThreeVerticalDots = () => '<ThreeVerticalDots />'
+export const Globe = () => '<GlobeIcon />'

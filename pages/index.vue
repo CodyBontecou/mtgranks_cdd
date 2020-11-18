@@ -1,70 +1,47 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">frontend</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+  <div class="">
+    <Header page="home"></Header>
+    <h2 class="mt-6 font-bold text-22">Latest Sets</h2>
+    <div class="mt-6 whitespace-no-wrap overflow-x-scroll">
+      <NewSet
+        v-for="(set, i) in sets"
+        :key="i"
+        class="mr-2 inline-block whitespace-normal text-left"
+        :set="set"
+        :color="set.color"
+      />
     </div>
   </div>
 </template>
 
-<script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({})
+<script>
+export default {
+  data() {
+    return {
+      sets: [
+        {
+          name: 'Zendikar Rising',
+          code: 'ZNR',
+          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/znr.svg',
+          cardCount: '220',
+          color: 'black-gold',
+        },
+        {
+          name: 'Ikoria: Lair of Behemoths',
+          code: 'IKO',
+          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/iko.svg',
+          cardCount: '264',
+          color: 'orange-red',
+        },
+        {
+          name: 'Core 2021',
+          code: 'M21',
+          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/m21.svg',
+          cardCount: '264',
+          color: 'black-green',
+        },
+      ],
+    }
+  },
+}
 </script>
-
-<style>
-/* Sample `apply` at-rules with Tailwind CSS
-.container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
-}
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
-</style>

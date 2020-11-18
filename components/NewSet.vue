@@ -38,10 +38,16 @@ export default {
   // TODO: Move this to a Mixin
   computed: {
     setRoute() {
-      return this.set.name
-        .replaceAll(' ', '-')
-        .replaceAll("'", '')
-        .toLowerCase()
+      try {
+        return this.set.name
+          .replaceAll(' ', '-')
+          .replaceAll(':', '')
+          .replaceAll("'", '')
+          .toLowerCase()
+      } catch (e) {
+        console.log(e)
+        return ''
+      }
     },
   },
 }

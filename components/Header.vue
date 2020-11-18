@@ -1,20 +1,40 @@
 <template>
-  <div class="flex flex-col justify-between h-40 w-full bg-charcoal text-white">
-    <!--  Top bar -->
-    <div class="flex justify-between">
+  <div
+    class="flex flex-col justify-between w-full"
+    :class="{
+      'h-40 bg-charcoal text-white': page === 'mtgSet',
+      'bg-transparent text-black': page === 'home',
+    }"
+  >
+    <!--  Top bar mtgSet -->
+    <div v-if="page === 'mtgSet'" class="flex justify-between">
       <ThinLeftArrow />
       <div class="font-bold text-24">mtgranks</div>
       <ThreeVerticalDots />
     </div>
 
-    <div class="large-circle"></div>
-    <div class="small-circle"></div>
+    <!--  Top bar HOME -->
+    <div v-if="page === 'home'" class="flex justify-center items-start">
+      <div class="font-bold text-36">mtgranks</div>
+      <div class="absolute mr-20 right-0 flex">
+        <GlobeIcon />
+        <DownArrow class="ml-1" />
+      </div>
+    </div>
+
+    <div v-if="page === 'mtgSet'" class="large-circle"></div>
+    <div v-if="page === 'mtgSet'" class="small-circle"></div>
 
     <div v-if="card" class="">
       {{ card }}
     </div>
 
-    <span class="opaque-logo absolute text-white font-bold"> mtgranks </span>
+    <span
+      v-if="page === 'mtgSet'"
+      class="opaque-logo absolute text-white font-bold"
+    >
+      mtgranks
+    </span>
 
     <div v-if="set">
       <!--  Set Name -->
@@ -31,8 +51,10 @@
 </template>
 
 <script>
+import GlobeIcon from '@/components/GlobeIcon'
 export default {
   name: 'Header',
+  components: { GlobeIcon },
   props: {
     set: {
       type: Object,
@@ -43,6 +65,11 @@ export default {
       type: Object,
       default: null,
       required: false,
+    },
+    page: {
+      type: String,
+      default: 'mtgSet',
+      required: true,
     },
   },
 }

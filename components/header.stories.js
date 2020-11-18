@@ -34,3 +34,10 @@ export const HeaderWithSetAndCard = () => ({
   },
   template: '<Header :card="card" :set="set"/>',
 })
+
+export const HeaderWhite = () => ({
+  data() {
+    return {}
+  },
+  template: '<Header page="home" />',
+})
