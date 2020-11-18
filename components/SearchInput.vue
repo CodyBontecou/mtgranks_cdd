@@ -9,7 +9,7 @@
       <label for="cardSearch"> </label>
       <input
         id="cardSearch"
-        class="mb-1 appearance-none focus:outline-none"
+        class="appearance-none focus:outline-none"
         type="text"
         placeholder="Search for a card"
       />
