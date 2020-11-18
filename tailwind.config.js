@@ -47,12 +47,6 @@ module.exports = {
       boxShadow: {
         1: '0px 0.892729px 2.67819px rgba(0, 0, 0, 0.05), 0px 10px 20px rgba(0, 0, 0, 0.15)',
       },
-      minHeight: {
-        8: '8px',
-      },
-      minWidth: {
-        8: '8px',
-      },
     },
   },
   variants: {
