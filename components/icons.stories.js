@@ -13,3 +13,6 @@ export const CircleWithGradient = () =>
 export const RightArrowCircle = () => '<RightArrowCircle />'
 export const ThreeVerticalDots = () => '<ThreeVerticalDots />'
 export const Globe = () => '<GlobeIcon />'
+export const PersonOutline = () => '<PersonOutline />'
+export const BulletedList = () => '<BulletedList />'
+export const LightingFillIcon = () => '<LightingFillIcon />'

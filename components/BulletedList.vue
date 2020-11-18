@@ -1,0 +1,16 @@
+<template>
+  <svg width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M6 15.75A2.247 2.247 0 003.75 18 2.247 2.247 0 006 20.25 2.247 2.247 0 008.25 18 2.247 2.247 0 006 15.75zm0-9A2.247 2.247 0 003.75 9 2.247 2.247 0 006 11.25 2.247 2.247 0 008.25 9 2.247 2.247 0 006 6.75zm0 18A2.257 2.257 0 003.75 27c0 1.23 1.02 2.25 2.25 2.25S8.25 28.23 8.25 27 7.245 24.75 6 24.75zm4.5 3.75h21v-3h-21v3zm0-9h21v-3h-21v3zm0-12v3h21v-3h-21z"
+      fill="#fff"
+    />
+  </svg>
+</template>
+
+<script>
+export default {
+  name: 'BulletedList',
+}
+</script>
+
+<style scoped></style>

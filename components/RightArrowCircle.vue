@@ -1,5 +1,5 @@
 <template>
-  <BaseCircle><ThinRightArrow /></BaseCircle>
+  <BaseCircle color="black"><ThinRightArrow /></BaseCircle>
 </template>
 
 <script>

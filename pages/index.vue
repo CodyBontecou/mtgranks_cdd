@@ -27,6 +27,8 @@
         :color="set.color"
       />
     </div>
+
+    <BottomNav class="mt-10" />
   </div>
 </template>
 

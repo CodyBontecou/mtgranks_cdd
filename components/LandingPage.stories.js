@@ -28,3 +28,10 @@ export const NewSet = () => ({
   },
   template: '<NewSet :set="set" color="black-gold"/>',
 })
+
+export const BottomNav = () => ({
+  data() {
+    return {}
+  },
+  template: '<BottomNav />',
+})
