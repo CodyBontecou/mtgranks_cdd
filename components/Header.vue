@@ -52,7 +52,7 @@ export default {
 .opaque-logo {
   top: 100px;
   right: 20px;
-  opacity: 7%;
+  opacity: 0.1;
   font-size: 60px;
   line-height: 71px;
 }
