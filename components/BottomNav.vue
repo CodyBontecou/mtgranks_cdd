@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed left-0 bottom-0 w-full relative w-full h-66 px-8 py-4 flex justify-between rounded-full bg-black"
+    class="relative w-full h-66 px-8 py-4 flex justify-between rounded-full bg-black"
   >
     <PersonOutline />
     <SearchIcon />

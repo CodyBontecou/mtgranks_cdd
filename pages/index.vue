@@ -1,34 +1,40 @@
 <template>
-  <div class="">
-    <Header page="home"></Header>
-    <h2 class="mt-6 font-bold text-22">Latest Sets</h2>
-    <div class="mt-6 -mx-20 whitespace-no-wrap overflow-x-scroll no-scrollbar">
-      <NewSet
-        v-for="(set, i) in newSets"
-        :key="i"
-        class="mr-2 inline-block whitespace-normal text-left"
-        :class="{
-          'ml-20': i === 0,
-          'mr-20': i === 2,
-        }"
-        :set="set"
-        :color="set.color"
-      />
+  <div class="flex flex-col justify-between h-screen">
+    <div class="">
+      <Header page="home"></Header>
+      <h2 class="mt-6 font-bold text-22">Latest Sets</h2>
+      <div
+        class="mt-6 -mx-20 whitespace-no-wrap overflow-x-scroll no-scrollbar"
+      >
+        <NewSet
+          v-for="(set, i) in newSets"
+          :key="i"
+          class="mr-2 inline-block whitespace-normal text-left"
+          :class="{
+            'ml-20': i === 0,
+            'mr-20': i === 2,
+          }"
+          :set="set"
+          :color="set.color"
+        />
+      </div>
+
+      <h2 class="mt-8 font-bold text-22">Older Sets</h2>
+      <div class="mt-4">
+        <OldSet
+          v-for="(set, i) in oldSets"
+          :key="i"
+          class="whitespace-no-wrap"
+          :class="{
+            'mt-4': i !== 0,
+          }"
+          :set="set"
+          :color="set.color"
+        />
+      </div>
     </div>
 
-    <h2 class="mt-8 font-bold text-22">Older Sets</h2>
-    <div class="mt-4">
-      <OldSet
-        v-for="(set, i) in oldSets"
-        :key="i"
-        class="whitespace-no-wrap"
-        :class="{ 'mt-4': i !== 0 }"
-        :set="set"
-        :color="set.color"
-      />
-    </div>
-
-    <BottomNav class="mt-10" />
+    <BottomNav />
   </div>
 </template>
 
