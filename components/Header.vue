@@ -8,8 +8,12 @@
   >
     <!--  Top bar mtgSet -->
     <div v-if="page === 'mtgSet'" class="flex justify-between m-20">
-      <ThinLeftArrow />
-      <div class="font-bold text-24">mtgranks</div>
+      <nuxt-link to="/">
+        <ThinLeftArrow />
+      </nuxt-link>
+      <nuxt-link to="/">
+        <div class="font-bold text-24">mtgranks</div>
+      </nuxt-link>
       <ThreeVerticalDots />
     </div>
 
