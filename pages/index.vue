@@ -97,6 +97,22 @@ export default {
       ],
     }
   },
+  head: {
+    meta: [
+      {
+        name: 'theme-color',
+        content: '#ffffff',
+      },
+      {
+        name: 'msapplication-navbutton-color',
+        content: '#ffffff',
+      },
+      {
+        name: 'apple-mobile-web-app-status-bar-style',
+        content: '#ffffff',
+      },
+    ],
+  },
 }
 </script>
 
