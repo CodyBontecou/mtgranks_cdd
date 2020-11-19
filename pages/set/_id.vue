@@ -11,6 +11,25 @@
 export default {
   name: 'Id',
   layout: 'wideHeader',
+  head: {
+    meta: [
+      {
+        hid: 'theme-color',
+        name: 'theme-color',
+        content: '#264653',
+      },
+      {
+        hid: 'msapplication-navbutton-color',
+        name: 'msapplication-navbutton-color',
+        content: '#264653',
+      },
+      {
+        hid: 'apple-mobile-web-app-status-bar-style',
+        name: 'apple-mobile-web-app-status-bar-style',
+        content: '#264653',
+      },
+    ],
+  },
   data: () => {
     return {
       cards: [],

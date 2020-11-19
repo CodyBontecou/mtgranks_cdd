@@ -11,18 +11,6 @@ export default {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, viewport-fit=cover',
       },
-      {
-        name: 'theme-color',
-        content: '#264653',
-      },
-      {
-        name: 'msapplication-navbutton-color',
-        content: '#264653',
-      },
-      {
-        name: 'apple-mobile-web-app-status-bar-style',
-        content: '#264653',
-      },
       { hid: 'description', name: 'description', content: '' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],

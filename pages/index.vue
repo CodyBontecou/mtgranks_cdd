@@ -100,14 +100,17 @@ export default {
   head: {
     meta: [
       {
+        hid: 'theme-color',
         name: 'theme-color',
         content: '#ffffff',
       },
       {
+        hid: 'msapplication-navbutton-color',
         name: 'msapplication-navbutton-color',
         content: '#ffffff',
       },
       {
+        hid: 'apple-mobile-web-app-status-bar-style',
         name: 'apple-mobile-web-app-status-bar-style',
         content: '#ffffff',
       },
