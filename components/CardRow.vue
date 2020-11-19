@@ -1,7 +1,7 @@
 <template>
   <nuxt-link :to="cardRoute" class="flex items-end hover:text-gray-600">
     <!--    <RatingBubble :rating="card.rating" />-->
-    <RatingBubble rating="A+" />
+    <RatingBubble :rating="randomizedRating" />
     <span class="cardName pl-6 mb-2 justify-self-end">{{ cardName }}</span>
   </nuxt-link>
 </template>
@@ -14,6 +14,11 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  data: () => {
+    return {
+      ratings: ['A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F'],
+    }
   },
   computed: {
     cardName() {
@@ -30,6 +35,9 @@ export default {
         .replaceAll(',', '')
         .replaceAll("'", '')
         .toLowerCase()
+    },
+    randomizedRating() {
+      return this.ratings[Math.floor(Math.random() * this.ratings.length)]
     },
   },
 }
