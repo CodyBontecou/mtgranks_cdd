@@ -109,4 +109,9 @@ export default {
   top: 55px;
   background: rgba(255, 255, 255, 0.05);
 }
+
+.notch {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
 </style>
