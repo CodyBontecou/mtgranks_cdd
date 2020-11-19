@@ -1,6 +1,7 @@
 <template>
   <nuxt-link :to="cardRoute" class="flex items-end hover:text-gray-600">
-    <RatingBubble :rating="card.rating" />
+    <!--    <RatingBubble :rating="card.rating" />-->
+    <RatingBubble rating="A+" />
     <span class="cardName pl-6 mb-2 justify-self-end">{{ cardName }}</span>
   </nuxt-link>
 </template>

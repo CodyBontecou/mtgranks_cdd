@@ -51,11 +51,14 @@ export default {
     },
     setRoute() {
       try {
-        return this.set.name
-          .replaceAll(' ', '-')
-          .replaceAll(':', '')
-          .replaceAll("'", '')
-          .toLowerCase()
+        return (
+          'set/' +
+          this.set.name
+            .replaceAll(' ', '-')
+            .replaceAll(':', '')
+            .replaceAll("'", '')
+            .toLowerCase()
+        )
       } catch (e) {
         console.log(e)
         return ''

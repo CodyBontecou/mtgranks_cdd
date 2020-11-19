@@ -7,7 +7,7 @@
     }"
   >
     <!--  Top bar mtgSet -->
-    <div v-if="page === 'mtgSet'" class="flex justify-between">
+    <div v-if="page === 'mtgSet'" class="flex justify-between m-20">
       <ThinLeftArrow />
       <div class="font-bold text-24">mtgranks</div>
       <ThreeVerticalDots />
@@ -38,7 +38,7 @@
 
     <div v-if="set">
       <!--  Set Name -->
-      <div class="font-bold text-24 leading-29 opacity-75">
+      <div class="font-bold text-24 leading-29 opacity-75 ml-20">
         {{ set.name }}
       </div>
 
