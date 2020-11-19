@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <BottomNav class="mt-4" />
+    <BottomNav class="mt-10" />
   </div>
 </template>
 
