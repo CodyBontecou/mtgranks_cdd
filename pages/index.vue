@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-between h-screen">
+  <div class="flex flex-col justify-between h-full">
     <div class="">
       <Header page="home"></Header>
       <h2 class="mt-6 font-bold text-22">Latest Sets</h2>
