@@ -2,7 +2,7 @@
   <div
     class="flex flex-col justify-between w-full"
     :class="{
-      'h-40 bg-charcoal text-white': page === 'mtgSet',
+      'h-40 bg-charcoal text-white notch': page === 'mtgSet',
       'bg-transparent text-black': page === 'home',
     }"
   >
