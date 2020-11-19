@@ -1,7 +1,7 @@
 <template>
   <div class="mb-2 font-medium text-xs">
     <button
-      class="flex items-center px-2 py-1 opacity-50 hover:opacity-75 mb-2"
+      class="flex items-center px-2 py-1 opacity-50 hover:opacity-75 mb-2 focus:outline-none"
       @click="filters.isExpanded = !filters.isExpanded"
     >
       {{ $t('filters') }}
@@ -10,7 +10,7 @@
         :class="filters.isExpanded ? 'rotate-90' : 'rotate-0'"
       />
     </button>
-    <div v-if="filters.isExpanded" class="ml-4">
+    <div v-if="filters.isExpanded" class="ml-4 focus:outline-none">
       <div
         v-for="(child, childIndex) in filters.children"
         :key="`child-${childIndex + 1}`"
