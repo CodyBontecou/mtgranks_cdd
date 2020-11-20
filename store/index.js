@@ -66,7 +66,7 @@ export const state = () => ({
   ],
   cards: [],
   set: {},
-  card: {},
+  card: null,
 })
 
 export const actions = {
@@ -79,7 +79,7 @@ export const actions = {
         (card) =>
           (card.slug = card.name
             .replace(/:/g, '')
-            .replace(/ /g, '')
+            .replace(/ /g, '-')
             .replace(/,/g, '')
             .replace(/'/g, '')
             .toLowerCase())
@@ -92,6 +92,9 @@ export const actions = {
 }
 
 export const mutations = {
+  setCard(state, card) {
+    state.card = card
+  },
   setCards(state, cards) {
     state.cards = cards
   },
@@ -101,6 +104,9 @@ export const mutations = {
 }
 
 export const getters = {
+  card(state) {
+    return state.card
+  },
   cards(state) {
     return state.cards
   },
@@ -115,5 +121,12 @@ export const getters = {
   },
   oldSets(state) {
     return state.sets.filter((set) => set.type === 'old')
+  },
+  inputPlaceholderText(state) {
+    if (state.card === null || state.cards.length === 0) {
+      return 'Search for a card'
+    } else {
+      return state.card.name
+    }
   },
 }

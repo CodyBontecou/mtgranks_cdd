@@ -42,7 +42,6 @@ export default {
       required: true,
     },
   },
-  // TODO: Move this to a Mixin
   computed: {
     setName() {
       if (this.set.name.length > 22) {

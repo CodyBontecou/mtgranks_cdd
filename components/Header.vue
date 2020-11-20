@@ -2,19 +2,29 @@
   <div
     class="flex flex-col justify-between w-full"
     :class="{
-      'h-40 bg-charcoal text-white notch': page === 'mtgSet',
+      'h-40 bg-charcoal text-white notch': page === 'mtgSet' && card === null,
+      'h-auto bg-charcoal text-white notch': page === 'mtgSet' && card !== null,
       'bg-transparent text-black': page === 'home',
     }"
   >
     <!--  Top bar mtgSet -->
-    <div v-if="page === 'mtgSet'" class="flex justify-between m-20">
-      <NuxtLink to="/">
-        <ThinLeftArrow />
-      </NuxtLink>
-      <NuxtLink to="/">
-        <div class="font-bold text-24">mtgranks</div>
-      </NuxtLink>
-      <ThreeVerticalDots />
+    <div v-if="page === 'mtgSet'" class="flex flex-col m-20">
+      <div class="flex justify-between">
+        <NuxtLink to="/">
+          <ThinLeftArrow />
+        </NuxtLink>
+        <NuxtLink to="/">
+          <div class="font-bold text-24">mtgranks</div>
+        </NuxtLink>
+        <ThreeVerticalDots />
+      </div>
+      <div v-if="card" class="flex mt-20 z-50" style="max-height: 204px">
+        <img
+          :src="card.image_uris.border_crop"
+          :alt="`Small image of ${card.name} within the header.`"
+        />
+        <VerticalReview class="ml-4" />
+      </div>
     </div>
 
     <!--  Top bar HOME -->
@@ -28,11 +38,6 @@
 
     <div v-if="page === 'mtgSet'" class="large-circle"></div>
     <div v-if="page === 'mtgSet'" class="small-circle"></div>
-
-    <div v-if="card" class="">
-      {{ card }}
-    </div>
-
     <span
       v-if="page === 'mtgSet'"
       class="opaque-logo absolute text-white font-bold"
@@ -42,7 +47,10 @@
 
     <div v-if="set">
       <!--  Set Name -->
-      <div class="font-bold text-24 leading-29 opacity-75 ml-20">
+      <div
+        v-if="card === null"
+        class="font-bold text-24 leading-29 opacity-75 ml-20"
+      >
         {{ set.name }}
       </div>
 
@@ -55,10 +63,8 @@
 </template>
 
 <script>
-import GlobeIcon from '@/components/GlobeIcon'
 export default {
   name: 'Header',
-  components: { GlobeIcon },
   props: {
     set: {
       type: Object,

@@ -1,11 +1,18 @@
 <template>
   <div>
-    <Header :set="set" page="mtgSet" />
+    <Header :set="set" :card="card" page="mtgSet" />
     <div class="mx-20">
       <div v-if="cards.length === 0">
         <Loading />
       </div>
-      <Column v-else class="mt-10" :cards="cards" color="Green"></Column>
+      <!--      <Column v-else class="mt-10" :cards="cards" color="Green"></Column>-->
+      <CardRow
+        v-for="(card, i) in cards"
+        :key="i"
+        :card="card"
+        class="mb-2"
+        :class="{ 'mt-10': i === 0 }"
+      />
     </div>
   </div>
 </template>
@@ -20,19 +27,21 @@ export default {
       'setSet',
       this.sets.find((set) => set.slug === this.$route.params.set)
     )
-    await this.$store.dispatch('getCards', this.set.code)
+    if (this.cards.length === 0 || this.cards[0].set_name !== this.set.name) {
+      await this.$store.dispatch('getCards', this.set.code)
+    }
   },
   computed: {
-    ...mapGetters(['cards', 'sets', 'set']),
+    ...mapGetters(['card', 'cards', 'sets', 'set']),
   },
   watch: {
     $route() {
       console.log('_id here')
     },
   },
-  destroyed() {
-    this.$store.commit('setCards', [])
-  },
+  // destroyed() {
+  //   this.$store.commit('setCards', [])
+  // },
   head: {
     meta: [
       {
