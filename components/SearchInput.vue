@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center">
+  <div class="flex justify-center z-50">
     <form
       class="card-search py-2 px-8 flex items-center justify-center bg-white shadow-1 rounded-full"
     >
