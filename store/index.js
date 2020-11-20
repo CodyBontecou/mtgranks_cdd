@@ -78,10 +78,8 @@ export const actions = {
       response.data.forEach(
         (card) =>
           (card.slug = card.name
-            .replace(/:/g, '')
+            .replace(/[/:.,']/g, '')
             .replace(/ /g, '-')
-            .replace(/,/g, '')
-            .replace(/'/g, '')
             .toLowerCase())
       )
       commit('setCards', response.data)
