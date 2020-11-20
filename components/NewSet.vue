@@ -3,7 +3,10 @@
     class="new-set-container outline-none focus:outline-none"
     :class="`bg-gradient-${color}`"
   >
-    <nuxt-link :to="setRoute" class="flex h-full w-full py-20 px-3">
+    <NuxtLink
+      :to="{ name: 'set___en', params: { set: set.slug, object: set } }"
+      class="flex h-full w-full py-20 px-3"
+    >
       <div class="flex flex-col justify-between">
         <div class="flex flex-col justify-start items-start text-white">
           <div class="text-8 font-normal">{{ set.code }}</div>
@@ -18,7 +21,7 @@
           />
         </div>
       </div>
-    </nuxt-link>
+    </NuxtLink>
   </button>
 </template>
 
@@ -33,21 +36,6 @@ export default {
     set: {
       type: Object,
       required: true,
-    },
-  },
-  // TODO: Move this to a Mixin
-  computed: {
-    setRoute() {
-      try {
-        return this.set.name
-          .replaceAll(' ', '-')
-          .replaceAll(':', '')
-          .replaceAll("'", '')
-          .toLowerCase()
-      } catch (e) {
-        console.log(e)
-        return ''
-      }
     },
   },
 }

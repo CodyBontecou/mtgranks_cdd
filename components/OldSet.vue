@@ -1,6 +1,8 @@
 <template>
   <button class="w-full rounded-10 h-66 bg-gray-1">
-    <nuxt-link :to="setRoute">
+    <NuxtLink
+      :to="{ name: 'set___en', params: { set: set.slug, object: set } }"
+    >
       <div class="flex justify-between">
         <div class="flex">
           <div
@@ -22,7 +24,7 @@
         </div>
         <RightArrowCircle class="mr-20 self-center" />
       </div>
-    </nuxt-link>
+    </NuxtLink>
   </button>
 </template>
 
@@ -47,21 +49,6 @@ export default {
         return this.set.name.substring(0, 19) + '...'
       } else {
         return this.set.name
-      }
-    },
-    setRoute() {
-      try {
-        return (
-          'set/' +
-          this.set.name
-            .replaceAll(' ', '-')
-            .replaceAll(':', '')
-            .replaceAll("'", '')
-            .toLowerCase()
-        )
-      } catch (e) {
-        console.log(e)
-        return ''
       }
     },
   },

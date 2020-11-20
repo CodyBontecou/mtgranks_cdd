@@ -2,15 +2,37 @@
   <div>
     <Header :set="set" page="mtgSet" />
     <div class="mx-20">
-      <Column class="mt-10" :cards="cards" color="Green"></Column>
+      <div v-if="cards.length === 0">
+        <Loading />
+      </div>
+      <Column v-else class="mt-10" :cards="cards" color="Green"></Column>
     </div>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  name: 'Id',
   layout: 'wideHeader',
+  async fetch() {
+    this.$store.commit(
+      'setSet',
+      this.sets.find((set) => set.slug === this.$route.params.set)
+    )
+    await this.$store.dispatch('getCards', this.set.code)
+  },
+  computed: {
+    ...mapGetters(['cards', 'sets', 'set']),
+  },
+  watch: {
+    $route() {
+      console.log('_id here')
+    },
+  },
+  destroyed() {
+    this.$store.commit('setCards', [])
+  },
   head: {
     meta: [
       {
@@ -29,25 +51,6 @@ export default {
         content: '#264653',
       },
     ],
-  },
-  data: () => {
-    return {
-      cards: [],
-      set: {
-        name: 'Zendikar Rising',
-      },
-    }
-  },
-  mounted() {
-    this.getCards()
-  },
-  methods: {
-    async getCards() {
-      const response = await this.$axios.$get(
-        'https://api.scryfall.com/cards/search?q=set:iko+is:booster'
-      )
-      this.cards = response.data
-    },
   },
 }
 </script>

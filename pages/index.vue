@@ -39,63 +39,11 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
-  data() {
-    return {
-      newSets: [
-        {
-          name: 'Zendikar Rising',
-          code: 'ZNR',
-          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/znr.svg',
-          cardCount: '220',
-          color: 'black-gold',
-        },
-        {
-          name: 'Ikoria: Lair of Behemoths',
-          code: 'IKO',
-          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/iko.svg',
-          cardCount: '264',
-          color: 'orange-red',
-        },
-        {
-          name: 'Core 2021',
-          code: 'M21',
-          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/m21.svg',
-          cardCount: '264',
-          color: 'black-green',
-        },
-      ],
-      oldSets: [
-        {
-          name: 'Theros Beyond Death',
-          code: 'THB',
-          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/thb.svg',
-          cardCount: '220',
-          color: 'ash',
-        },
-        {
-          name: 'Throne of Eldraine',
-          code: 'ELD',
-          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/eld.svg',
-          cardCount: '264',
-          color: 'teal',
-        },
-        {
-          name: 'Core 2020',
-          code: 'M20',
-          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/m20.svg',
-          cardCount: '264',
-          color: 'mandarin',
-        },
-        {
-          name: 'War of the Spark',
-          code: 'WAR',
-          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/war.svg',
-          cardCount: '264',
-          color: 'peach',
-        },
-      ],
-    }
+  computed: {
+    ...mapGetters(['newSets', 'oldSets']),
   },
   head: {
     meta: [
