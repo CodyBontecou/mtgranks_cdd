@@ -23,10 +23,13 @@ import { mapGetters } from 'vuex'
 export default {
   layout: 'wideHeader',
   async fetch() {
-    this.$store.commit(
-      'setSet',
-      this.sets.find((set) => set.slug === this.$route.params.set)
-    )
+    if (this.set.slug !== this.$route.params.set) {
+      this.$store.commit(
+        'setSet',
+        this.sets.find((set) => set.slug === this.$route.params.set)
+      )
+    }
+
     if (
       (this.cards.length > 0 && this.cards[0].set_name !== this.set.name) ||
       this.cards.length === 0

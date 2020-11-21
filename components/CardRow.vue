@@ -4,7 +4,7 @@
     class="flex items-end hover:text-gray-600"
   >
     <!--    <RatingBubble :rating="card.rating" />-->
-    <div class="flex items-end hover:text-gray-600" @click="active = true">
+    <div class="flex items-end hover:text-gray-600">
       <RatingBubble :rating="randomizedRating" />
       <span class="cardName pl-6 mb-2 justify-self-end">{{ cardName }}</span>
     </div>
