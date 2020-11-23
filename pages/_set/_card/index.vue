@@ -22,24 +22,21 @@ import { mapGetters } from 'vuex'
 
 export default {
   layout: 'wideHeader',
-  async fetch() {
-    if (this.set.slug !== this.$route.params.set) {
-      this.$store.commit(
+  async fetch({ payload, store, params }) {
+    if (payload) {
+      return { card: payload.card, cards: payload.cards, set: payload.set }
+    } else {
+      store.commit(
         'setSet',
-        this.sets.find((set) => set.slug === this.$route.params.set)
+        store.state.sets.find((set) => set.slug === params.set)
+      )
+      await store.dispatch('getCards', store.state.set.code)
+
+      store.state.commit(
+        'setCard',
+        store.state.cards.find((card) => card.slug === params.card)
       )
     }
-
-    if (
-      (this.cards.length > 0 && this.cards[0].set_name !== this.set.name) ||
-      this.cards.length === 0
-    ) {
-      await this.$store.dispatch('getCards', this.set.code)
-    }
-    this.$store.commit(
-      'setCard',
-      this.cards.find((card) => card.slug === this.$route.params.card)
-    )
   },
   computed: {
     ...mapGetters(['card', 'cards', 'sets', 'set']),
@@ -49,9 +46,9 @@ export default {
       console.log('_id here')
     },
   },
-  destroyed() {
-    this.$store.commit('setCard', null)
-  },
+  // destroyed() {
+  //   this.$store.commit('setCard', null)
+  // },
   head: {
     meta: [
       {

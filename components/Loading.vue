@@ -8,6 +8,7 @@
 </template>
 <script>
 export default {
+  // TODO: This is a blocking component. I still want button navigation available.
   data() {
     return {
       text: 'Loading',

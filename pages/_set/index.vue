@@ -22,26 +22,33 @@ import { mapGetters } from 'vuex'
 
 export default {
   layout: 'wideHeader',
-  async fetch() {
-    this.$store.commit(
-      'setSet',
-      this.sets.find((set) => set.slug === this.$route.params.set)
-    )
-    if (this.cards.length === 0 || this.cards[0].set_name !== this.set.name) {
-      await this.$store.dispatch('getCards', this.set.code)
+  async fetch({ payload, store, params }) {
+    if (payload) {
+      return { card: payload.card, cards: payload.cards, set: payload.set }
+    } else {
+      store.commit(
+        'setSet',
+        store.state.sets.find((set) => set.slug === params.set)
+      )
+      await store.dispatch('getCards', {
+        name: 'Zendikar Rising',
+        code: 'ZNR',
+        icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/znr.svg',
+        cardCount: '220',
+        color: 'black-gold',
+        type: 'new',
+        slug: 'zendikar-rising',
+      })
     }
   },
   computed: {
-    ...mapGetters(['card', 'cards', 'sets', 'set']),
+    ...mapGetters(['card', 'cards', 'set']),
   },
   watch: {
     $route() {
       console.log('_id here')
     },
   },
-  // destroyed() {
-  //   this.$store.commit('setCards', [])
-  // },
   head: {
     meta: [
       {
