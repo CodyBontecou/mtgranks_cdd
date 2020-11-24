@@ -2,14 +2,15 @@
   <div>
     <Header :set="set" :card="card" page="mtgSet" />
     <div class="mx-20">
-      <!--      <div v-if="cards.length === 0">-->
+      <!--      <div v-if="$fetchState.pending">-->
       <!--        <Loading />-->
       <!--      </div>-->
+      <!--      <p v-else-if="$fetchState.error">Error while fetching cards</p>-->
       <!--      <Column v-else class="mt-10" :cards="cards" color="Green"></Column>-->
       <CardRow
-        v-for="(card, i) in cards"
+        v-for="(c, i) in cards"
         :key="i"
-        :card="card"
+        :card="c"
         class="mb-2"
         :class="{ 'mt-10': i === 0 }"
       />
@@ -20,9 +21,8 @@
 <script>
 export default {
   layout: 'wideHeader',
-  async fetch({ payload, params, app }) {
+  async asyncData({ payload, params, $axios }) {
     if (payload) {
-      console.log(`payload of _set: ${payload}`)
       return { card: payload.card, cards: payload.cards, set: payload.set }
     } else {
       const sets = [
@@ -91,17 +91,29 @@ export default {
         },
       ]
       const set = sets.find((set) => set.slug === params.set)
-      const cards = await app.$axios.$get(
+      const { data } = await $axios.get(
         `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
       )
-      cards.data.forEach(
+      data.data.forEach(
         (card) =>
           (card.slug = card.name
             .replace(/[/:.,']/g, '')
             .replace(/ /g, '-')
             .toLowerCase())
       )
-      return { cards, set, sets }
+
+      const card = null
+      const cards = data.data
+
+      return { card, cards, set, sets }
+    }
+  },
+  data() {
+    return {
+      card: null,
+      cards: [],
+      set: {},
+      sets: [],
     }
   },
   head: {

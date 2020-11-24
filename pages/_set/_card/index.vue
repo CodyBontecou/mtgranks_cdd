@@ -20,9 +20,9 @@
 <script>
 export default {
   layout: 'wideHeader',
-  async fetch({ payload, params, app }) {
+  async asyncData({ payload, params, $axios }) {
     if (payload) {
-      console.log(`payload of _card:  ${payload}`)
+      console.log(`payload of _card:  ${JSON.stringify(payload.card)}`)
       return { card: payload.card, cards: payload.cards, set: payload.set }
     } else {
       const sets = [
@@ -91,17 +91,17 @@ export default {
         },
       ]
       const set = sets.find((set) => set.slug === params.set)
-      const cards = await app.$axios.$get(
+      const response = await $axios.$get(
         `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
       )
-      cards.data.forEach(
+      response.data.forEach(
         (card) =>
           (card.slug = card.name
             .replace(/[/:.,']/g, '')
             .replace(/ /g, '-')
             .toLowerCase())
       )
-
+      const cards = response.data
       const card = cards.find((card) => card.slug === params.card)
 
       return { card, cards, set, sets }

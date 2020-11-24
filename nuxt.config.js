@@ -167,8 +167,8 @@ export default {
           })
         data.push(response)
       }
-      // const final = [].concat(...data)
-      // console.log(final[0])
+      const final = [].concat(...data)
+      console.log(final[0])
       return [].concat(...data).flat()
     },
   },
