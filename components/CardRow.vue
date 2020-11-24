@@ -99,11 +99,11 @@ export default {
       return sets.find((set) => set.slug === this.$route.params.set)
     },
     cardName() {
-      if (this.card.name.length > 19) {
-        return this.card.name.substring(0, 16) + '...'
-      } else {
-        return this.card.name
-      }
+      // if (this.card.name.length > 19) {
+      //   return this.card.name.substring(0, 16) + '...'
+      // } else {
+      return this.card.name
+      // }
     },
     randomizedRating() {
       return this.ratings[Math.floor(Math.random() * this.ratings.length)]
