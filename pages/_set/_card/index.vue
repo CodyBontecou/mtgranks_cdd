@@ -2,9 +2,9 @@
   <div>
     <Header :set="set" :card="card" page="mtgSet" />
     <div class="mx-20">
-      <div v-if="cards.length === 0">
-        <Loading />
-      </div>
+      <!--      <div v-if="cards.length === 0">-->
+      <!--        <Loading />-->
+      <!--      </div>-->
       <!--      <Column v-else class="mt-10" :cards="cards" color="Green"></Column>-->
       <CardRow
         v-for="(card, i) in cards"
@@ -18,7 +18,6 @@
 </template>
 
 <script>
-
 export default {
   layout: 'wideHeader',
   async fetch({ payload, params, app }) {
