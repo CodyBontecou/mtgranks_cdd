@@ -22,7 +22,6 @@ export default {
   layout: 'wideHeader',
   async asyncData({ payload, params, $axios }) {
     if (payload) {
-      console.log(`payload of _card:  ${JSON.stringify(payload.card)}`)
       return { card: payload.card, cards: payload.cards, set: payload.set }
     } else {
       const sets = [
