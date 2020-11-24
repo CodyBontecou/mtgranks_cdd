@@ -18,33 +18,95 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   layout: 'wideHeader',
-  async fetch({ payload, store, params }) {
+  async fetch({ payload, params, app }) {
     if (payload) {
+      console.log(`payload of _card:  ${payload}`)
       return { card: payload.card, cards: payload.cards, set: payload.set }
     } else {
-      store.commit(
-        'setSet',
-        store.state.sets.find((set) => set.slug === params.set)
+      const sets = [
+        {
+          name: 'Zendikar Rising',
+          code: 'ZNR',
+          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/znr.svg',
+          cardCount: '220',
+          color: 'black-gold',
+          type: 'new',
+          slug: 'zendikar-rising',
+        },
+        {
+          name: 'Ikoria: Lair of Behemoths',
+          code: 'IKO',
+          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/iko.svg',
+          cardCount: '264',
+          color: 'orange-red',
+          type: 'new',
+          slug: 'ikoria-lair-of-behemoths',
+        },
+        {
+          name: 'Core 2021',
+          code: 'M21',
+          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/m21.svg',
+          cardCount: '264',
+          color: 'black-green',
+          type: 'new',
+          slug: 'core-2021',
+        },
+        {
+          name: 'Theros Beyond Death',
+          code: 'THB',
+          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/thb.svg',
+          cardCount: '220',
+          color: 'ash',
+          type: 'old',
+          slug: 'theros-beyond-death',
+        },
+        {
+          name: 'Throne of Eldraine',
+          code: 'ELD',
+          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/eld.svg',
+          cardCount: '264',
+          color: 'teal',
+          type: 'old',
+          slug: 'throne-of-eldraine',
+        },
+        {
+          name: 'Core 2020',
+          code: 'M20',
+          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/m20.svg',
+          cardCount: '264',
+          color: 'mandarin',
+          type: 'old',
+          slug: 'core-2020',
+        },
+        {
+          name: 'War of the Spark',
+          code: 'WAR',
+          icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/war.svg',
+          cardCount: '264',
+          color: 'peach',
+          type: 'old',
+          slug: 'war-of-the-spark',
+        },
+      ]
+      const set = sets.find((set) => set.slug === params.set)
+      const cards = await app.$axios.$get(
+        `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
       )
-      await store.dispatch('getCards', store.state.set.code)
+      cards.data.forEach(
+        (card) =>
+          (card.slug = card.name
+            .replace(/[/:.,']/g, '')
+            .replace(/ /g, '-')
+            .toLowerCase())
+      )
 
-      store.state.commit(
-        'setCard',
-        store.state.cards.find((card) => card.slug === params.card)
-      )
+      const card = cards.find((card) => card.slug === params.card)
+
+      return { card, cards, set, sets }
     }
-  },
-  computed: {
-    ...mapGetters(['card', 'cards', 'sets', 'set']),
-  },
-  watch: {
-    $route() {
-      console.log('_id here')
-    },
   },
   // destroyed() {
   //   this.$store.commit('setCard', null)
