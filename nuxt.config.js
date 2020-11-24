@@ -169,7 +169,7 @@ export default {
       }
       // const final = [].concat(...data)
       // console.log(final[0])
-      return [].concat(...data)
+      return [].concat(...data).flat()
     },
   },
 }
