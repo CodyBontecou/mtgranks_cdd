@@ -23,6 +23,7 @@
         <!--          :src="card.image_uris.border_crop"-->
         <!--          :alt="`Small image of ${card.name} within the header.`"-->
         <!--        />-->
+        <p>{{ card.name }}</p>
         <VerticalReview class="ml-4" />
       </div>
     </div>
