@@ -141,35 +141,48 @@ export default {
   },
 
   generate: {
+    crawler: false,
+    interval: 100,
     async routes() {
-      const data = []
+      const payloadArray = []
 
       for (const set of sets) {
-        const response = await axios
-          .get(
-            `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
-          )
-          .then((cards) => {
-            return cards.data.data.map((card) => {
-              set.slug = set.name
-                .replace(/[/:.,']/g, '')
-                .replace(/ /g, '-')
-                .toLowerCase()
-              card.slug = card.name
-                .replace(/[/:.,']/g, '')
-                .replace(/ /g, '-')
-                .toLowerCase()
-              return {
-                route: `${set.slug}/${card.slug}`,
-                payload: { card, cards, set },
-              }
-            })
-          })
-        data.push(response)
+        const { data } = await axios.get(
+          `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
+        )
+
+        data.data.forEach(
+          (card) =>
+            (card.slug = card.name
+              .replace(/[/:.,']/g, '')
+              .replace(/ /g, '-')
+              .toLowerCase())
+        )
+
+        const cards = data.data
+        const cardRoutes = data.data.map((card) => {
+          return {
+            route: `${set.slug}/${card.slug}/`,
+            payload: { card, cards, set, sets },
+          }
+        })
+
+        payloadArray.push(...cardRoutes)
+
+        const setRoutes = data.data.map((card) => {
+          return {
+            route: `${set.slug}/`,
+            payload: { card, cards, set, sets },
+          }
+        })
+
+        payloadArray.push(...setRoutes)
       }
-      const final = [].concat(...data)
-      console.log(final[0])
-      return [].concat(...data).flat()
+
+      // console.log([...payloadArray])
+      console.log(payloadArray[0])
+
+      return payloadArray
     },
   },
 }

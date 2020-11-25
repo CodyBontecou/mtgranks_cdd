@@ -23,7 +23,14 @@ export default {
   layout: 'wideHeader',
   async asyncData({ payload, params, $axios }) {
     if (payload) {
-      return { card: payload.card, cards: payload.cards, set: payload.set }
+      console.log('SET PAYLOAD')
+      console.log(payload.set)
+      return {
+        card: payload.card,
+        cards: payload.cards,
+        set: payload.set,
+        sets: payload.sets,
+      }
     } else {
       const sets = [
         {
