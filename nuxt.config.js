@@ -140,11 +140,14 @@ export default {
     ],
   },
 
+  router: {
+    trailingSlash: true,
+  },
+
   generate: {
     crawler: false,
-    interval: 100,
     async routes() {
-      const payloadArray = []
+      const payloads = []
 
       for (const set of sets) {
         const { data } = await axios.get(
@@ -166,7 +169,7 @@ export default {
             payload: { card, cards, set, sets },
           }
         })
-        payloadArray.push(...cardRoutes)
+        payloads.push(...cardRoutes)
 
         const setRoutes = sets.map((set) => {
           return {
@@ -174,10 +177,10 @@ export default {
             payload: { cards, set, sets },
           }
         })
-        payloadArray.push(...setRoutes)
+        payloads.push(...setRoutes)
       }
 
-      return payloadArray
+      return payloads
     },
   },
 }
