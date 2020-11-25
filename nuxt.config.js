@@ -162,7 +162,7 @@ export default {
         const cards = data.data
         const cardRoutes = data.data.map((card) => {
           return {
-            route: `${set.slug}/${card.slug}/`,
+            route: `${set.slug}/${card.slug}`,
             payload: { card, cards, set, sets },
           }
         })
@@ -170,7 +170,7 @@ export default {
 
         const setRoutes = sets.map((set) => {
           return {
-            route: `${set.slug}/`,
+            route: `${set.slug}`,
             payload: { cards, set, sets },
           }
         })
