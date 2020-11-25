@@ -55,8 +55,8 @@ module.exports = {
   },
   plugins: [require('@tailwindcss/custom-forms')],
   purge: {
-    // enabled: process.env.NODE_ENV === 'production',
-    enabled: false,
+    enabled: process.env.NODE_ENV === 'production',
+    // enabled: false,
     content: [
       'components/**/*.vue',
       'layouts/**/*.vue',
