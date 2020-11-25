@@ -22,8 +22,6 @@ export default {
   layout: 'wideHeader',
   async asyncData({ payload, params, $axios }) {
     if (payload) {
-      console.log('_card payload')
-      console.log(payload.card.name)
       return {
         card: payload.card,
         cards: payload.cards,
@@ -113,9 +111,6 @@ export default {
       return { card, cards, set, sets }
     }
   },
-  // destroyed() {
-  //   this.$store.commit('setCard', null)
-  // },
   head: {
     meta: [
       {
