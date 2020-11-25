@@ -166,21 +166,16 @@ export default {
             payload: { card, cards, set, sets },
           }
         })
-
         payloadArray.push(...cardRoutes)
 
-        const setRoutes = data.data.map((card) => {
+        const setRoutes = sets.map((set) => {
           return {
             route: `${set.slug}/`,
-            payload: { card, cards, set, sets },
+            payload: { cards, set, sets },
           }
         })
-
         payloadArray.push(...setRoutes)
       }
-
-      // console.log([...payloadArray])
-      console.log(payloadArray[0])
 
       return payloadArray
     },

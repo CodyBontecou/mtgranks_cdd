@@ -7,9 +7,9 @@
       <!--      </div>-->
       <!--      <Column v-else class="mt-10" :cards="cards" color="Green"></Column>-->
       <CardRow
-        v-for="(card, i) in cards"
+        v-for="(c, i) in cards"
         :key="i"
-        :card="card"
+        :card="c"
         class="mb-2"
         :class="{ 'mt-10': i === 0 }"
       />
