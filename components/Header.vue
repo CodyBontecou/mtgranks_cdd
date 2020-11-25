@@ -19,10 +19,10 @@
         <ThreeVerticalDots />
       </div>
       <div v-if="card" class="flex mt-20 z-50" style="max-height: 204px">
-        <img
-          :src="card.image_uris.border_crop"
-          :alt="`Small image of ${card.name} within the header.`"
-        />
+        <!--        <img-->
+        <!--          :src="card.image_uris.border_crop"-->
+        <!--          :alt="`Small image of ${card.name} within the header.`"-->
+        <!--        />-->
         <VerticalReview class="ml-4" />
       </div>
     </div>
