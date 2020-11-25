@@ -12,8 +12,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   name: 'CardRow',
   props: {
@@ -29,7 +27,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['cards', 'sets', 'set']),
     set() {
       const sets = [
         {
@@ -109,15 +106,15 @@ export default {
       return this.ratings[Math.floor(Math.random() * this.ratings.length)]
     },
   },
-  watch: {
-    active() {
-      this.$store.commit('setCard', this.card)
-      this.$router.push({
-        name: 'set-card___en',
-        params: { card: this.card, set: this.set },
-      })
-    },
-  },
+  // watch: {
+  //   active() {
+  //     this.$store.commit('setCard', this.card)
+  //     this.$router.push({
+  //       name: 'set-card___en',
+  //       params: { card: this.card, set: this.set },
+  //     })
+  //   },
+  // },
 }
 </script>
 
