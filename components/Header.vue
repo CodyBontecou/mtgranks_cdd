@@ -26,9 +26,11 @@
       <div
         v-if="card"
         class="flex justify-between mt-20 z-40"
-        @clicked="onClickChild"
+        :class="{
+          'flex-col': expanded,
+        }"
       >
-        <CardImg :card="card" />
+        <CardImg :card="card" @expand="onClickChild" />
         <VerticalReview class="ml-4" />
       </div>
     </div>
@@ -92,9 +94,14 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      expanded: false,
+    }
+  },
   methods: {
-    onClickChild(value) {
-      console.log(value) // someValue
+    onClickChild() {
+      this.expanded = !this.expanded
     },
   },
 }

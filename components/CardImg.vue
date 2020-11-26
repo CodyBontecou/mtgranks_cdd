@@ -47,8 +47,9 @@ export default {
     }
   },
   methods: {
-    onClickButton(event) {
-      this.$emit('clicked', 'someValue')
+    onClickButton() {
+      this.expanded = !this.expanded
+      this.$emit('expand')
     },
   },
 }
