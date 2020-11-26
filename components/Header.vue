@@ -25,13 +25,15 @@
       </div>
       <div
         v-if="card"
-        class="flex justify-between mt-20 z-40"
+        class="flex mt-20 z-40"
         :class="{
-          'flex-col': expanded,
+          'flex-col items-center': expanded,
+          'justify-between': !expanded,
         }"
       >
         <CardImg :card="card" @expand="onClickChild" />
-        <VerticalReview class="ml-4" />
+        <HorizontalReview v-if="expanded" class="mt-4" />
+        <VerticalReview v-else />
       </div>
     </div>
 
@@ -44,6 +46,7 @@
       </div>
     </div>
 
+    <!--  Bubbles and opaque Mtgranks logo  -->
     <div v-if="page === 'mtgSet'" class="large-circle"></div>
     <div v-if="page === 'mtgSet'" class="small-circle"></div>
     <span

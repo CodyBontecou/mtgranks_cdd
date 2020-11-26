@@ -19,13 +19,21 @@
       :alt="`Small image of ${card.name} within the header.`"
     />
     <div
-      class="expand-bubble bg-white opacity-75 hover:opacity-100 cursor-pointer"
+      class="absolute rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer"
+      :class="{
+        'expand-bubble-small': !expanded,
+        'expand-bubble-large': expanded,
+      }"
       @click="onClickButton"
     >
       <ExpandIcon />
     </div>
     <div
-      class="price-bubble text-black font-medium text-12 bg-white opacity-75 hover:opacity-100 cursor-pointer"
+      class="absolute text-black font-medium text-12 bg-white opacity-75 hover:opacity-100 cursor-pointer"
+      :class="{
+        'price-bubble-small': !expanded,
+        'price-bubble-large': expanded,
+      }"
     >
       ${{ card.prices.usd }}
     </div>
@@ -60,19 +68,28 @@ export default {
   max-height: 204px;
 }
 .card-large {
-  max-height: 475px;
+  max-height: 50vh;
 }
-.expand-bubble {
-  position: absolute;
+.expand-bubble-small {
   bottom: 91px;
   left: 10px;
-  border-radius: 999999px;
   padding: 8px;
 }
-.price-bubble {
-  position: absolute;
+.expand-bubble-large {
+  bottom: 22.5vh;
+  left: 16px;
+  padding: 8px;
+}
+.price-bubble-small {
   bottom: 91px;
   right: 10px;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.price-bubble-large {
+  bottom: 22.5vh;
+  right: 16px;
   border-radius: 4px;
   padding: 4px;
 }
