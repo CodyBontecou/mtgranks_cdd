@@ -98,13 +98,19 @@ export default {
       const { data } = await $axios.get(
         `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
       )
-      data.data.forEach(
-        (card) =>
-          (card.slug = card.name
-            .replace(/[/:.,']/g, '')
-            .replace(/ /g, '-')
-            .toLowerCase())
-      )
+      data.data.forEach((card) => {
+        card.slug = card.name
+          .replace(/[/:.,']/g, '')
+          .replace(/ /g, '-')
+          .toLowerCase()
+
+        for (const uri in card.purchase_uris) {
+          card.purchase_uris[uri] = card.purchase_uris[uri].replace(
+            'utm_source=scryfall',
+            'utm_source=mtgranks'
+          )
+        }
+      })
       const cards = data.data
       const card = cards.find((card) => card.slug === params.card)
 

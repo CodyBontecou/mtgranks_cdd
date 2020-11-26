@@ -28,7 +28,9 @@
     >
       <ExpandIcon />
     </div>
-    <div
+    <a
+      :href="card.purchase_uris.tcgplayer"
+      target="_blank"
       class="absolute text-black font-medium text-12 bg-white opacity-75 hover:opacity-100 cursor-pointer"
       :class="{
         'price-bubble-small': !expanded,
@@ -36,7 +38,7 @@
       }"
     >
       ${{ card.prices.usd }}
-    </div>
+    </a>
   </div>
 </template>
 
