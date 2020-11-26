@@ -68,7 +68,7 @@ export default {
   max-height: 204px;
 }
 .card-large {
-  max-height: 50vh;
+  max-height: 60vh;
 }
 .expand-bubble-small {
   bottom: 91px;
