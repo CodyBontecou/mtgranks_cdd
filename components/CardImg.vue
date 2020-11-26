@@ -76,8 +76,8 @@ export default {
   padding: 8px;
 }
 .expand-bubble-large {
-  bottom: 22.5vh;
-  left: 18px;
+  bottom: 26.5vh;
+  left: 23px;
   padding: 8px;
 }
 .price-bubble-small {
@@ -88,8 +88,8 @@ export default {
 }
 
 .price-bubble-large {
-  bottom: 22.5vh;
-  right: 18px;
+  bottom: 26.5vh;
+  right: 23px;
   border-radius: 4px;
   padding: 4px;
 }
