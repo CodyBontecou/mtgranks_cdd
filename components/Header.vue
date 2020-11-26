@@ -2,23 +2,32 @@
   <div
     class="flex flex-col justify-between w-full"
     :class="{
-      'h-40 bg-charcoal text-white notch': page === 'mtgSet' && card === null,
-      'h-auto bg-charcoal text-white notch': page === 'mtgSet' && card !== null,
+      'fixed top-0 h-40 bg-charcoal text-white notch':
+        page === 'mtgSet' && card === null,
+      'fixed top-0 h-auto bg-charcoal text-white notch':
+        page === 'mtgSet' && card !== null,
       'bg-transparent text-black': page === 'home',
     }"
   >
     <!--  Top bar mtgSet -->
     <div v-if="page === 'mtgSet'" class="flex flex-col m-20">
       <div class="flex justify-between">
-        <NuxtLink to="/">
+        <NuxtLink v-if="card === null" to="/">
           <ThinLeftArrow />
+        </NuxtLink>
+        <NuxtLink v-else :to="{ name: 'set___en', params: { set: set.slug } }">
+          <CloseIcon />
         </NuxtLink>
         <NuxtLink to="/">
           <div class="font-bold text-24">mtgranks</div>
         </NuxtLink>
         <ThreeVerticalDots />
       </div>
-      <div v-if="card" class="flex justify-between mt-20 z-50">
+      <div
+        v-if="card"
+        class="flex justify-between mt-20 z-40"
+        @clicked="onClickChild"
+      >
         <CardImg :card="card" />
         <VerticalReview class="ml-4" />
       </div>
@@ -38,6 +47,10 @@
     <span
       v-if="page === 'mtgSet'"
       class="opaque-logo absolute text-white font-bold"
+      :class="{
+        'small-screen': card === null,
+        'medium-screen': card !== null,
+      }"
     >
       mtgranks
     </span>
@@ -79,16 +92,28 @@ export default {
       required: true,
     },
   },
+  methods: {
+    onClickChild(value) {
+      console.log(value) // someValue
+    },
+  },
 }
 </script>
 
 <style scoped>
 .opaque-logo {
-  top: 100px;
   right: 20px;
   opacity: 0.1;
   font-size: 60px;
   line-height: 71px;
+}
+
+.small-screen {
+  top: 100px;
+}
+
+.medium-screen {
+  top: 220px;
 }
 
 .large-circle {
@@ -97,8 +122,8 @@ export default {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   position: absolute;
-  right: -20px;
-  top: -120px;
+  right: 0;
+  top: 0;
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -108,8 +133,8 @@ export default {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   position: absolute;
-  right: -10px;
-  top: 55px;
+  right: 0;
+  top: 185px;
   background: rgba(255, 255, 255, 0.05);
 }
 

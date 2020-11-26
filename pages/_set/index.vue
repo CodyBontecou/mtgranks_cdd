@@ -12,7 +12,7 @@
         :key="i"
         :card="c"
         class="mb-2"
-        :class="{ 'mt-10': i === 0 }"
+        :class="{ 'mt-52': i === 0 }"
       />
     </div>
   </div>

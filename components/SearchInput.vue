@@ -4,7 +4,7 @@
       class="card-search py-2 px-8 flex items-center justify-center bg-white shadow-1 rounded-full"
     >
       <div class="flex justify-center">
-        <SearchIcon class="mr-3 fill-current text-black w-6 h-6" />
+        <GreySearchIcon class="mr-3 w-6 h-6" />
       </div>
       <label for="cardSearch"> </label>
       <!-- TODO: Change placeholder text when a card exists  -->
