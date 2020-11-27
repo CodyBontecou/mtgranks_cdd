@@ -117,24 +117,28 @@ export default {
       return { card, cards, set, sets }
     }
   },
-  head: {
-    meta: [
-      {
-        hid: 'theme-color',
-        name: 'theme-color',
-        content: '#264653',
-      },
-      {
-        hid: 'msapplication-navbutton-color',
-        name: 'msapplication-navbutton-color',
-        content: '#264653',
-      },
-      {
-        hid: 'apple-mobile-web-app-status-bar-style',
-        name: 'apple-mobile-web-app-status-bar-style',
-        content: '#264653',
-      },
-    ],
+  head() {
+    return {
+      title: `${this.card.name} | Mtgranks | MTG: Arena Card Rankings for Magic The Gathering | Rating Review`,
+      link: [{ rel: 'icon', type: 'image/x-icon', href: `${this.set.icon}` }],
+      meta: [
+        {
+          hid: 'theme-color',
+          name: 'theme-color',
+          content: '#264653',
+        },
+        {
+          hid: 'msapplication-navbutton-color',
+          name: 'msapplication-navbutton-color',
+          content: '#264653',
+        },
+        {
+          hid: 'apple-mobile-web-app-status-bar-style',
+          name: 'apple-mobile-web-app-status-bar-style',
+          content: '#264653',
+        },
+      ],
+    }
   },
 }
 </script>

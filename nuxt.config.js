@@ -72,16 +72,22 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'mtgranks',
+    title: 'Mtgranks | Home | Magic the Gathering: Arena Card Rankings',
     meta: [
       { charset: 'utf-8' },
       {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, viewport-fit=cover',
       },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Mtgranks provides Magic the Gathering card ratings for the\n' +
+          '    sealed and draft formats. Cards are given a rating alongside a description explaining each cards power and weakness. Content is provided by famous MTG pros.',
+      },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '' }],
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
