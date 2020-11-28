@@ -2,16 +2,12 @@
   <div>
     <Header :set="set" :card="card" page="mtgSet" />
     <div class="mx-20">
-      <!--      <div v-if="cards.length === 0">-->
-      <!--        <Loading />-->
-      <!--      </div>-->
-      <!--      <Column v-else class="mt-10" :cards="cards" color="Green"></Column>-->
-      <CardRow
-        v-for="(c, i) in cards"
+      <Column
+        v-for="(color, i) in colors"
         :key="i"
-        :card="c"
-        class="mb-2"
-        :class="{ 'mt-368': i === 0 }"
+        class="mt-10"
+        :cards="cardsByColor(color)"
+        :color="color"
       />
     </div>
   </div>
@@ -116,6 +112,33 @@ export default {
 
       return { card, cards, set, sets }
     }
+  },
+  computed: {
+    colors() {
+      const temp = []
+      this.cards.forEach((card) => {
+        if (!this.isArrayInArray(temp, card.colors)) {
+          temp.push(card.colors)
+        }
+      })
+      return temp.filter((element) => {
+        return element !== undefined
+      })
+    },
+  },
+  methods: {
+    cardsByColor(color) {
+      return this.cards.filter(
+        (card) => JSON.stringify(card.colors) === JSON.stringify(color)
+      )
+    },
+    isArrayInArray(arr, item) {
+      const itemAsString = JSON.stringify(item)
+
+      return arr.some((ele) => {
+        return JSON.stringify(ele) === itemAsString
+      })
+    },
   },
   head() {
     return {

@@ -139,7 +139,9 @@ export default {
   },
   methods: {
     cardsByColor(color) {
-      return this.cards.filter((card) => JSON.stringify(card.colors) === JSON.stringify(color))
+      return this.cards.filter(
+        (card) => JSON.stringify(card.colors) === JSON.stringify(color)
+      )
     },
     isArrayInArray(arr, item) {
       const itemAsString = JSON.stringify(item)
