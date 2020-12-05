@@ -72,7 +72,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'Mtgranks | Home | Magic the Gathering: Arena Card Rankings',
+    title: 'Mtgranks | Magic the Gathering Card Rankings',
     meta: [
       { charset: 'utf-8' },
       {
@@ -84,7 +84,73 @@ export default {
         name: 'description',
         content:
           'Mtgranks provides Magic the Gathering card ratings for the\n' +
-          '    sealed and draft formats. Cards are given a rating alongside a description explaining each cards power and weakness. Content is provided by famous MTG pros.',
+          ' sealed and draft formats. Cards are given a rating alongside a description explaining the power and weakness of each card. Content is provided by famous MTG pros.',
+      },
+
+      // Twitter
+      // Test on: https://cards-dev.twitter.com/validator
+      {
+        hid: 'twitter:card',
+        name: 'twitter:card',
+        content: 'summary_large_image',
+      },
+      { hid: 'twitter:site', name: 'twitter:site', content: '@nuxt_js' },
+      {
+        hid: 'twitter:url',
+        name: 'twitter:url',
+        content: 'https://nuxtjs.org',
+      },
+      {
+        hid: 'twitter:title',
+        name: 'twitter:title',
+        content: 'My amazing Nuxt application',
+      },
+      {
+        hid: 'twitter:description',
+        name: 'twitter:description',
+        content:
+          'The amazing Nuxt application that teaches me all the cool features of Nuxt',
+      },
+      {
+        hid: 'twitter:image',
+        name: 'twitter:image',
+        content: 'https://nuxtjs.org/nuxt-card.png',
+      },
+
+      // Open Graph
+      // Test on: https://developers.facebook.com/tools/debug/
+      { hid: 'og:site_name', property: 'og:site_name', content: 'Nuxt' },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      {
+        hid: 'og:url',
+        property: 'og:url',
+        content: 'https://nuxtjs.org',
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'My amazing Nuxt application',
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content:
+          'The amazing Nuxt application that teaches me all the cool features of Nuxt',
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: 'https://nuxtjs.org/nuxt-card.png',
+      },
+      {
+        hid: 'og:image:secure_url',
+        property: 'og:image:secure_url',
+        content: 'https://nuxtjs.org/nuxt-card.png',
+      },
+      {
+        hid: 'og:image:alt',
+        property: 'og:image:alt',
+        content: 'NuxtJS',
       },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '' }],
