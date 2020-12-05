@@ -171,6 +171,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@/modules/sitemapRouteGenerator',
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -180,6 +181,7 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     'nuxt-i18n',
+    '@nuxtjs/sitemap',
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -187,6 +189,10 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
+
+  sitemap: {
+    hostname: 'https://mtgranks.netlify.app/',
+  },
 
   storybook: {
     // Options
@@ -241,22 +247,19 @@ export default {
         })
 
         const cards = data.data
-        console.log(cards[0].purchase_uris)
         const cardRoutes = data.data.map((card) => {
           return {
-            route: `${set.slug}/${card.slug}`,
+            route: `${set.slug}/${card.slug}/`,
             payload: { card, cards, set, sets },
           }
         })
         payloads.push(...cardRoutes)
 
-        const setRoutes = sets.map((set) => {
-          return {
-            route: `${set.slug}`,
-            payload: { cards, set, sets },
-          }
-        })
-        payloads.push(...setRoutes)
+        const setRoutes = {
+          route: `${set.slug}/`,
+          payload: { cards, set, sets },
+        }
+        payloads.push(setRoutes)
       }
 
       return payloads
