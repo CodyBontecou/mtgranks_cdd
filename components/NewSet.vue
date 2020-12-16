@@ -4,7 +4,7 @@
     :class="`bg-gradient-${color}`"
   >
     <NuxtLink
-      :to="{ name: 'set___en', params: { set: set.slug, object: set } }"
+      :to="{ name: 'setSlug___en', params: { setSlug: set.slug } }"
       class="flex h-full w-full py-20 px-3"
     >
       <div class="flex flex-col justify-between">

@@ -1,9 +1,11 @@
 <template>
   <NuxtLink
-    :to="{ name: 'set-card___en', params: { card: card.slug, set: set.slug } }"
+    :to="{
+      name: 'setSlug-cardSlug___en',
+      params: { cardSlug: card.slug, setSlug: set.slug },
+    }"
     class="flex items-end hover:text-gray-600"
   >
-    <!--    <RatingBubble :rating="card.rating" />-->
     <div class="flex items-end hover:text-gray-600">
       <RatingBubble :rating="randomizedRating" />
       <span class="cardName pl-6 mb-2 justify-self-end">{{ cardName }}</span>
@@ -93,7 +95,7 @@ export default {
           slug: 'war-of-the-spark',
         },
       ]
-      return sets.find((set) => set.slug === this.$route.params.set)
+      return sets.find((set) => set.slug === this.$route.params.setSlug)
     },
     cardName() {
       // if (this.card.name.length > 19) {
@@ -106,15 +108,6 @@ export default {
       return this.ratings[Math.floor(Math.random() * this.ratings.length)]
     },
   },
-  // watch: {
-  //   active() {
-  //     this.$store.commit('setCard', this.card)
-  //     this.$router.push({
-  //       name: 'set-card___en',
-  //       params: { card: this.card, set: this.set },
-  //     })
-  //   },
-  // },
 }
 </script>
 

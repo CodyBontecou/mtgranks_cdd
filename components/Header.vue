@@ -15,7 +15,10 @@
         <NuxtLink v-if="card === null" to="/">
           <ThinLeftArrow />
         </NuxtLink>
-        <NuxtLink v-else :to="{ name: 'set___en', params: { set: set.slug } }">
+        <NuxtLink
+          v-else
+          :to="{ name: 'setSlug___en', params: { setSlug: set.slug } }"
+        >
           <CloseIcon />
         </NuxtLink>
         <NuxtLink to="/">
