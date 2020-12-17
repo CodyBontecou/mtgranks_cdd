@@ -19,6 +19,7 @@
         :cards="cardsByColor(color)"
         :color="color"
       />
+      <FilterMenu class="fixed menus" />
     </div>
   </div>
 </template>
@@ -102,3 +103,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.menus {
+  bottom: 20px;
+  right: 20px;
+}
+</style>
