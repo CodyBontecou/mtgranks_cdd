@@ -1,7 +1,7 @@
 <template>
   <div class="mb-2 font-medium text-xs">
     <button
-      class="flex items-center px-2 py-1 opacity-50 hover:opacity-75 mb-2 focus:outline-none"
+      class="absolute filter flex items-center px-2 py-1 opacity-50 hover:opacity-75 mb-2 focus:outline-none"
       @click="filters.isExpanded = !filters.isExpanded"
     >
       {{ $t('filters') }}
@@ -10,13 +10,16 @@
         :class="filters.isExpanded ? 'rotate-90' : 'rotate-0'"
       />
     </button>
-    <div v-if="filters.isExpanded" class="ml-4 focus:outline-none">
+    <div
+      v-if="filters.isExpanded"
+      class="mr-4 mb-4 absolute filter focus:outline-none"
+    >
       <div
         v-for="(child, childIndex) in filters.children"
         :key="`child-${childIndex + 1}`"
       >
         <button
-          class="flex items-center px-2 py-1 opacity-50 hover:opacity-75 mb-2"
+          class="mb-4 absolute filter flex items-center px-2 py-1 opacity-50 hover:opacity-75"
           @click="child.isExpanded = !child.isExpanded"
         >
           {{ child.name }}
@@ -25,7 +28,7 @@
             :class="child.isExpanded ? 'rotate-90' : 'rotate-0'"
           />
         </button>
-        <div v-if="child.isExpanded" class="inline-flex flex-col">
+        <div v-if="child.isExpanded" class="inline-flex flex-col mb-8">
           <label
             v-for="(option, optionIndex) in child.options"
             :key="`child-${childIndex + 1}-option-${optionIndex + 1}`"
@@ -84,3 +87,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.filter {
+  bottom: 0;
+  right: 0;
+}
+</style>

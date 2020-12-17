@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :set="set" :card="card" page="mtgSet" />
+    <Header class="z-10" :set="set" :card="card" page="mtgSet" />
     <div
       class="mx-20"
       :class="{
@@ -106,7 +106,7 @@ export default {
 
 <style scoped>
 .menus {
-  bottom: 20px;
-  right: 20px;
+  bottom: 0;
+  right: 10px;
 }
 </style>
