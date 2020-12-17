@@ -4,8 +4,9 @@
     <div
       class="mx-20"
       :class="{
-        'mt-40': card === null,
-        'mt-auto': card !== null,
+        'mt-48': card === null,
+        'mt-88': card && expanded === false,
+        'mt-176': card && expanded === true,
       }"
     >
       <div v-if="cards.length === 0">
@@ -37,7 +38,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['card', 'cards', 'sets', 'set']),
+    ...mapGetters(['card', 'cards', 'sets', 'set', 'expanded']),
     colors() {
       const temp = []
       this.cards.forEach((card) => {
