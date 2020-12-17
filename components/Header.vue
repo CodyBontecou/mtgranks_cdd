@@ -60,8 +60,8 @@
       mtgranks
     </span>
 
+    <!--  Set Name -->
     <div v-if="set !== null">
-      <!--  Set Name -->
       <div
         v-if="card === null"
         class="font-bold text-24 leading-29 opacity-75 ml-20"

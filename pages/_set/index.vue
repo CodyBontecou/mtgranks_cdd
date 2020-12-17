@@ -1,18 +1,16 @@
 <template>
   <div>
     <Header :set="set" :card="card" page="mtgSet" />
-    <div class="mx-20">
+    <div
+      class="mx-20"
+      :class="{
+        'mt-40': card === null,
+        'mt-auto': card !== null,
+      }"
+    >
       <div v-if="cards.length === 0">
         <Loading />
       </div>
-      <!--      <Column v-else class="mt-10" :cards="cards" color="Green"></Column>-->
-      <!--      <CardRow-->
-      <!--        v-for="(card, i) in cards"-->
-      <!--        :key="i"-->
-      <!--        :card="card"-->
-      <!--        class="mb-2"-->
-      <!--        :class="{ 'mt-10': i === 0 }"-->
-      <!--      />-->
       <Column
         v-for="(color, i) in colors"
         :key="i"
@@ -38,11 +36,6 @@ export default {
       await this.$store.dispatch('getCards', this.set.code)
     }
   },
-  // watch: {
-  //   $route() {
-  //      console.log('_id here')
-  //   },
-  // },
   computed: {
     ...mapGetters(['card', 'cards', 'sets', 'set']),
     colors() {
