@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-row items-center">
-    <p class="text-sm text-white leading-160 font-medium w-56">
+  <div class="flex items-center">
+    <p class="text-sm text-white leading-160 font-medium">
       {{ ratings[0].reason }}
     </p>
     <div class="flex">

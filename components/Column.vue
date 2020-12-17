@@ -1,10 +1,7 @@
 <template>
-  <div class="flex">
-    <div>
-      <h1 class="column-title mb-4 font-semibold">{{ color }}</h1>
-      <CardRow v-for="card in cards" :key="card.id" :card="card" class="mb-2" />
-    </div>
-    <FilterMenu />
+  <div class="mt-20">
+    <h1 class="column-title mb-4 font-semibold">{{ color }}</h1>
+    <CardRow v-for="card in cards" :key="card.id" :card="card" class="mb-2" />
   </div>
 </template>
 
@@ -17,7 +14,7 @@ export default {
       required: true,
     },
     color: {
-      type: String,
+      type: Array,
       required: true,
     },
   },

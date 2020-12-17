@@ -2,28 +2,38 @@
   <div
     class="flex flex-col justify-between w-full"
     :class="{
-      'h-40 bg-charcoal text-white notch': page === 'mtgSet' && card === null,
-      'h-auto bg-charcoal text-white notch': page === 'mtgSet' && card !== null,
+      'fixed top-0 h-40 bg-charcoal text-white notch':
+        page === 'mtgSet' && card === null,
+      'fixed top-0 h-auto bg-charcoal text-white notch':
+        page === 'mtgSet' && card !== null,
       'bg-transparent text-black': page === 'home',
     }"
   >
     <!--  Top bar mtgSet -->
     <div v-if="page === 'mtgSet'" class="flex flex-col m-20">
       <div class="flex justify-between">
-        <NuxtLink to="/">
+        <NuxtLink v-if="card === null" to="/">
           <ThinLeftArrow />
         </NuxtLink>
+        <div v-if="card" @click="removeCard">
+          <CloseIcon />
+        </div>
         <NuxtLink to="/">
           <div class="font-bold text-24">mtgranks</div>
         </NuxtLink>
         <ThreeVerticalDots />
       </div>
-      <div v-if="card" class="flex mt-20 z-50" style="max-height: 204px">
-        <img
-          :src="card.image_uris.border_crop"
-          :alt="`Small image of ${card.name} within the header.`"
-        />
-        <VerticalReview class="ml-4" />
+      <div
+        v-if="card"
+        class="flex mt-20 z-40"
+        :class="{
+          'flex-col items-center': expanded,
+          'justify-between': !expanded,
+        }"
+      >
+        <CardImg :card="card" />
+        <HorizontalReview v-if="expanded" class="mt-4" />
+        <VerticalReview v-else />
       </div>
     </div>
 
@@ -36,16 +46,21 @@
       </div>
     </div>
 
+    <!--  Bubbles and opaque Mtgranks logo  -->
     <div v-if="page === 'mtgSet'" class="large-circle"></div>
     <div v-if="page === 'mtgSet'" class="small-circle"></div>
     <span
       v-if="page === 'mtgSet'"
       class="opaque-logo absolute text-white font-bold"
+      :class="{
+        'small-screen': card === null,
+        'medium-screen': card !== null,
+      }"
     >
       mtgranks
     </span>
 
-    <div v-if="set">
+    <div v-if="set !== null">
       <!--  Set Name -->
       <div
         v-if="card === null"
@@ -63,23 +78,39 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Header',
   props: {
-    set: {
-      type: Object,
-      default: null,
-      required: false,
-    },
-    card: {
-      type: Object,
-      default: null,
-      required: false,
-    },
     page: {
       type: String,
       default: 'mtgSet',
       required: true,
+    },
+  },
+  computed: {
+    ...mapGetters(['set', 'expanded']),
+    card: {
+      get() {
+        return this.$store.state.card
+      },
+      set(value) {
+        this.$store.commit('setCard', value)
+      },
+    },
+  },
+  methods: {
+    shrinkCard() {
+      this.$store.commit('setExpanded', false)
+    },
+    removeCard() {
+      this.card = null
+      this.shrinkCard()
+      this.removeQuery()
+    },
+    removeQuery() {
+      this.$router.replace({ query: null })
     },
   },
 }
@@ -87,35 +118,37 @@ export default {
 
 <style scoped>
 .opaque-logo {
-  top: 100px;
   right: 20px;
   opacity: 0.1;
   font-size: 60px;
   line-height: 71px;
 }
-
+.small-screen {
+  top: 100px;
+}
+.medium-screen {
+  top: 220px;
+}
 .large-circle {
   height: 200px;
   width: 200px;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   position: absolute;
-  right: -20px;
-  top: -120px;
+  right: 0;
+  top: 0;
   background: rgba(255, 255, 255, 0.05);
 }
-
 .small-circle {
   height: 100px;
   width: 100px;
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   position: absolute;
-  right: -10px;
-  top: 55px;
+  right: 0;
+  top: 185px;
   background: rgba(255, 255, 255, 0.05);
 }
-
 .notch {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);

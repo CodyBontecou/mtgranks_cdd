@@ -6,12 +6,19 @@
         <Loading />
       </div>
       <!--      <Column v-else class="mt-10" :cards="cards" color="Green"></Column>-->
-      <CardRow
-        v-for="(card, i) in cards"
+      <!--      <CardRow-->
+      <!--        v-for="(card, i) in cards"-->
+      <!--        :key="i"-->
+      <!--        :card="card"-->
+      <!--        class="mb-2"-->
+      <!--        :class="{ 'mt-10': i === 0 }"-->
+      <!--      />-->
+      <Column
+        v-for="(color, i) in colors"
         :key="i"
-        :card="card"
-        class="mb-2"
-        :class="{ 'mt-10': i === 0 }"
+        class="mt-10"
+        :cards="cardsByColor(color)"
+        :color="color"
       />
     </div>
   </div>
@@ -31,12 +38,23 @@ export default {
       await this.$store.dispatch('getCards', this.set.code)
     }
   },
+  // watch: {
+  //   $route() {
+  //      console.log('_id here')
+  //   },
+  // },
   computed: {
     ...mapGetters(['card', 'cards', 'sets', 'set']),
-  },
-  watch: {
-    $route() {
-      console.log('_id here')
+    colors() {
+      const temp = []
+      this.cards.forEach((card) => {
+        if (!this.isArrayInArray(temp, card.colors)) {
+          temp.push(card.colors)
+        }
+      })
+      return temp.filter((element) => {
+        return element !== undefined
+      })
     },
   },
   mounted() {
@@ -47,11 +65,27 @@ export default {
           (card) => card.slug === this.$route.query.card
         )
       )
+    } else {
+      this.$store.commit('setCard', null)
     }
   },
   destroyed() {
     this.$store.commit('setCards', [])
     this.$store.commit('setCard', null)
+    this.$store.commit('setSet', null)
+  },
+  methods: {
+    cardsByColor(color) {
+      return this.cards.filter(
+        (card) => JSON.stringify(card.colors) === JSON.stringify(color)
+      )
+    },
+    isArrayInArray(arr, item) {
+      const itemAsString = JSON.stringify(item)
+      return arr.some((ele) => {
+        return JSON.stringify(ele) === itemAsString
+      })
+    },
   },
   head: {
     meta: [

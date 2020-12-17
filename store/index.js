@@ -73,8 +73,9 @@ export const state = () => ({
     },
   ],
   cards: [],
-  set: {},
+  set: null,
   card: null,
+  expanded: false,
 })
 
 export const actions = {
@@ -101,6 +102,9 @@ export const mutations = {
   setSet(state, set) {
     state.set = set
   },
+  setExpanded(state, expanded) {
+    state.expanded = expanded
+  },
 }
 
 export const getters = {
@@ -115,6 +119,9 @@ export const getters = {
   },
   sets(state) {
     return state.sets
+  },
+  expanded(state) {
+    return state.expanded
   },
   newSets(state) {
     return state.sets.filter((set) => set.type === 'new')
