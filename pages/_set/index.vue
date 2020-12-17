@@ -12,13 +12,15 @@
       <div v-if="cards.length === 0">
         <Loading />
       </div>
-      <Column
-        v-for="(color, i) in colors"
-        :key="i"
-        class="mt-10"
-        :cards="cardsByColor(color)"
-        :color="color"
-      />
+      <div class="w-2/3">
+        <Column
+          v-for="(color, i) in colors"
+          :key="i"
+          class="mt-10"
+          :cards="cardsByColor(color)"
+          :color="color"
+        />
+      </div>
       <FilterMenu class="fixed menus" />
     </div>
   </div>

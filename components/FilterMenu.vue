@@ -80,11 +80,6 @@ export default {
       },
     }
   },
-  computed: {
-    colorsList() {
-      return this.$t('colorsList')
-    },
-  },
 }
 </script>
 
