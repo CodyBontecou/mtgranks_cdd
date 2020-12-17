@@ -1,3 +1,11 @@
+function generateCardSlug(card) {
+  return card.name
+    .replace(/[/:.,']/g, '')
+    .replace(/ /g, '-')
+    .replace(/--/g, '-')
+    .toLowerCase()
+}
+
 export const state = () => ({
   sets: [
     {
@@ -72,19 +80,11 @@ export const state = () => ({
 export const actions = {
   async getCards({ commit }, setCode) {
     try {
-      const response = await this.$axios.$get(
+      const { data } = await this.$axios.$get(
         `https://api.scryfall.com/cards/search?q=set:${setCode}+is:booster`
       )
-      response.data.forEach(
-        (card) =>
-          (card.slug = card.name
-            .replace(/:/g, '')
-            .replace(/ /g, '-')
-            .replace(/,/g, '')
-            .replace(/'/g, '')
-            .toLowerCase())
-      )
-      commit('setCards', response.data)
+      data.forEach((card) => (card.slug = generateCardSlug(card)))
+      commit('setCards', data)
     } catch (e) {
       console.log(e)
     }

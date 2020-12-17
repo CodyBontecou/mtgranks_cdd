@@ -1,18 +1,11 @@
 <template>
-  <NuxtLink
-    :to="{ name: 'set-card___en', params: { card: card.slug, set: set.slug } }"
-    class="flex items-end hover:text-gray-600"
-  >
-    <!--    <RatingBubble :rating="card.rating" />-->
-    <div class="flex items-end hover:text-gray-600" @click="active = true">
-      <RatingBubble :rating="randomizedRating" />
-      <span class="cardName pl-6 mb-2 justify-self-end">{{ cardName }}</span>
-    </div>
-  </NuxtLink>
+  <div class="flex items-end hover:text-gray-600" @click="active = true">
+    <RatingBubble :rating="randomizedRating" />
+    <span class="cardName pl-6 mb-2 justify-self-end">{{ cardName }}</span>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'CardRow',
@@ -29,7 +22,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['cards', 'sets', 'set']),
     cardName() {
       if (this.card.name.length > 19) {
         return this.card.name.substring(0, 16) + '...'
@@ -45,8 +37,8 @@ export default {
     active() {
       this.$store.commit('setCard', this.card)
       this.$router.push({
-        name: 'set-card___en',
-        params: { card: this.card, set: this.set },
+        name: 'set___en',
+        query: { card: this.card.slug },
       })
     },
   },

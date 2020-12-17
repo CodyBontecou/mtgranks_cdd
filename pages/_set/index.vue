@@ -39,9 +39,20 @@ export default {
       console.log('_id here')
     },
   },
-  // destroyed() {
-  //   this.$store.commit('setCards', [])
-  // },
+  mounted() {
+    if (this.$route.query.card) {
+      this.$store.commit(
+        'setCard',
+        this.$store.state.cards.find(
+          (card) => card.slug === this.$route.query.card
+        )
+      )
+    }
+  },
+  destroyed() {
+    this.$store.commit('setCards', [])
+    this.$store.commit('setCard', null)
+  },
   head: {
     meta: [
       {
