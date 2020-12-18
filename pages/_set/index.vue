@@ -21,7 +21,7 @@
           :color="color"
         />
       </div>
-      <FilterMenu class="fixed menus" />
+      <FilterMenu class="fixed menus" @colorToggled="updateColors" />
     </div>
   </div>
 </template>
@@ -41,18 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['card', 'cards', 'sets', 'set', 'expanded']),
-    colors() {
-      const temp = []
-      this.cards.forEach((card) => {
-        if (!this.isArrayInArray(temp, card.colors)) {
-          temp.push(card.colors)
-        }
-      })
-      return temp.filter((element) => {
-        return element !== undefined
-      })
-    },
+    ...mapGetters(['card', 'cards', 'colors', 'sets', 'set', 'expanded']),
   },
   mounted() {
     if (this.$route.query.card) {
@@ -77,11 +66,8 @@ export default {
         (card) => JSON.stringify(card.colors) === JSON.stringify(color)
       )
     },
-    isArrayInArray(arr, item) {
-      const itemAsString = JSON.stringify(item)
-      return arr.some((ele) => {
-        return JSON.stringify(ele) === itemAsString
-      })
+    updateColors(event) {
+      console.log(event)
     },
   },
   head: {

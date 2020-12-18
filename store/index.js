@@ -6,6 +6,13 @@ function generateCardSlug(card) {
     .toLowerCase()
 }
 
+function isArrayInArray(arr, item) {
+  const itemAsString = JSON.stringify(item)
+  return arr.some((ele) => {
+    return JSON.stringify(ele) === itemAsString
+  })
+}
+
 export const state = () => ({
   sets: [
     {
@@ -76,6 +83,37 @@ export const state = () => ({
   set: null,
   card: null,
   expanded: false,
+  colorLabels: [
+    { Black: 'B' },
+    { Blue: 'U' },
+    { Red: 'R' },
+    { White: 'W' },
+    { Green: 'G' },
+    { Boros: 'RW' },
+    { Azorius: 'UW' },
+    { Dimir: 'BU' },
+    { Golgari: 'BG' },
+    { Gruul: 'GR' },
+    { Izzet: 'RU' },
+    { Orzhov: 'BW' },
+    { Rakdos: 'BR' },
+    { Selesnya: 'GW' },
+    { Simic: 'GU' },
+    { Abzan: 'WBG' },
+    { Bant: 'GUW' },
+    { Esper: 'BUW' },
+    { Grixis: 'UBR' },
+    { Jeskai: 'RUW' },
+    { Jund: 'BGR' },
+    { Mardu: 'BRW' },
+    { Naya: 'GRW' },
+    { Sultai: 'BGU' },
+    { Temur: 'BRU' },
+    { Glint: 'BGRU' },
+    { Dune: 'BGRW' },
+    { Ink: 'GRUW' },
+    { Yore: 'BRUW' },
+  ],
 })
 
 export const actions = {
@@ -123,6 +161,9 @@ export const getters = {
   expanded(state) {
     return state.expanded
   },
+  filters(state) {
+    return state.filters
+  },
   newSets(state) {
     return state.sets.filter((set) => set.type === 'new')
   },
@@ -135,5 +176,19 @@ export const getters = {
     } else {
       return state.card.name
     }
+  },
+  colors(state) {
+    const temp = []
+    state.cards.forEach((card) => {
+      if (!isArrayInArray(temp, card.colors)) {
+        temp.push(card.colors)
+      }
+    })
+    return temp.filter((element) => {
+      return element !== undefined
+    })
+  },
+  colorLabels(state) {
+    return state.colorLabels
   },
 }

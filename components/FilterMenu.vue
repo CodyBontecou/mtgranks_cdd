@@ -37,7 +37,7 @@
             <span
               class="ml-2 mr-4 hover:opacity-75"
               :class="{
-                'opacity-100': option.isChecked === true,
+                'opacity-75': option.isChecked === true,
                 'opacity-50': option.isChecked === false,
               }"
             >
@@ -46,7 +46,8 @@
             <input
               v-model="option.isChecked"
               type="checkbox"
-              class="flex-shrink-0 cursor-pointer form-checkbox text-charcoal"
+              class="flex-shrink-0 cursor-pointer form-checkbox text-charcoal opacity-75"
+              @click="$emit('colorToggled', option)"
             />
           </label>
         </div>
@@ -57,7 +58,7 @@
 
 <script>
 export default {
-  data: () => {
+  data() {
     return {
       filters: {
         isExpanded: false,
