@@ -14,7 +14,7 @@
       </div>
       <div class="w-2/3">
         <Column
-          v-for="(color, i) in colors"
+          v-for="(color, i) in colorz"
           :key="i"
           class="mt-10"
           :cards="cardsByColor(color)"
@@ -41,7 +41,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['card', 'cards', 'colors', 'sets', 'set', 'expanded']),
+    ...mapGetters([
+      'card',
+      'cards',
+      'colors',
+      'colorz',
+      'sets',
+      'set',
+      'expanded',
+    ]),
   },
   mounted() {
     if (this.$route.query.card) {
@@ -62,12 +70,31 @@ export default {
   },
   methods: {
     cardsByColor(color) {
-      return this.cards.filter(
-        (card) => JSON.stringify(card.colors) === JSON.stringify(color)
-      )
+      if (!color.isChecked) {
+        return []
+      }
+      const temp = []
+      for (const i in this.cards) {
+        try {
+          if ('card_faces' in this.cards[i]) {
+            if (this.cards[i].card_faces[0].colors.join() === color.raw) {
+              temp.push(this.cards[i])
+            }
+          } else if (this.cards[i].colors.join() === color.raw) {
+            temp.push(this.cards[i])
+          }
+        } catch (e) {
+          console.log(e)
+        }
+      }
+      return temp
     },
     updateColors(event) {
-      console.log(event)
+      const color = this.$store.state.colorz.find(
+        (elem) => elem.label === event.label
+      )
+      const boolean = !event.isChecked
+      this.$store.commit('toggleColor', { color, boolean })
     },
   },
   head: {

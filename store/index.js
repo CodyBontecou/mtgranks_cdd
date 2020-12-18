@@ -84,6 +84,7 @@ export const state = () => ({
   card: null,
   expanded: false,
   colorLabels: [
+    { Colorless: '' },
     { Black: 'B' },
     { Blue: 'U' },
     { Red: 'R' },
@@ -114,6 +115,10 @@ export const state = () => ({
     { Ink: 'GRUW' },
     { Yore: 'BRUW' },
   ],
+  colorz: [
+    { raw: '', isChecked: true, label: 'Colorless' },
+    { raw: 'R', isChecked: true, label: 'Red' },
+  ],
 })
 
 export const actions = {
@@ -142,6 +147,10 @@ export const mutations = {
   },
   setExpanded(state, expanded) {
     state.expanded = expanded
+  },
+  toggleColor(state, { color, boolean }) {
+    const c = state.colorz.find((elem) => elem.label === color.label)
+    c.isChecked = boolean
   },
 }
 
@@ -187,6 +196,9 @@ export const getters = {
     return temp.filter((element) => {
       return element !== undefined
     })
+  },
+  colorz(state) {
+    return state.colorz
   },
   colorLabels(state) {
     return state.colorLabels

@@ -1,6 +1,7 @@
 <template>
-  <div class="mt-20">
-    <h1 class="column-title mb-4 font-semibold">{{ prettifiedColorName }}</h1>
+  <div v-if="cardsLoaded" class="mt-20">
+    <!--    <h1 class="column-title mb-4 font-semibold">{{ prettifiedColorName }}</h1>-->
+    <h1 class="column-title mb-4 font-semibold">{{ color.label }}</h1>
     <CardRow v-for="card in cards" :key="card.id" :card="card" class="mb-2" />
   </div>
 </template>
@@ -16,27 +17,30 @@ export default {
       required: true,
     },
     color: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
   computed: {
     ...mapGetters(['colorLabels']),
-    prettifiedColorName() {
-      const flattenedColor = this.color.join().replace(/,/g, '')
-      for (const i in this.colorLabels) {
-        // Checking if the colorLabel object has a value of color
-        if (
-          Object.keys(this.colorLabels[i]).find(
-            (key) => this.colorLabels[i][key] === flattenedColor
-          )
-        ) {
-          // grabbing the first key
-          return Object.keys(this.colorLabels[i])[0]
-        }
-      }
-      return this.color
+    cardsLoaded() {
+      return this.cards.length > 0
     },
+    // prettifiedColorName() {
+    //   const flattenedColor = this.color.join().replace(/,/g, '')
+    //   for (const i in this.colorLabels) {
+    //     // Checking if the colorLabel object has a value of color
+    //     if (
+    //       Object.keys(this.colorLabels[i]).find(
+    //         (key) => this.colorLabels[i][key] === flattenedColor
+    //       )
+    //     ) {
+    //       // grabbing the first key
+    //       return Object.keys(this.colorLabels[i])[0]
+    //     }
+    //   }
+    //   return this.color
+    // },
   },
 }
 </script>
