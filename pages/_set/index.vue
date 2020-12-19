@@ -12,16 +12,16 @@
       <div v-if="cards.length === 0">
         <Loading />
       </div>
-      <div class="w-2/3">
+      <div class="flex flex-wrap sm:justify-center">
         <Column
-          v-for="(color, i) in colorz"
+          v-for="(color, i) in colors"
           :key="i"
-          class="mt-10"
+          class="mt-10 mx-2"
           :cards="cardsByColor(color)"
           :color="color"
         />
       </div>
-      <FilterMenu class="fixed menus" @colorToggled="updateColors" />
+      <FilterMenu class="fixed bottom-0 right-0 mr-20 mb-4" @colorToggled="updateColors" />
     </div>
   </div>
 </template>
@@ -41,15 +41,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'card',
-      'cards',
-      'colors',
-      'colorz',
-      'sets',
-      'set',
-      'expanded',
-    ]),
+    ...mapGetters(['card', 'cards', 'colors', 'sets', 'set', 'expanded']),
   },
   mounted() {
     if (this.$route.query.card) {
@@ -90,7 +82,7 @@ export default {
       return temp
     },
     updateColors(event) {
-      const color = this.$store.state.colorz.find(
+      const color = this.$store.state.colors.find(
         (elem) => elem.label === event.label
       )
       const boolean = !event.isChecked
@@ -119,9 +111,9 @@ export default {
 }
 </script>
 
-<style scoped>
-.menus {
-  bottom: 0;
-  right: 10px;
-}
-</style>
+<!--<style scoped>-->
+<!--.menus {-->
+<!--  bottom: 10px;-->
+<!--  right: 10px;-->
+<!--}-->
+<!--</style>-->

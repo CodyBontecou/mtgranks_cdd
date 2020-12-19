@@ -6,13 +6,6 @@ function generateCardSlug(card) {
     .toLowerCase()
 }
 
-function isArrayInArray(arr, item) {
-  const itemAsString = JSON.stringify(item)
-  return arr.some((ele) => {
-    return JSON.stringify(ele) === itemAsString
-  })
-}
-
 export const state = () => ({
   sets: [
     {
@@ -115,9 +108,15 @@ export const state = () => ({
     { Ink: 'GRUW' },
     { Yore: 'BRUW' },
   ],
-  colorz: [
+  colors: [
     { raw: '', isChecked: true, label: 'Colorless' },
     { raw: 'R', isChecked: true, label: 'Red' },
+    { raw: 'G', isChecked: true, label: 'Green' },
+    { raw: 'U', isChecked: true, label: 'Blue' },
+    { raw: 'B', isChecked: true, label: 'Black' },
+    { raw: 'W', isChecked: true, label: 'White' },
+    { raw: null, isChecked: true, label: 'Lands' },
+    { raw: null, isChecked: true, label: 'Multi' },
   ],
 })
 
@@ -149,7 +148,7 @@ export const mutations = {
     state.expanded = expanded
   },
   toggleColor(state, { color, boolean }) {
-    const c = state.colorz.find((elem) => elem.label === color.label)
+    const c = state.colors.find((elem) => elem.label === color.label)
     c.isChecked = boolean
   },
 }
@@ -187,18 +186,7 @@ export const getters = {
     }
   },
   colors(state) {
-    const temp = []
-    state.cards.forEach((card) => {
-      if (!isArrayInArray(temp, card.colors)) {
-        temp.push(card.colors)
-      }
-    })
-    return temp.filter((element) => {
-      return element !== undefined
-    })
-  },
-  colorz(state) {
-    return state.colorz
+    return state.colors
   },
   colorLabels(state) {
     return state.colorLabels

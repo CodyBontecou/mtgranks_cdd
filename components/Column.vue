@@ -1,5 +1,5 @@
 <template>
-  <div v-if="cardsLoaded" class="mt-20">
+  <div v-show="cardsLoaded" class="mt-20">
     <!--    <h1 class="column-title mb-4 font-semibold">{{ prettifiedColorName }}</h1>-->
     <h1 class="column-title mb-4 font-semibold">{{ color.label }}</h1>
     <CardRow v-for="card in cards" :key="card.id" :card="card" class="mb-2" />
