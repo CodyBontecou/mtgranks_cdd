@@ -2,22 +2,21 @@
   <div class="relative">
     <img
       v-if="card.image_uris"
-      class="max-h-52 lg:card-large"
+      class="max-h-card-small lg:max-h-card-large"
       :class="{
-        'card-large': expanded === true,
+        'max-h-card-large': expanded === true,
       }"
       :src="card.image_uris.border_crop"
-      :alt="`Small image of ${card.name} within the header.`"
+      :alt="`image of ${card.name} within the header.`"
     />
     <img
       v-else-if="card.card_faces !== undefined"
-      class="lg:card-large"
+      class="max-h-card-small lg:max-h-card-large"
       :class="{
-        'card-small': expanded === false,
-        'card-large': expanded === true,
+        'max-h-card-large': expanded === true,
       }"
       :src="card.card_faces[0].image_uris.border_crop"
-      :alt="`Small image of ${card.name} within the header.`"
+      :alt="`Image of ${card.name} within the header.`"
     />
     <div
       class="absolute lg:hidden rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer"
@@ -66,12 +65,6 @@ export default {
 </script>
 
 <style scoped>
-.card-small {
-  max-height: 204px;
-}
-.card-large {
-  max-height: 60vh;
-}
 .expand-bubble-small {
   bottom: 91px;
   left: 10px;

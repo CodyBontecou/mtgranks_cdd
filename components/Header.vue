@@ -50,7 +50,7 @@
 
     <!--  Set Name -->
     <div v-if="set !== null" class="order-last lg:order-2">
-      <div class="font-bold text-24 leading-29 opacity-75 ml-20 lg:mt-4">
+      <div class="font-bold text-20 leading-29 opacity-75 ml-20">
         {{ set.name }}
       </div>
 

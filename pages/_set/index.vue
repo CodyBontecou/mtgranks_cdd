@@ -5,7 +5,7 @@
       class="mx-20 lg:mt-0 lg:ml-divider"
       :class="{
         'mt-48': card === null,
-        'mt-88': card && expanded === false,
+        'mt-104': card && expanded === false,
         'mt-176': card && expanded === true,
       }"
     >

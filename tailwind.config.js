@@ -19,7 +19,7 @@ module.exports = {
         22: '22px',
         38: '38px',
         66: '66px',
-        88: '22rem',
+        104: '26rem',
         106: '106px',
         170: '170px',
         176: '44rem',
@@ -54,6 +54,8 @@ module.exports = {
       },
       maxHeight: {
         '1/2': '50%',
+        'card-small': '204px;',
+        'card-large': '60vh;',
       },
     },
   },
