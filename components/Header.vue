@@ -1,39 +1,27 @@
 <template>
   <div
-    class="flex flex-col justify-between w-full"
+    class="flex flex-col justify-between lg:justify-start w-full"
     :class="{
-      'fixed top-0 h-40 bg-charcoal text-white notch':
+      'fixed top-0 h-40 bg-charcoal text-white notch lg:w-divider lg:h-screen lg:fixed divider':
         page === 'mtgSet' && card === null,
-      'fixed top-0 h-auto bg-charcoal text-white notch':
+      'fixed top-0 h-auto bg-charcoal text-white notch lg:w-divider lg:h-screen lg:fixed divider':
         page === 'mtgSet' && card !== null,
       'bg-transparent text-black': page === 'home',
     }"
   >
     <!--  Top bar mtgSet -->
-    <div v-if="page === 'mtgSet'" class="flex flex-col m-20">
+    <div v-if="page === 'mtgSet'" class="flex flex-col m-20 order-1 lg:order-1">
       <div class="flex justify-between">
         <NuxtLink v-if="card === null" to="/">
           <ThinLeftArrow />
         </NuxtLink>
-        <div v-if="card" @click="removeCard">
+        <div v-if="card" class="cursor-pointer" @click="removeCard">
           <CloseIcon />
         </div>
         <NuxtLink to="/">
           <div class="font-bold text-24">mtgranks</div>
         </NuxtLink>
         <ThreeVerticalDots />
-      </div>
-      <div
-        v-if="card"
-        class="flex mt-20 z-40"
-        :class="{
-          'flex-col items-center': expanded,
-          'justify-between': !expanded,
-        }"
-      >
-        <CardImg :card="card" />
-        <HorizontalReview v-if="expanded" class="mt-4" />
-        <VerticalReview v-else />
       </div>
     </div>
 
@@ -61,24 +49,35 @@
     </span>
 
     <!--  Set Name -->
-    <div v-if="set !== null">
-      <div
-        v-if="card === null"
-        class="font-bold text-24 leading-29 opacity-75 ml-20"
-      >
+    <div v-if="set !== null" class="order-last lg:order-2">
+      <div class="font-bold text-24 leading-29 opacity-75 ml-20 lg:mt-4">
         {{ set.name }}
       </div>
 
       <!--  Search Bar -->
-      <div class="flex justify-center">
-        <SearchInput class="-mb-20 mt-3 text-black" />
+      <div class="flex justify-center mt-3 lg:mt-4">
+        <SearchInput class="-mb-20 lg:mb-0 text-black" />
       </div>
+    </div>
+
+    <!--  Card  -->
+    <div
+      v-if="card"
+      class="m-20 z-40 flex lg:flex-col lg:items-center order-2 lg:order-3"
+      :class="{
+        'flex-col items-center': expanded,
+        'justify-between': !expanded,
+      }"
+    >
+      <CardImg :card="card" />
+      <HorizontalReview v-if="expanded" class="mt-4" />
+      <VerticalReview v-else class="lg:mt-4" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'Header',
@@ -152,5 +151,8 @@ export default {
 .notch {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+}
+.divider {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 </style>

@@ -2,8 +2,8 @@
   <div class="relative">
     <img
       v-if="card.image_uris"
+      class="max-h-52 lg:card-large"
       :class="{
-        'card-small': expanded === false,
         'card-large': expanded === true,
       }"
       :src="card.image_uris.border_crop"
@@ -11,6 +11,7 @@
     />
     <img
       v-else-if="card.card_faces !== undefined"
+      class="lg:card-large"
       :class="{
         'card-small': expanded === false,
         'card-large': expanded === true,
@@ -19,7 +20,7 @@
       :alt="`Small image of ${card.name} within the header.`"
     />
     <div
-      class="absolute rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer"
+      class="absolute lg:hidden rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer"
       :class="{
         'expand-bubble-small': !expanded,
         'expand-bubble-large': expanded,

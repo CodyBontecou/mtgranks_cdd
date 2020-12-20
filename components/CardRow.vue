@@ -1,12 +1,14 @@
 <template>
-  <div class="flex items-end hover:text-gray-600 cursor-pointer" @click="active = true">
+  <div
+    class="flex items-end hover:text-gray-600 cursor-pointer"
+    @click="active = true"
+  >
     <RatingBubble :rating="randomizedRating" />
-    <span class="cardName pl-6 mb-2 justify-self-end">{{ cardName }}</span>
+    <span class="cardName ml-6 mb-2 justify-self-end">{{ cardName }}</span>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'CardRow',
   props: {

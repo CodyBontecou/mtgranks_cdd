@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="md:flex mt-20">
     <Header class="z-10" :set="set" :card="card" page="mtgSet" />
     <div
-      class="mx-20"
+      class="mx-20 lg:mt-0 lg:ml-divider"
       :class="{
         'mt-48': card === null,
         'mt-88': card && expanded === false,
@@ -16,12 +16,15 @@
         <Column
           v-for="(color, i) in colors"
           :key="i"
-          class="mt-10 mx-2"
+          class="mx-2"
           :cards="cardsByColor(color)"
           :color="color"
         />
       </div>
-      <FilterMenu class="fixed bottom-0 right-0 mr-20 mb-4" @colorToggled="updateColors" />
+      <FilterMenu
+        class="fixed bottom-0 right-0 mr-20 mb-4"
+        @colorToggled="updateColors"
+      />
     </div>
   </div>
 </template>
@@ -40,10 +43,25 @@ export default {
       await this.$store.dispatch('getCards', this.set.code)
     }
   },
+  data() {
+    return {
+      windowWidth: 0,
+      headerOpen: true,
+      mdBreakpoint: 768,
+    }
+  },
   computed: {
     ...mapGetters(['card', 'cards', 'colors', 'sets', 'set', 'expanded']),
+    headerVisible() {
+      return this.windowWidth > this.mdBreakpoint ? false : this.headerOpen
+    },
+  },
+  beforeDestroyed() {
+    window.removeEventListener('resize', this.updateWindowSize)
   },
   mounted() {
+    this.updateWindowSize()
+    window.addEventListener('resize', this.updateWindowSize)
     if (this.$route.query.card) {
       this.$store.commit(
         'setCard',
@@ -87,6 +105,9 @@ export default {
       )
       const boolean = !event.isChecked
       this.$store.commit('toggleColor', { color, boolean })
+    },
+    updateWindowSize() {
+      this.windowWidth = window.innerWidth
     },
   },
   head: {

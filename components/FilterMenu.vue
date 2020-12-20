@@ -1,7 +1,7 @@
 <template>
   <div class="font-medium text-xs">
     <div
-      class="relative rounded p-2 flex flex-col-reverse bg-white items-center justify-center group bg-white shadow-lg hover:shadow-2xl border border-ash border-opacity-25 hover:border-opacity-50 cursor-pointer"
+      class="relative rounded p-2 flex flex-col-reverse bg-white items-center justify-center bg-white shadow-lg hover:shadow-2xl border border-ash border-opacity-25 hover:border-opacity-50 cursor-pointer"
     >
       <button
         class="flex items-center justify-between w-full focus:outline-none opacity-50 hover:opacity-75"

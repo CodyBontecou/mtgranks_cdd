@@ -23,6 +23,8 @@ module.exports = {
         106: '106px',
         170: '170px',
         176: '44rem',
+        divider: '325px',
+        'divider-compact': '50px',
       },
       lineHeight: {
         12: '12px',
@@ -50,6 +52,9 @@ module.exports = {
       boxShadow: {
         1: '0px 0.892729px 2.67819px rgba(0, 0, 0, 0.05), 0px 10px 20px rgba(0, 0, 0, 0.15)',
       },
+      maxHeight: {
+        '1/2': '50%',
+      },
     },
   },
   variants: {
@@ -57,8 +62,8 @@ module.exports = {
   },
   plugins: [require('@tailwindcss/custom-forms')],
   purge: {
-    // enabled: process.env.NODE_ENV === 'production',
-    enabled: false,
+    enabled: process.env.NODE_ENV === 'production',
+    // enabled: false,
     content: [
       'components/**/*.vue',
       'layouts/**/*.vue',
