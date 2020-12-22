@@ -56,7 +56,7 @@
 
       <!--  Search Bar -->
       <div class="flex justify-center mt-3 lg:mt-4">
-        <SearchInput class="-mb-20 lg:mb-0 text-black" />
+        <SearchInput :cards="cards" class="-mb-20 lg:mb-0 text-black" />
       </div>
     </div>
 
@@ -89,7 +89,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['set', 'expanded']),
+    ...mapGetters(['set', 'expanded', 'cards']),
     card: {
       get() {
         return this.$store.state.card
