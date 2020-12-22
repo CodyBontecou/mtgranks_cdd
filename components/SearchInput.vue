@@ -13,10 +13,10 @@
       <input
         id="cardSearch"
         v-model="search"
-        class="appearance-none focus:outline-none placeholder-black rounded-r-full w-full"
+        class="appearance-none focus:outline-none placeholder-gray-600 rounded-r-full w-full"
         type="text"
         autocomplete="off"
-        :placeholder="inputPlaceholderText"
+        placeholder="Search Mtgranks"
         @input="onChange"
       />
     </form>
@@ -88,13 +88,10 @@ export default {
         query: { card: cardObject.slug },
       })
       this.resetResults()
-      this.resetSearch()
+      this.search = cardObject.name
     },
     resetResults() {
       this.results = []
-    },
-    resetSearch() {
-      this.search = ''
     },
   },
 }
