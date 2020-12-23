@@ -89,10 +89,14 @@ export default {
       return this.cards.filter((card) => this.cardColor(card) === color.raw)
     },
     cardColor(card) {
-      if ('card_faces' in card) {
-        return card.card_faces[0].colors.join()
-      } else {
-        return card.colors.join()
+      try {
+        if ('card_faces' in card) {
+          return card.card_faces[0].colors.join()
+        } else {
+          return card.colors.join()
+        }
+      } catch (e) {
+        console.log(e)
       }
     },
     updateColors(event) {

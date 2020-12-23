@@ -120,15 +120,35 @@ export const state = () => ({
 })
 
 export const actions = {
-  async getCards({ commit }, setCode) {
+  async getCards({ commit, dispatch }, setCode) {
+    const url = `https://api.scryfall.com/cards/search?q=set:${setCode}+is:booster`
     try {
-      const { data } = await this.$axios.$get(
-        `https://api.scryfall.com/cards/search?q=set:${setCode}+is:booster`
-      )
+      const response = await this.$axios.$get(url)
+      let data = response.data
+      if (response.has_more) {
+        const additionalData = await dispatch(
+          'getPaginatedCards',
+          response.next_page
+        )
+        data = data.concat(additionalData)
+      }
       data.forEach((card) => (card.slug = generateCardSlug(card)))
       commit('setCards', data)
     } catch (e) {
       console.log(e)
+    }
+  },
+  async getPaginatedCards({ dispatch }, url) {
+    const response = await this.$axios.$get(url)
+    let data = response.data
+    if (response.has_more) {
+      const additionalData = await dispatch(
+        'getPaginatedCards',
+        response.next_page
+      )
+      data = data.concat(additionalData)
+    } else {
+      return data
     }
   },
 }
@@ -149,6 +169,9 @@ export const mutations = {
   toggleColor(state, { color, boolean }) {
     const c = state.colors.find((elem) => elem.label === color.label)
     c.isChecked = boolean
+  },
+  updateCards(state, cards) {
+    state.cards = cards
   },
 }
 
