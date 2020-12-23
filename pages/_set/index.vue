@@ -2,7 +2,7 @@
   <div class="md:flex mt-20">
     <Header class="z-10" :set="set" :card="card" page="mtgSet" />
     <div
-      class="mx-20 lg:mt-0 lg:ml-divider"
+      class="mx-20 md:mt-0 md:ml-divider"
       :class="{
         'mt-48': card === null,
         'mt-104': card && expanded === false,

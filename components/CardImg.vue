@@ -2,7 +2,7 @@
   <div class="relative">
     <img
       v-if="card.image_uris"
-      class="max-h-card-small lg:max-h-card-large"
+      class="max-h-card-small md:max-h-card-large"
       :class="{
         'max-h-card-large': expanded === true,
       }"
@@ -11,7 +11,7 @@
     />
     <img
       v-else-if="card.card_faces !== undefined"
-      class="max-h-card-small lg:max-h-card-large"
+      class="max-h-card-small md:max-h-card-large"
       :class="{
         'max-h-card-large': expanded === true,
       }"
@@ -19,7 +19,7 @@
       :alt="`Image of ${card.name} within the header.`"
     />
     <div
-      class="absolute lg:hidden rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer"
+      class="absolute md:hidden rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer"
       :class="{
         'expand-bubble-small': !expanded,
         'expand-bubble-large': expanded,
