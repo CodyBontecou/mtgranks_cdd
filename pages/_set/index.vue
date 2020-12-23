@@ -83,21 +83,17 @@ export default {
       if (!color.isChecked) {
         return []
       }
-      const temp = []
-      for (const i in this.cards) {
-        try {
-          if ('card_faces' in this.cards[i]) {
-            if (this.cards[i].card_faces[0].colors.join() === color.raw) {
-              temp.push(this.cards[i])
-            }
-          } else if (this.cards[i].colors.join() === color.raw) {
-            temp.push(this.cards[i])
-          }
-        } catch (e) {
-          console.log(e)
-        }
+      if (color.label === 'Multi') {
+        return this.cards.filter((card) => this.cardColor(card).length > 1)
       }
-      return temp
+      return this.cards.filter((card) => this.cardColor(card) === color.raw)
+    },
+    cardColor(card) {
+      if ('card_faces' in card) {
+        return card.card_faces[0].colors.join()
+      } else {
+        return card.colors.join()
+      }
     },
     updateColors(event) {
       const color = this.$store.state.colors.find(

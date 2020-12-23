@@ -82,7 +82,6 @@ export default {
               { label: 'White', isChecked: true },
               { label: 'Colorless', isChecked: true },
               { label: 'Multi', isChecked: true },
-              { label: 'Lands', isChecked: true },
             ],
           },
         ],

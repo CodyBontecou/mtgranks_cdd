@@ -115,7 +115,6 @@ export const state = () => ({
     { raw: 'U', isChecked: true, label: 'Blue' },
     { raw: 'B', isChecked: true, label: 'Black' },
     { raw: 'W', isChecked: true, label: 'White' },
-    { raw: null, isChecked: true, label: 'Lands' },
     { raw: null, isChecked: true, label: 'Multi' },
   ],
 })
