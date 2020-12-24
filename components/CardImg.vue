@@ -31,10 +31,10 @@
     <a
       :href="card.purchase_uris.tcgplayer"
       target="_blank"
-      class="absolute text-black font-medium text-12 bg-white opacity-75 hover:opacity-100 cursor-pointer"
+      class="p-1 absolute text-black font-medium text-12 rounded bg-white opacity-75 hover:opacity-100 cursor-pointer md:right-18 md:bottom-180"
       :class="{
-        'price-bubble-small': !expanded,
-        'price-bubble-large': expanded,
+        'right-10 bottom-91 price-bubble-small': !expanded,
+        'right-23 bottom-215': expanded,
       }"
     >
       ${{ card.prices.usd }}
@@ -74,17 +74,5 @@ export default {
   bottom: 26.5vh;
   left: 23px;
   padding: 8px;
-}
-.price-bubble-small {
-  bottom: 91px;
-  right: 10px;
-  border-radius: 4px;
-  padding: 4px;
-}
-.price-bubble-large {
-  bottom: 26.5vh;
-  right: 23px;
-  border-radius: 4px;
-  padding: 4px;
 }
 </style>

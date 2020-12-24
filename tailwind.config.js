@@ -47,6 +47,7 @@ module.exports = {
         36: '36px',
       },
       borderRadius: {
+        4: '1rem',
         10: '10px',
       },
       boxShadow: {
@@ -56,6 +57,15 @@ module.exports = {
         '1/2': '50%',
         'card-small': '204px;',
         'card-large': '60vh;',
+      },
+      // For top, right, bottom, left
+      inset: {
+        10: '10px',
+        18: '18px',
+        23: '23px',
+        91: '91px',
+        180: '180px',
+        215: '215px',
       },
     },
   },
