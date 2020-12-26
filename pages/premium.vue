@@ -77,17 +77,17 @@ export default {
       {
         hid: 'theme-color',
         name: 'theme-color',
-        content: '#ffffff',
+        content: '#000000',
       },
       {
         hid: 'msapplication-navbutton-color',
         name: 'msapplication-navbutton-color',
-        content: '#ffffff',
+        content: '#000000',
       },
       {
         hid: 'apple-mobile-web-app-status-bar-style',
         name: 'apple-mobile-web-app-status-bar-style',
-        content: '#ffffff',
+        content: '#000000',
       },
     ],
   },
