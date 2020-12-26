@@ -6,12 +6,14 @@
     <SearchIcon class="cursor-pointer" />
     <BulletedList class="cursor-pointer" />
     <div></div>
-    <BaseCircle
-      class="absolute cursor-pointer right-0 top-0 w-66 h-66"
-      color="gradient-black-green"
-    >
-      <LightingFillIcon />
-    </BaseCircle>
+    <NuxtLink to="/premium">
+      <BaseCircle
+        class="absolute cursor-pointer right-0 top-0 w-66 h-66"
+        color="gradient-black-green"
+      >
+        <LightingFillIcon />
+      </BaseCircle>
+    </NuxtLink>
   </div>
 </template>
 
