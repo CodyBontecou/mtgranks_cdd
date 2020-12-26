@@ -13,3 +13,7 @@
 .bg-gradient-orange-red {
   background: linear-gradient(141.77deg, rgba(255, 90, 61, 0.8) 17.19%, #E9C46A 100%)
 }
+
+html {
+  @apply h-full
+}

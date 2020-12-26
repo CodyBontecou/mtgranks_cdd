@@ -1,12 +1,13 @@
 <template>
   <div
-    class="flex flex-col justify-between md:justify-start w-full"
+    class="flex flex-col justify-between md:justify-start w-full notch"
     :class="{
-      'fixed top-0 h-40 bg-charcoal text-white notch md:w-divider md:h-screen md:fixed divider':
+      'fixed top-0 h-40 bg-charcoal text-white md:w-divider md:h-screen md:fixed divider':
         page === 'mtgSet' && card === null,
-      'fixed top-0 h-auto bg-charcoal text-white notch md:w-divider md:h-screen md:fixed divider':
+      'fixed top-0 h-auto bg-charcoal text-white md:w-divider md:h-screen md:fixed divider':
         page === 'mtgSet' && card !== null,
       'bg-transparent text-black': page === 'home',
+      'text-white': page === 'premium',
     }"
   >
     <!--  Top bar mtgSet -->
@@ -29,9 +30,18 @@
     <div v-if="page === 'home'" class="flex justify-center items-center">
       <div class="font-bold text-36 leading-42">mtgranks</div>
       <div class="absolute mr-20 right-0 flex">
-        <GlobeIcon />
-        <DownArrow class="ml-1" />
+        <GlobeIcon class="fill-current text-black" />
+        <DownArrow class="ml-1 fill-current text-black" />
       </div>
+    </div>
+
+    <!--  Top bar PREMIUM -->
+    <div v-if="page === 'premium'" class="flex justify-between items-center">
+      <NuxtLink v-if="card === null" to="/">
+        <ThinLeftArrow />
+      </NuxtLink>
+      <div class="font-bold text-36 leading-42">mtgranks</div>
+      <ThreeVerticalDots />
     </div>
 
     <!--  Bubbles and opaque Mtgranks logo  -->

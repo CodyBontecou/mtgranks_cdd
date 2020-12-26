@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col max-w-md mx-auto justify-between h-full">
-    <div class="">
+    <div>
       <Header page="home"></Header>
       <h2 class="mt-6 font-bold text-22">Latest Sets</h2>
       <div

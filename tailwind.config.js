@@ -6,6 +6,7 @@ module.exports = {
         'persian-green': '#2A9D8F',
         gray: {
           1: '#f2f2f2',
+          2: '#343436',
         },
         ash: '#264653',
         teal: '#2A9D8F',
@@ -30,6 +31,7 @@ module.exports = {
         12: '12px',
         18: '18px',
         21: '21px',
+        26: '26px',
         29: '29px',
         42: '42px',
         130: '130%',
@@ -45,6 +47,7 @@ module.exports = {
         22: '22px',
         24: '24px',
         36: '36px',
+        44: '44px',
       },
       borderRadius: {
         4: '1rem',
@@ -53,10 +56,24 @@ module.exports = {
       boxShadow: {
         1: '0px 0.892729px 2.67819px rgba(0, 0, 0, 0.05), 0px 10px 20px rgba(0, 0, 0, 0.15)',
       },
+      minHeight: {
+        32: '32px',
+        80: '80px',
+      },
       maxHeight: {
+        32: '32px',
+        80: '80px',
         '1/2': '50%',
         'card-small': '204px;',
         'card-large': '60vh;',
+      },
+      minWidth: {
+        32: '32px',
+        80: '80px',
+      },
+      maxWidth: {
+        32: '32px',
+        80: '80px',
       },
       // For top, right, bottom, left
       inset: {
@@ -66,6 +83,9 @@ module.exports = {
         91: '91px',
         180: '180px',
         215: '215px',
+      },
+      opacity: {
+        30: '0.3',
       },
     },
   },
