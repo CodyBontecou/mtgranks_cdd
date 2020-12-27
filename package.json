@@ -17,8 +17,10 @@
     "@nuxtjs/axios": "^5.12.2",
     "@nuxtjs/pwa": "^3.0.2",
     "core-js": "^3.6.5",
+    "netlify-identity-widget": "^1.9.1",
     "nuxt": "^2.14.6",
-    "nuxt-i18n": "^6.15.4"
+    "nuxt-i18n": "^6.15.4",
+    "vuelidate": "^0.7.6"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.6",

@@ -19,12 +19,14 @@
           </h3>
         </div>
         <form
+          ref="form"
           action=""
           name="newsletter"
           method="POST"
           data-netlify="true"
           netlify-honeypot="bot-field"
           class="mt-12 flex"
+          @submit.prevent="submitForm"
         >
           <input type="hidden" name="form-name" value="newsletter" />
           <p class="hidden">
@@ -36,10 +38,14 @@
           <label for="emailForm"> </label>
           <input
             id="emailForm"
-            type="email"
+            v-model="email"
             name="email"
-            required
-            class="appearance-none border rounded-lg h-12 p-6 text-black focus:outline-none font-normal text-18"
+            class="appearance-none rounded-lg h-12 p-6 focus:outline-none font-normal text-18 bg-white focus:outline-none"
+            :class="{
+              'border-2 border-red-500 text-red-500 placeholder-text-red-500':
+                requiredEmail || isEmail,
+              'border-2 text-black': !requiredEmail && !isEmail,
+            }"
             placeholder="Email address"
           />
           <button
@@ -49,14 +55,49 @@
             Submit
           </button>
         </form>
+        <div v-if="requiredEmail" class="mt-2 text-red-500 text-18 font-medium">
+          Email is required.
+        </div>
+        <div v-if="isEmail" class="mt-2 text-red-500 text-18 font-medium">
+          Please input a valid email address.
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { email, required } from 'vuelidate/lib/validators'
+
 export default {
   layout: 'premium',
+  data() {
+    return {
+      email: '',
+    }
+  },
+  validations: {
+    email: {
+      required,
+      email,
+    },
+  },
+  computed: {
+    requiredEmail() {
+      return !this.$v.email.required && this.$v.email.$dirty
+    },
+    isEmail() {
+      return !this.$v.email.email && this.$v.email.$dirty
+    },
+  },
+  methods: {
+    submitForm() {
+      this.$v.$touch()
+      if (!this.$v.$invalid) {
+        this.$refs.form.submit()
+      }
+    },
+  },
   head: {
     bodyAttrs: {
       class: 'min-h-full bg-black',
