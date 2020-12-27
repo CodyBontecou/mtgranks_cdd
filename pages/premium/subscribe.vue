@@ -30,13 +30,13 @@
             id="singleFormField"
             class="appearance-none border rounded-lg h-12 p-6 text-black focus:outline-none font-normal text-18"
             placeholder="Email address"
-            @input="$emit('input', $event.target.value)"
           />
-          <input
+          <button
             class="ml-4 px-2 rounded-lg bg-white text-black text-16 font-medium"
             type="submit"
-            name="submit"
-          />
+          >
+            Submit
+          </button>
         </form>
       </div>
     </div>
