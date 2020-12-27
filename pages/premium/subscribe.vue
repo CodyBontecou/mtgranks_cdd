@@ -23,11 +23,19 @@
           name="newsletter"
           method="POST"
           data-netlify="true"
+          netlify-honeypot="bot-field"
           class="mt-12 flex"
         >
-          <label for="singleFormField"> </label>
+          <input type="hidden" name="form-name" value="newsletter" />
+          <p class="hidden">
+            <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+          </p>
+          <label for="emailForm"> </label>
           <input
-            id="singleFormField"
+            id="emailForm"
+            type="email"
+            name="email"
+            required
             class="appearance-none border rounded-lg h-12 p-6 text-black focus:outline-none font-normal text-18"
             placeholder="Email address"
           />
