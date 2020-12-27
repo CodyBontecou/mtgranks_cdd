@@ -15,3 +15,5 @@ export const PremiumFeature = () => ({
   },
   template: '<PremiumFeature :feature="feature"/>',
 })
+
+export const SubscriptionButton = () => '<SubscriptionButton />'
