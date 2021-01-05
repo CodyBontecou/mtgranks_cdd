@@ -25,11 +25,9 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  top: 0;
-  left: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
   z-index: 300;
   flex-direction: column;
   user-select: none;
