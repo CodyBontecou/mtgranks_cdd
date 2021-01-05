@@ -27,12 +27,12 @@ export default {
   methods: {
     handlePremium() {
       if (!this.isPremium) {
-        fetch('/.netlify/functions/create-manage-link', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${this.currentUser.token.access_token}`,
-          },
-        })
+        this.$axios
+          .post('/.netlify/functions/create-manage-link', {
+            headers: {
+              Authorization: `Bearer ${this.currentUser.token.access_token}`,
+            },
+          })
           .then((res) => res.json())
           .then((link) => {
             window.location.href = link
