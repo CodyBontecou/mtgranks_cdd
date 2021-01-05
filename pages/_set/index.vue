@@ -22,6 +22,7 @@
         />
       </div>
       <FilterMenu
+        v-if="isPremium"
         class="fixed bottom-0 right-0 mr-20 mb-4"
         @colorToggled="updateColors"
       />
@@ -30,7 +31,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   layout: 'wideHeader',
@@ -52,6 +53,10 @@ export default {
   },
   computed: {
     ...mapGetters(['card', 'cards', 'colors', 'sets', 'set', 'expanded']),
+    ...mapState({
+      isPremium: (state) =>
+        state.user.currentUser?.app_metadata.roles.includes('premium'),
+    }),
     headerVisible() {
       return this.windowWidth > this.mdBreakpoint ? false : this.headerOpen
     },
@@ -84,7 +89,13 @@ export default {
         return []
       }
       if (color.label === 'Multi') {
-        return this.cards.filter((card) => this.cardColor(card).length > 1)
+        try {
+          return this.cards.filter((card) => this.cardColor(card).length > 1)
+        } catch (e) {
+          // console.log('multi color error')
+          console.log(e)
+          // console.log(console.log(color))
+        }
       }
       return this.cards.filter((card) => this.cardColor(card) === color.raw)
     },

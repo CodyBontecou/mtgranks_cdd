@@ -3,6 +3,7 @@
     <Header page="home"></Header>
     <div>
       <logo />
+      <h1 v-if="isPremium">WE PREMIUM BABY</h1>
       <h1 class="title">Protected Page</h1>
       <h2 class="subtitle">
         My <strong><u>protected</u></strong> Nuxt.js project page
@@ -12,12 +13,18 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Logo from '~/components/Logo.vue'
 
 export default {
   components: {
     Logo,
+  },
+  computed: {
+    ...mapState({
+      isPremium: (state) =>
+        state.user.currentUser.app_metadata.roles[0] === 'premium',
+    }),
   },
   methods: {
     ...mapActions({
