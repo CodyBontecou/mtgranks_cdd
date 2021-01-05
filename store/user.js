@@ -13,3 +13,9 @@ export const actions = {
     commit('SET_USER', payload)
   },
 }
+
+export const getters = {
+  currentUser(state) {
+    return state.currentUser
+  },
+}
