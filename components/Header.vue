@@ -1,42 +1,28 @@
 <template>
   <div
-    class="flex flex-col justify-between w-full"
+    class="flex flex-col justify-between md:justify-start w-full notch"
     :class="{
-      'fixed top-0 h-40 bg-charcoal text-white notch':
+      'fixed top-0 h-40 bg-charcoal text-white md:w-divider md:h-screen md:fixed divider':
         page === 'mtgSet' && card === null,
-      'fixed top-0 h-auto bg-charcoal text-white notch':
+      'fixed top-0 h-auto bg-charcoal text-white md:w-divider md:h-screen md:fixed divider':
         page === 'mtgSet' && card !== null,
       'bg-transparent text-black': page === 'home',
+      'text-white': page === 'premium',
     }"
   >
     <!--  Top bar mtgSet -->
-    <div v-if="page === 'mtgSet'" class="flex flex-col m-20">
+    <div v-if="page === 'mtgSet'" class="flex flex-col m-20 order-1 md:order-1">
       <div class="flex justify-between">
         <NuxtLink v-if="card === null" to="/">
           <ThinLeftArrow />
         </NuxtLink>
-        <NuxtLink
-          v-else
-          :to="{ name: 'setSlug___en', params: { setSlug: set.slug } }"
-        >
+        <div v-if="card" class="cursor-pointer" @click="removeCard">
           <CloseIcon />
-        </NuxtLink>
+        </div>
         <NuxtLink to="/">
           <div class="font-bold text-24">mtgranks</div>
         </NuxtLink>
         <ThreeVerticalDots />
-      </div>
-      <div
-        v-if="card"
-        class="flex mt-20 z-40"
-        :class="{
-          'flex-col items-center': expanded,
-          'justify-between': !expanded,
-        }"
-      >
-        <CardImg :card="card" @expand="onClickChild" />
-        <HorizontalReview v-if="expanded" class="mt-4" />
-        <VerticalReview v-else />
       </div>
     </div>
 
@@ -44,9 +30,18 @@
     <div v-if="page === 'home'" class="flex justify-center items-center">
       <div class="font-bold text-36 leading-42">mtgranks</div>
       <div class="absolute mr-20 right-0 flex">
-        <GlobeIcon />
-        <DownArrow class="ml-1" />
+        <GlobeIcon class="fill-current text-black" />
+        <DownArrow class="ml-1 fill-current text-black" />
       </div>
+    </div>
+
+    <!--  Top bar PREMIUM -->
+    <div v-if="page === 'premium'" class="flex justify-between items-center">
+      <NuxtLink v-if="card === null" to="/">
+        <ThinLeftArrow />
+      </NuxtLink>
+      <div class="font-bold text-36 leading-42">mtgranks</div>
+      <ThreeVerticalDots />
     </div>
 
     <!--  Bubbles and opaque Mtgranks logo  -->
@@ -63,51 +58,107 @@
       mtgranks
     </span>
 
-    <div v-if="set">
-      <!--  Set Name -->
+    <div class="links">
       <div
-        v-if="card === null"
-        class="font-bold text-24 leading-29 opacity-75 ml-20"
+        v-if="isLoggedIn"
+        class="button--grey"
+        @click="triggerNetlifyIdentityAction('logout')"
       >
+        Logout
+      </div>
+      <div
+        v-else
+        class="button--grey"
+        @click="triggerNetlifyIdentityAction('login')"
+      >
+        Login
+      </div>
+      <nuxt-link to="/protected" class="button--green">
+        Protected Page
+      </nuxt-link>
+    </div>
+
+    <!--  Set Name -->
+    <div v-if="set !== null" class="order-last md:order-2">
+      <div class="font-bold text-20 leading-29 opacity-75 ml-20">
         {{ set.name }}
       </div>
 
       <!--  Search Bar -->
-      <div class="flex justify-center">
-        <SearchInput class="-mb-20 mt-3 text-black" />
+      <div class="flex justify-center mt-3 md:mt-4">
+        <SearchInput :cards="cards" class="-mb-20 md:mb-0 text-black" />
       </div>
+    </div>
+
+    <!--  Card  -->
+    <div
+      v-if="card"
+      class="m-20 z-40 flex md:flex-col md:items-center order-2 md:order-3"
+      :class="{
+        'flex-col items-center': expanded,
+        'justify-center': !expanded,
+      }"
+    >
+      <CardImg :card="card" />
+      <HorizontalReview v-if="expanded" class="mt-4" />
+      <VerticalReview v-else class="ml-8 md:ml-0 md:mt-4" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters, mapState } from 'vuex'
+
 export default {
   name: 'Header',
   props: {
-    set: {
-      type: Object,
-      default: null,
-      required: false,
-    },
-    card: {
-      type: Object,
-      default: null,
-      required: false,
-    },
     page: {
       type: String,
       default: 'mtgSet',
       required: true,
     },
   },
-  data() {
-    return {
-      expanded: false,
-    }
+  computed: {
+    ...mapGetters(['set', 'expanded', 'cards']),
+    ...mapState({
+      isLoggedIn: (state) => state.user.currentUser,
+    }),
+    card: {
+      get() {
+        return this.$store.state.card
+      },
+      set(value) {
+        this.$store.commit('setCard', value)
+      },
+    },
   },
   methods: {
-    onClickChild() {
-      this.expanded = !this.expanded
+    ...mapActions({
+      setUser: 'user/setUser',
+    }),
+    triggerNetlifyIdentityAction(action) {
+      if (action === 'login' || action === 'signup') {
+        window.netlifyIdentity.open(action)
+        window.netlifyIdentity.on(action, (user) => {
+          this.setUser(user)
+          window.netlifyIdentity.close()
+        })
+      } else if (action === 'logout') {
+        this.setUser(null)
+        window.netlifyIdentity.logout()
+        this.$router.push('/')
+      }
+    },
+    shrinkCard() {
+      this.$store.commit('setExpanded', false)
+    },
+    removeCard() {
+      this.card = null
+      this.shrinkCard()
+      this.removeQuery()
+    },
+    removeQuery() {
+      this.$router.replace({ query: null })
     },
   },
 }
@@ -120,15 +171,12 @@ export default {
   font-size: 60px;
   line-height: 71px;
 }
-
 .small-screen {
   top: 100px;
 }
-
 .medium-screen {
   top: 220px;
 }
-
 .large-circle {
   height: 200px;
   width: 200px;
@@ -139,7 +187,6 @@ export default {
   top: 0;
   background: rgba(255, 255, 255, 0.05);
 }
-
 .small-circle {
   height: 100px;
   width: 100px;
@@ -150,9 +197,11 @@ export default {
   top: 185px;
   background: rgba(255, 255, 255, 0.05);
 }
-
 .notch {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
+}
+.divider {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 </style>

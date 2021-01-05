@@ -1,6 +1,8 @@
 <template>
   <button class="w-full rounded-10 h-66 bg-gray-1">
-    <NuxtLink :to="{ name: 'setSlug___en', params: { setSlug: set.slug } }">
+    <NuxtLink
+      :to="{ name: 'set___en', params: { set: set.slug, object: set } }"
+    >
       <div class="flex justify-between">
         <div class="flex">
           <div

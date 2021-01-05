@@ -20,7 +20,6 @@ export default {
       default: 'https://nuxtjs.org/nuxt-card.png',
     },
   },
-
   head() {
     return {
       meta: [

@@ -1,11 +1,13 @@
 <template>
-  <div class="mt-20">
-    <h1 class="column-title mb-4 font-semibold">{{ color }}</h1>
+  <div v-show="cardsLoaded">
+    <h1 class="text-18 mb-4 font-semibold">{{ color.label }}</h1>
     <CardRow v-for="card in cards" :key="card.id" :card="card" class="mb-2" />
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'Column',
   props: {
@@ -14,17 +16,15 @@ export default {
       required: true,
     },
     color: {
-      type: Array,
+      type: Object,
       required: true,
+    },
+  },
+  computed: {
+    ...mapGetters(['colorLabels']),
+    cardsLoaded() {
+      return this.cards.length > 0
     },
   },
 }
 </script>
-
-<style scoped>
-.column-title {
-  font-style: normal;
-  font-size: 17px;
-  line-height: 130%;
-}
-</style>
