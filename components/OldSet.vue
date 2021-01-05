@@ -7,7 +7,12 @@
         <div class="flex">
           <div
             class="flex items-center justify-center w-12 h-38 rounded ml-20 mr-3"
-            :class="`bg-${color}`"
+            :class="{
+              'bg-ash': color === 'ash',
+              'bg-teal': color === 'teal',
+              'bg-mandarin': color === 'mandarin',
+              'bg-peach': color === 'peach',
+            }"
           >
             <img
               class="filter-white text-white h-8 w-6"
