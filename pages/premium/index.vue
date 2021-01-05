@@ -2,7 +2,7 @@
   <div class="flex flex-col max-w-md mx-auto justify-between">
     <div class="m-20">
       <Header page="premium"></Header>
-      <div class="">
+      <div>
         <h2 class="mt-6 font-bold text-44">Pro Features</h2>
         <h3 class="mt-2 font-medium text-22 opacity-30">
           Support the content creation

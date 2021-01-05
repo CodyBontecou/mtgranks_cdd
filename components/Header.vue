@@ -58,6 +58,26 @@
       mtgranks
     </span>
 
+    <div class="links">
+      <div
+        v-if="isLoggedIn"
+        class="button--grey"
+        @click="triggerNetlifyIdentityAction('logout')"
+      >
+        Logout
+      </div>
+      <div
+        v-else
+        class="button--grey"
+        @click="triggerNetlifyIdentityAction('login')"
+      >
+        Login
+      </div>
+      <nuxt-link to="/protected" class="button--green">
+        Protected Page
+      </nuxt-link>
+    </div>
+
     <!--  Set Name -->
     <div v-if="set !== null" class="order-last md:order-2">
       <div class="font-bold text-20 leading-29 opacity-75 ml-20">
@@ -87,7 +107,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'Header',
@@ -100,6 +120,9 @@ export default {
   },
   computed: {
     ...mapGetters(['set', 'expanded', 'cards']),
+    ...mapState({
+      isLoggedIn: (state) => state.user.currentUser,
+    }),
     card: {
       get() {
         return this.$store.state.card
@@ -110,6 +133,22 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      setUser: 'user/setUser',
+    }),
+    triggerNetlifyIdentityAction(action) {
+      if (action === 'login' || action === 'signup') {
+        window.netlifyIdentity.open(action)
+        window.netlifyIdentity.on(action, (user) => {
+          this.setUser(user)
+          window.netlifyIdentity.close()
+        })
+      } else if (action === 'logout') {
+        this.setUser(null)
+        window.netlifyIdentity.logout()
+        this.$router.push('/')
+      }
+    },
     shrinkCard() {
       this.$store.commit('setExpanded', false)
     },
