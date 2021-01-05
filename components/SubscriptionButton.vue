@@ -27,10 +27,12 @@ export default {
   methods: {
     handlePremium() {
       if (!this.isPremium) {
+        const token = this.currentUser.token.access_token
+        console.log(token)
         this.$axios
           .post('/.netlify/functions/create-manage-link', {
             headers: {
-              Authorization: `Bearer ${this.currentUser.token.access_token}`,
+              Authorization: `Bearer ${token}`,
             },
           })
           .then((res) => res.json())
