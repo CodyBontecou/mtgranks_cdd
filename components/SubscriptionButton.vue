@@ -38,9 +38,8 @@ export default {
               },
             }
           )
-          .then((link) => {
-            console.log(link)
-            window.location.href = link
+          .then((response) => {
+            window.location.href = response.data
           })
           .catch((err) => console.error(err))
       }
