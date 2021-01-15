@@ -38,7 +38,6 @@ export default {
               },
             }
           )
-          .then((res) => res.json())
           .then((link) => {
             window.location.href = link
           })
