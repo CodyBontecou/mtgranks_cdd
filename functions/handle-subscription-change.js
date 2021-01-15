@@ -35,14 +35,6 @@ exports.handler = async (request, context) => {
     const plans = {
       free: 'price_1I65BfLO1grUNTcZlpuvRN3k',
       premium: 'price_1I65D1LO1grUNTcZGMfMe1Ri',
-      // pro: {
-      //     monthly: 'price_1HevLCKQ4Xdl21WJ5EqLoDds',
-      //     yearly: 'price_1HevLTKQ4Xdl21WJLOI4gldz',
-      // },
-      // premium: {
-      //     monthly: 'price_1HevLfKQ4Xdl21WJeBsU4Fvt',
-      //     yearly: 'price_1HevLsKQ4Xdl21WJaoQWEjCJ',
-      // },
     }
 
     let role = ''
@@ -52,9 +44,6 @@ exports.handler = async (request, context) => {
         role = plan
       }
     }
-
-    // const plan = subscription.items.data[0].plan.nickname;
-    // const role = plan.split(' ')[0].toLowerCase();
 
     // send a call to the Netlify Identity admin API to update the user role
     const { identity } = context.clientContext

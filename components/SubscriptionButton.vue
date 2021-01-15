@@ -26,23 +26,21 @@ export default {
   },
   methods: {
     handlePremium() {
-      if (!this.isPremium) {
-        const token = this.currentUser.token.access_token
-        this.$axios
-          .post(
-            'https://mtgranks.netlify.app/.netlify/functions/create-manage-link',
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            }
-          )
-          .then((response) => {
-            window.location.href = response.data
-          })
-          .catch((err) => console.error(err))
-      }
+      const token = this.currentUser.token.access_token
+      this.$axios
+        .post(
+          'https://mtgranks.netlify.app/.netlify/functions/create-manage-link',
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((response) => {
+          window.location.href = response.data
+        })
+        .catch((err) => console.error(err))
     },
   },
 }
