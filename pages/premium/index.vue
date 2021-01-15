@@ -9,9 +9,15 @@
         </h3>
         <div class="flex mt-6 -mr-20 overflow-hidden">
           <div class="flex flex-col mr-8">
-            <PremiumFeature><DoubleDotsIcon /></PremiumFeature>
-            <PremiumFeature class="mt-6"><WisdomEyeIcon /></PremiumFeature>
-            <PremiumFeature class="mt-6"><MultipleUserIcon /></PremiumFeature>
+            <PremiumFeature :feature="{}">
+              <DoubleDotsIcon />
+            </PremiumFeature>
+            <PremiumFeature :feature="{}" class="mt-6">
+              <WisdomEyeIcon />
+            </PremiumFeature>
+            <PremiumFeature :feature="{}" class="mt-6">
+              <MultipleUserIcon />
+            </PremiumFeature>
           </div>
           <img
             class="rounded-md"
