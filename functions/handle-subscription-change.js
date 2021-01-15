@@ -2,12 +2,12 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const fetch = require('node-fetch')
 const { faunaFetch } = require('./utils/fauna')
 
-exports.handler = async ({ rawBody, headers }, context) => {
+exports.handler = async (request, context) => {
   try {
     // make sure this event was sent legitimately.
     const stripeEvent = stripe.webhooks.constructEvent(
-      rawBody,
-      headers['stripe-signature'],
+      request.body,
+      request.headers['stripe-signature'],
       process.env.STRIPE_WEBHOOK_SECRET
     )
 
