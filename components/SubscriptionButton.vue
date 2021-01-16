@@ -38,6 +38,7 @@ export default {
           }
         )
         .then((response) => {
+          window.netlifyIdentity.logout()
           window.location.href = response.data
         })
         .catch((err) => console.error(err))
