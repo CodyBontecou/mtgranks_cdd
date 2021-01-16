@@ -132,6 +132,9 @@ export default {
       },
     },
   },
+  mounted() {
+    this.setUser(window.netlifyIdentity.currentUser())
+  },
   methods: {
     ...mapActions({
       setUser: 'user/setUser',

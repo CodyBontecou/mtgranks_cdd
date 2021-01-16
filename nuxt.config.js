@@ -45,7 +45,12 @@ export default {
     '@nuxtjs/sitemap',
   ],
 
-  axios: {},
+  axios: {
+    baseUrl:
+      process.env.NODE_ENV === 'production'
+        ? 'https://mtgranks.netlify.app/'
+        : 'http://localhost:3000/',
+  },
 
   build: {},
 

@@ -29,7 +29,7 @@ export default {
       const token = this.currentUser.token.access_token
       this.$axios
         .post(
-          'https://mtgranks.netlify.app/.netlify/functions/create-manage-link',
+          '/.netlify/functions/create-manage-link',
           {},
           {
             headers: {

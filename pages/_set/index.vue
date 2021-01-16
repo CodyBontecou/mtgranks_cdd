@@ -44,29 +44,14 @@ export default {
       await this.$store.dispatch('getCards', this.set.code)
     }
   },
-  data() {
-    return {
-      windowWidth: 0,
-      headerOpen: true,
-      mdBreakpoint: 768,
-    }
-  },
   computed: {
     ...mapGetters(['card', 'cards', 'colors', 'sets', 'set', 'expanded']),
     ...mapState({
       isPremium: (state) =>
         state.user.currentUser?.app_metadata.roles.includes('premium'),
     }),
-    headerVisible() {
-      return this.windowWidth > this.mdBreakpoint ? false : this.headerOpen
-    },
-  },
-  beforeDestroyed() {
-    window.removeEventListener('resize', this.updateWindowSize)
   },
   mounted() {
-    this.updateWindowSize()
-    window.addEventListener('resize', this.updateWindowSize)
     if (this.$route.query.card) {
       this.$store.commit(
         'setCard',
@@ -92,9 +77,7 @@ export default {
         try {
           return this.cards.filter((card) => this.cardColor(card).length > 1)
         } catch (e) {
-          // console.log('multi color error')
           console.log(e)
-          // console.log(console.log(color))
         }
       }
       return this.cards.filter((card) => this.cardColor(card) === color.raw)
@@ -116,9 +99,6 @@ export default {
       )
       const boolean = !event.isChecked
       this.$store.commit('toggleColor', { color, boolean })
-    },
-    updateWindowSize() {
-      this.windowWidth = window.innerWidth
     },
   },
   head: {
@@ -142,10 +122,3 @@ export default {
   },
 }
 </script>
-
-<!--<style scoped>-->
-<!--.menus {-->
-<!--  bottom: 10px;-->
-<!--  right: 10px;-->
-<!--}-->
-<!--</style>-->
