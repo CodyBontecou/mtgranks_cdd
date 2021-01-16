@@ -138,7 +138,6 @@ export default {
     },
   },
   mounted() {
-    this.setUser(window.netlifyIdentity.currentUser())
     console.log(this.currentUser)
   },
   methods: {
