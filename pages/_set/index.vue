@@ -40,7 +40,7 @@ export default {
       'setSet',
       this.sets.find((set) => set.slug === this.$route.params.set)
     )
-    if (this.cards.length === 0 || this.cards[0].set_name !== this.set.name) {
+    if (this.cards.length === 0 || this?.cards[0].set_name !== this?.set.name) {
       await this.$store.dispatch('getCards', this.set.code)
     }
   },
