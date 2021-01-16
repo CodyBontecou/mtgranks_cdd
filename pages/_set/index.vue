@@ -92,10 +92,12 @@ export default {
     },
     cardColor(card) {
       try {
-        if ('card_faces' in card) {
+        if (card !== null && 'card_faces' in card) {
           return card.card_faces[0].colors.join()
-        } else {
+        } else if (card !== null) {
           return card.colors.join()
+        } else {
+          return ''
         }
       } catch (e) {
         console.error('Issue with "card_faces" in card')
