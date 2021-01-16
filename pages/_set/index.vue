@@ -4,12 +4,12 @@
     <div
       class="mx-20 md:mt-0 md:ml-divider"
       :class="{
-        'mt-48': card === null,
+        'mt-48': noCard,
         'mt-104': card && expanded === false,
         'mt-176': card && expanded === true,
       }"
     >
-      <div v-if="cards.length === 0">
+      <div v-if="noCards">
         <Loading />
       </div>
       <div class="flex flex-wrap sm:justify-center">
@@ -41,6 +41,7 @@ export default {
       this.sets.find((set) => set.slug === this.$route.params.set)
     )
     if (this.cards.length === 0 || this?.cards[0].set_name !== this?.set.name) {
+      console.log(this.set)
       await this.$store.dispatch('getCards', this.set.code)
     }
   },
@@ -50,6 +51,12 @@ export default {
       isPremium: (state) =>
         state.user.currentUser?.app_metadata.roles.includes('premium'),
     }),
+    noCard() {
+      return this.card === null
+    },
+    noCards() {
+      return this.cards.length === 0
+    },
   },
   mounted() {
     if (this.$route.query.card) {
@@ -77,6 +84,7 @@ export default {
         try {
           return this.cards.filter((card) => this.cardColor(card).length > 1)
         } catch (e) {
+          console.error('Issue with color.label === "Multi"')
           console.log(e)
         }
       }
@@ -90,6 +98,7 @@ export default {
           return card.colors.join()
         }
       } catch (e) {
+        console.error('Issue with "card_faces" in card')
         console.log(e)
       }
     },
