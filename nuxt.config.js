@@ -45,6 +45,10 @@ export default {
     '@nuxtjs/sitemap',
   ],
 
+  router: {
+    trailingSlash: true,
+  },
+
   axios: {},
 
   build: {},
