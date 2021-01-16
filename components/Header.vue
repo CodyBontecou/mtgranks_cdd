@@ -119,7 +119,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['set', 'expanded', 'cards']),
+    ...mapGetters({
+      set: 'set',
+      expanded: 'expanded',
+      cards: 'cards',
+      currentUser: 'user/currentUser',
+    }),
     ...mapState({
       isLoggedIn: (state) => state.user.currentUser,
     }),
@@ -134,6 +139,7 @@ export default {
   },
   mounted() {
     this.setUser(window.netlifyIdentity.currentUser())
+    console.log(this.currentUser)
   },
   methods: {
     ...mapActions({
