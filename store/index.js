@@ -181,4 +181,7 @@ export const getters = {
   colorLabels(state) {
     return state.colorLabels
   },
+  tcgPriceLink(state) {
+    return state.card.purchase_uris.tcgplayer.replace('scryfall', 'mtgranks')
+  },
 }

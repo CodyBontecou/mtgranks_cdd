@@ -29,7 +29,7 @@
       <ExpandIcon />
     </div>
     <a
-      :href="card.purchase_uris.tcgplayer"
+      :href="tcgPriceLink"
       target="_blank"
       class="p-1 absolute text-black font-medium text-12 rounded bg-white opacity-75 hover:opacity-100 cursor-pointer md:right-18 md:bottom-180"
       :class="{
@@ -54,7 +54,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['expanded']),
+    ...mapGetters(['expanded', 'tcgPriceLink']),
   },
   methods: {
     handleExpand() {
