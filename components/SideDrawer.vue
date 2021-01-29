@@ -17,8 +17,7 @@
       </button>
       <div
         v-if="filters.isExpanded"
-        class="h-full h-screen bg-yellow-400"
-        style="width: 400px"
+        class="h-full h-screen bg-yellow-400 w-drawer"
       ></div>
     </div>
   </div>

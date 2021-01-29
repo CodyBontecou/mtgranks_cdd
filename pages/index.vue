@@ -34,7 +34,9 @@
       </div>
     </div>
 
-    <BottomNav class="mt-10" />
+    <div class="my-20">
+      <BottomNav />
+    </div>
   </div>
 </template>
 

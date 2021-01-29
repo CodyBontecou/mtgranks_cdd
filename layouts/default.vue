@@ -1,5 +1,5 @@
 <template>
-  <div class="m-20" style="height: 96vh">
+  <div class="m-20">
     <Nuxt />
   </div>
 </template>

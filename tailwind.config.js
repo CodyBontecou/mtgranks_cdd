@@ -12,6 +12,7 @@ module.exports = {
         teal: '#2A9D8F',
         mandarin: '#F4A261',
         peach: '#E76F51',
+        earth: '#2D9CDB',
       },
       spacing: {
         6: '1.5rem',
@@ -74,6 +75,9 @@ module.exports = {
       maxWidth: {
         32: '32px',
         80: '80px',
+      },
+      width: {
+        drawer: '400',
       },
       // For top, right, bottom, left
       inset: {

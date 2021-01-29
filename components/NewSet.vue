@@ -50,4 +50,8 @@ export default {
   width: 142px;
   border-radius: 20px;
 }
+/*.new-set-dropshadow {*/
+/*  filter: drop-shadow(0px 0.892729px 2.67819px rgba(0, 0, 0, 0.05))*/
+/*    drop-shadow(0px 10px 20px rgba(0, 0, 0, 0.15));*/
+/*}*/
 </style>
