@@ -28,10 +28,16 @@
 
     <!--  Top bar HOME -->
     <div v-if="page === 'home'" class="flex justify-center items-center">
+      <div class="absolute ml-20 left-0">
+        <User
+          v-if="isLoggedIn"
+          @click.native="triggerNetlifyIdentityAction('open')"
+        />
+        <User v-else @click.native="triggerNetlifyIdentityAction('login')" />
+      </div>
       <div class="font-bold text-36 leading-42">mtgranks</div>
       <div class="absolute mr-20 right-0 flex">
-        <GlobeIcon class="fill-current text-black" />
-        <DownArrow class="ml-1 fill-current text-black" />
+        <GlobeIcon class="fill-current text-earth" />
       </div>
     </div>
 
@@ -57,26 +63,6 @@
     >
       mtgranks
     </span>
-
-    <div class="links">
-      <div
-        v-if="isLoggedIn"
-        class="button--grey"
-        @click="triggerNetlifyIdentityAction('logout')"
-      >
-        Logout
-      </div>
-      <div
-        v-else
-        class="button--grey"
-        @click="triggerNetlifyIdentityAction('login')"
-      >
-        Login
-      </div>
-      <nuxt-link to="/protected" class="button--green">
-        Protected Page
-      </nuxt-link>
-    </div>
 
     <!--  Set Name -->
     <div v-if="set !== null" class="order-last md:order-2">
@@ -142,16 +128,21 @@ export default {
       setUser: 'user/setUser',
     }),
     triggerNetlifyIdentityAction(action) {
-      if (action === 'login' || action === 'signup') {
-        window.netlifyIdentity.open(action)
-        window.netlifyIdentity.on(action, (user) => {
-          this.setUser(user)
-          window.netlifyIdentity.close()
-        })
-      } else if (action === 'logout') {
-        this.setUser(null)
-        window.netlifyIdentity.logout()
-        this.$router.push('/')
+      try {
+        if (action === 'login' || action === 'signup') {
+          window.netlifyIdentity.open(action)
+          window.netlifyIdentity.on(action, (user) => {
+            this.setUser(user)
+            window.netlifyIdentity.close()
+          })
+        } else if (action === 'open') {
+          window.netlifyIdentity.open()
+          window.netlifyIdentity.on('logout', () => {
+            window.netlifyIdentity.close()
+          })
+        }
+      } catch (error) {
+        this.$sentry.captureException(error)
       }
     },
     shrinkCard() {
