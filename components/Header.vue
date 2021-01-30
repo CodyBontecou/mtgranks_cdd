@@ -86,8 +86,8 @@
       }"
     >
       <CardImg :card="card" />
-      <HorizontalReview v-if="expanded" class="mt-4" />
-      <VerticalReview v-else class="ml-8 md:ml-0 md:mt-4" />
+      <HorizontalReview v-if="expanded" :rating="rating" class="mt-4" />
+      <VerticalReview v-else :rating="rating" class="ml-8 md:ml-0 md:mt-4" />
     </div>
   </div>
 </template>
@@ -103,6 +103,19 @@ export default {
       default: 'mtgSet',
       required: true,
     },
+  },
+  data() {
+    return {
+      rating: {
+        rator: {
+          name: 'Justlolaman',
+        },
+        rating: 'A-',
+        reason:
+          'Best cards in the format. Bombs. Completely changes the game in your\n' +
+          '      favor. Will almost single handedly win you the game.',
+      },
+    }
   },
   computed: {
     ...mapGetters({
