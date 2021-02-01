@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex items-end hover:text-gray-600 cursor-pointer"
-    @click="active = true"
+    @click="activateCard"
   >
     <RatingBubble :rating="randomizedRating" />
     <span class="cardName ml-6 mb-2 justify-self-end">{{ cardName }}</span>
@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   name: 'CardRow',
   props: {
@@ -42,6 +44,13 @@ export default {
         name: 'set___en',
         query: { card: this.card.slug },
       })
+    },
+  },
+  methods: {
+    ...mapActions(['setExpanded']),
+    activateCard() {
+      this.active = true
+      this.setExpanded(true)
     },
   },
 }

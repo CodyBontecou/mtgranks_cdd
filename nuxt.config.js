@@ -23,7 +23,7 @@ export default {
 
   plugins: [
     { src: '~/plugins/Vuelidate' },
-    { src: '~/plugins/vuex-persist', ssr: false },
+    // { src: '~/plugins/vuex-persist', ssr: false },
   ],
 
   components: true,

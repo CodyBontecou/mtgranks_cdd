@@ -119,6 +119,12 @@ export const actions = {
       return data
     }
   },
+  toggleExpanded: ({ commit }, payload) => {
+    commit('TOGGLE_EXPANDED', payload)
+  },
+  setExpanded: ({ commit }, payload) => {
+    commit('SET_EXPANDED', payload)
+  },
 }
 
 export const mutations = {
@@ -131,8 +137,11 @@ export const mutations = {
   setSet(state, set) {
     state.set = set
   },
-  setExpanded(state, expanded) {
-    state.expanded = expanded
+  TOGGLE_EXPANDED(state) {
+    state.expanded = !state.expanded
+  },
+  SET_EXPANDED(state, bool) {
+    state.expanded = bool
   },
   toggleColor(state, { color, boolean }) {
     const c = state.colors.find((elem) => elem.label === color.label)

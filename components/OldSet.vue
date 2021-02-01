@@ -1,35 +1,31 @@
 <template>
   <button class="w-full rounded-10 h-66 bg-gray-1">
-    <NuxtLink
-      :to="{ name: 'set___en', params: { set: set.slug, object: set } }"
-    >
-      <div class="flex justify-between">
-        <div class="flex">
-          <div
-            class="flex items-center justify-center w-12 h-38 rounded ml-20 mr-3"
-            :class="{
-              'bg-ash': color === 'ash',
-              'bg-teal': color === 'teal',
-              'bg-mandarin': color === 'mandarin',
-              'bg-peach': color === 'peach',
-            }"
-          >
-            <img
-              class="filter-white text-white h-8 w-6"
-              :src="set.icon"
-              :alt="`set.name set icon`"
-            />
-          </div>
-          <div class="flex flex-col items-start">
-            <div class="text-10 font-semibold">
-              {{ set.code }}
-            </div>
-            <div class="text-18 font-semibold">{{ setName }}</div>
-          </div>
+    <div class="flex justify-between" @click="navigateToSet">
+      <div class="flex">
+        <div
+          class="flex items-center justify-center w-12 h-38 rounded ml-20 mr-3"
+          :class="{
+            'bg-ash': color === 'ash',
+            'bg-teal': color === 'teal',
+            'bg-mandarin': color === 'mandarin',
+            'bg-peach': color === 'peach',
+          }"
+        >
+          <img
+            class="filter-white text-white h-8 w-6"
+            :src="set.icon"
+            :alt="`set.name set icon`"
+          />
         </div>
-        <RightArrowCircle class="mr-20 self-center" />
+        <div class="flex flex-col items-start">
+          <div class="text-10 font-semibold">
+            {{ set.code }}
+          </div>
+          <div class="text-18 font-semibold">{{ setName }}</div>
+        </div>
       </div>
-    </NuxtLink>
+      <RightArrowCircle class="mr-20 self-center" />
+    </div>
   </button>
 </template>
 
@@ -54,6 +50,14 @@ export default {
       } else {
         return this.set.name
       }
+    },
+  },
+  methods: {
+    navigateToSet() {
+      this.$router.push({
+        name: 'set___en',
+        params: { set: this.set.slug, object: this.set },
+      })
     },
   },
 }

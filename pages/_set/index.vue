@@ -1,16 +1,18 @@
 <template>
   <div class="md:flex mt-20">
-    <Header class="z-10" :set="set" :card="card" page="mtgSet" />
+    <!--    <Header class="z-10" :set="set" :card="card" page="mtgSet" />-->
+    <SideDrawer />
     <div
-      class="mx-20 md:mt-0 md:ml-divider"
+      class="mx-20 md:mt-0"
       :class="{
         'mt-48': noCard,
+        'ml-drawer': expanded,
         'mt-104': card && expanded === false,
         'mt-176': card && expanded === true,
       }"
     >
       <div v-if="noCards">
-        <Loading />
+        <Loading :class="{ 'ml-48': expanded }" />
       </div>
       <div class="flex flex-wrap sm:justify-center">
         <Column
@@ -22,10 +24,10 @@
         />
       </div>
       <FilterMenu
-        v-if="isPremium"
         class="fixed bottom-0 right-0 mr-20 mb-4"
         @colorToggled="updateColors"
       />
+      <!--      v-if="isPremium"-->
     </div>
   </div>
 </template>
