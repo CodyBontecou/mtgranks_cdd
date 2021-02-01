@@ -2,10 +2,7 @@
   <div
     class="flex flex-col justify-between w-full notch"
     :class="{
-      'fixed top-0 h-40 bg-charcoal text-white divider':
-        page === 'mtgSet' && card === null,
-      'fixed top-0 h-auto bg-charcoal text-white divider':
-        page === 'mtgSet' && card !== null,
+      'fixed top-0 bg-charcoal text-white divider': page === 'mtgSet',
       'bg-transparent text-black': page === 'home',
       'text-white': page === 'premium',
     }"
@@ -66,10 +63,6 @@
 
     <!--  Set Name -->
     <div v-if="set !== null" class="order-last">
-      <div class="font-bold text-20 leading-29 opacity-75 ml-20">
-        {{ set.name }}
-      </div>
-
       <!--  Search Bar -->
       <div class="flex justify-center mt-3">
         <SearchInput :cards="cards" class="-mb-20 text-black" />
@@ -79,7 +72,7 @@
     <!--  Card  -->
     <div
       v-if="card"
-      class="m-20 z-40 flex order-2"
+      class="mx-20 z-40 flex order-2"
       :class="{
         'flex-col items-center justify-center': expanded,
         'justify-center': !expanded,
@@ -90,8 +83,8 @@
         class="flex-shrink-0"
         :class="{ 'mr-8': !expanded }"
       />
-      <VerticalReview v-if="!expanded" :rating="rating" />
-      <HorizontalReview v-else :rating="rating" class="mt-4" />
+      <HorizontalReview v-if="expanded" :rating="rating" class="mt-4" />
+      <VerticalReview v-else :rating="rating" />
     </div>
   </div>
 </template>
