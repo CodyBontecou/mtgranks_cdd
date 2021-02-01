@@ -79,7 +79,7 @@
     <!--  Card  -->
     <div
       v-if="card"
-      class="m-20 z-40 flex md:flex-col md:items-center order-2 md:order-3"
+      class="m-20 z-40 flex order-2 md:flex-col md:items-center md:order-3"
       :class="{
         'flex-col items-center': expanded,
         'justify-center': !expanded,
