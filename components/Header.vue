@@ -157,7 +157,7 @@ export default {
           })
         }
       } catch (error) {
-        this.$sentry.captureException(error)
+        console.log(error)
       }
     },
     removeCard() {

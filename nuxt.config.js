@@ -43,7 +43,6 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     'nuxt-i18n',
-    '@nuxtjs/sentry',
     '@nuxtjs/sitemap',
   ],
 
@@ -77,17 +76,5 @@ export default {
 
   sitemap: {
     hostname: 'https://mtgranks.netlify.app/',
-  },
-
-  sentry: {
-    dsn:
-      'https://f808c094ac6a4c63b64458bbc69d0296@o506555.ingest.sentry.io/5596394', // Enter your project's DSN here
-    config: {}, // Additional config
-    publishRelease: true,
-    webpackConfig: {
-      include: '.',
-      release: 'v1.0.0',
-      ignoreFile: '.gitignore',
-    },
   },
 }
