@@ -1,17 +1,17 @@
 <template>
   <div
-    class="flex flex-col justify-between md:justify-start w-full notch"
+    class="flex flex-col justify-between w-full notch"
     :class="{
-      'fixed top-0 h-40 bg-charcoal text-white md:w-divider md:h-screen md:fixed divider':
+      'fixed top-0 h-40 bg-charcoal text-white divider':
         page === 'mtgSet' && card === null,
-      'fixed top-0 h-auto bg-charcoal text-white md:w-divider md:h-screen md:fixed divider':
+      'fixed top-0 h-auto bg-charcoal text-white divider':
         page === 'mtgSet' && card !== null,
       'bg-transparent text-black': page === 'home',
       'text-white': page === 'premium',
     }"
   >
     <!--  Top bar mtgSet -->
-    <div v-if="page === 'mtgSet'" class="flex flex-col m-20 order-1 md:order-1">
+    <div v-if="page === 'mtgSet'" class="flex flex-col m-20 order-1">
       <div class="flex justify-between">
         <NuxtLink v-if="card === null" to="/">
           <ThinLeftArrow />
@@ -65,21 +65,21 @@
     </span>
 
     <!--  Set Name -->
-    <div v-if="set !== null" class="order-last md:order-2">
+    <div v-if="set !== null" class="order-last">
       <div class="font-bold text-20 leading-29 opacity-75 ml-20">
         {{ set.name }}
       </div>
 
       <!--  Search Bar -->
-      <div class="flex justify-center mt-3 md:mt-4">
-        <SearchInput :cards="cards" class="-mb-20 md:mb-0 text-black" />
+      <div class="flex justify-center mt-3">
+        <SearchInput :cards="cards" class="-mb-20 text-black" />
       </div>
     </div>
 
     <!--  Card  -->
     <div
       v-if="card"
-      class="m-20 z-40 flex order-2 md:flex-col md:items-center md:order-3"
+      class="m-20 z-40 flex order-2"
       :class="{
         'flex-col items-center': expanded,
         'justify-center': !expanded,
@@ -87,7 +87,7 @@
     >
       <CardImg :card="card" />
       <HorizontalReview v-if="expanded" :rating="rating" class="mt-4" />
-      <VerticalReview v-else :rating="rating" class="ml-8 md:ml-0 md:mt-4" />
+      <VerticalReview v-else :rating="rating" class="ml-8" />
     </div>
   </div>
 </template>
