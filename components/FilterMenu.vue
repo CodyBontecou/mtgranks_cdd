@@ -49,7 +49,7 @@
               }"
             >
               <span
-                class=""
+                class="mr-2"
                 :class="{
                   'opacity-50': option.isChecked === false,
                 }"
