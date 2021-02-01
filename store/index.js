@@ -76,6 +76,7 @@ export const state = () => ({
   set: null,
   card: null,
   expanded: false,
+  sideDrawerExpanded: false,
   colors: [
     { raw: '', isChecked: true, label: 'Colorless' },
     { raw: 'R', isChecked: true, label: 'Red' },
@@ -119,10 +120,10 @@ export const actions = {
       return data
     }
   },
-  toggleExpanded: ({ commit }, payload) => {
+  toggleSideDrawerExpanded: ({ commit }, payload) => {
     commit('TOGGLE_EXPANDED', payload)
   },
-  setExpanded: ({ commit }, payload) => {
+  setSideDrawerExpanded: ({ commit }, payload) => {
     commit('SET_EXPANDED', payload)
   },
 }
@@ -138,10 +139,10 @@ export const mutations = {
     state.set = set
   },
   TOGGLE_EXPANDED(state) {
-    state.expanded = !state.expanded
+    state.sideDrawerExpanded = !state.sideDrawerExpanded
   },
   SET_EXPANDED(state, bool) {
-    state.expanded = bool
+    state.sideDrawerExpanded = bool
   },
   toggleColor(state, { color, boolean }) {
     const c = state.colors.find((elem) => elem.label === color.label)
@@ -167,6 +168,9 @@ export const getters = {
   },
   expanded(state) {
     return state.expanded
+  },
+  sideDrawerExpanded(state) {
+    return state.sideDrawerExpanded
   },
   filters(state) {
     return state.filters

@@ -6,13 +6,13 @@
       class="mx-20 md:mt-0"
       :class="{
         'mt-48': noCard,
-        'md:ml-drawer': expanded,
+        'md:ml-drawer': sideDrawerExpanded,
         'mt-104': card && expanded === false,
         'mt-176': card && expanded === true,
       }"
     >
       <div v-if="noCards">
-        <Loading :class="{ 'ml-48': expanded }" />
+        <Loading :class="{ 'ml-48': sideDrawerExpanded }" />
       </div>
       <div class="flex flex-wrap sm:justify-center">
         <Column
@@ -47,7 +47,15 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['card', 'cards', 'colors', 'sets', 'set', 'expanded']),
+    ...mapGetters([
+      'card',
+      'cards',
+      'colors',
+      'sets',
+      'set',
+      'expanded',
+      'sideDrawerExpanded',
+    ]),
     ...mapState({
       isPremium: (state) =>
         state.user.currentUser?.app_metadata.roles.includes('premium'),

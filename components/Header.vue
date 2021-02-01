@@ -159,7 +159,7 @@ export default {
       }
     },
     shrinkCard() {
-      this.$store.commit('setExpanded', false)
+      this.$store.commit('setSideDrawerExpanded', false)
     },
     removeCard() {
       this.card = null

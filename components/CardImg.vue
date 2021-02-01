@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     handleExpand() {
-      this.$store.commit('setExpanded', !this.expanded)
+      this.$store.commit('setSideDrawerExpanded', !this.expanded)
     },
   },
 }
