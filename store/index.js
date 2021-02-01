@@ -126,6 +126,9 @@ export const actions = {
   setSideDrawerExpanded: ({ commit }, payload) => {
     commit('SET_EXPANDED', payload)
   },
+  toggleExpandedImage: ({ commit }) => {
+    commit('TOGGLE_EXPANDED_IMAGE')
+  },
 }
 
 export const mutations = {
@@ -143,6 +146,9 @@ export const mutations = {
   },
   SET_EXPANDED(state, bool) {
     state.sideDrawerExpanded = bool
+  },
+  TOGGLE_EXPANDED_IMAGE(state) {
+    state.expanded = !state.expanded
   },
   toggleColor(state, { color, boolean }) {
     const c = state.colors.find((elem) => elem.label === color.label)

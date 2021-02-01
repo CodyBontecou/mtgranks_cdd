@@ -24,7 +24,7 @@
         'expand-bubble-small': !expanded,
         'expand-bubble-large': expanded,
       }"
-      @click="handleExpand"
+      @click="toggleExpandedImage"
     >
       <ExpandIcon />
     </div>
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'CardImg',
@@ -57,9 +57,7 @@ export default {
     ...mapGetters(['expanded', 'tcgPriceLink']),
   },
   methods: {
-    handleExpand() {
-      this.$store.commit('setSideDrawerExpanded', !this.expanded)
-    },
+    ...mapActions(['toggleExpandedImage']),
   },
 }
 </script>
