@@ -8,7 +8,7 @@
       />
       <button
         v-else
-        class="font-semibold bg-white rounded p-2 items-center shadow-lg hover:shadow-2xl border border-ash border-opacity-25 hover:border-opacity-50"
+        class="font-medium bg-white rounded p-2 items-center shadow-lg hover:shadow-2xl border border-ash border-opacity-25 hover:border-opacity-50"
         @click="triggerNetlifyIdentityAction('login')"
       >
         Sign In
