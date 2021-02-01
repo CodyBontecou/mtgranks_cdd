@@ -7,7 +7,7 @@
         'max-h-card-large': expanded === true,
       }"
       :src="card.image_uris.border_crop"
-      :alt="`image of ${card.name} within the header.`"
+      :alt="`image of ${card.name}.`"
     />
     <img
       v-else-if="card.card_faces !== undefined"
@@ -16,13 +16,13 @@
         'max-h-card-large': expanded === true,
       }"
       :src="card.card_faces[0].image_uris.border_crop"
-      :alt="`Image of ${card.name} within the header.`"
+      :alt="`Image of ${card.name}.`"
     />
     <div
-      class="absolute md:hidden rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer"
+      class="absolute md:hidden rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer p-2"
       :class="{
-        'expand-bubble-small': !expanded,
-        'expand-bubble-large': expanded,
+        'left-10 bottom-91': !expanded,
+        'left-23 bottom-215': expanded,
       }"
       @click="toggleExpandedImage"
     >
@@ -61,16 +61,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.expand-bubble-small {
-  bottom: 91px;
-  left: 10px;
-  padding: 8px;
-}
-.expand-bubble-large {
-  bottom: 26.5vh;
-  left: 23px;
-  padding: 8px;
-}
-</style>

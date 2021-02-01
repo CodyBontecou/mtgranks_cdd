@@ -81,13 +81,17 @@
       v-if="card"
       class="m-20 z-40 flex order-2"
       :class="{
-        'flex-col items-center': expanded,
+        'flex-col items-center justify-center': expanded,
         'justify-center': !expanded,
       }"
     >
-      <CardImg :card="card" />
-      <HorizontalReview v-if="expanded" :rating="rating" class="mt-4" />
-      <VerticalReview v-else :rating="rating" class="ml-8" />
+      <CardImg
+        :card="card"
+        class="flex-shrink-0"
+        :class="{ 'mr-8': !expanded }"
+      />
+      <VerticalReview v-if="!expanded" :rating="rating" />
+      <HorizontalReview v-else :rating="rating" class="mt-4" />
     </div>
   </div>
 </template>
@@ -139,6 +143,7 @@ export default {
   methods: {
     ...mapActions({
       setUser: 'user/setUser',
+      toggleExpandedImage: 'toggleExpandedImage',
     }),
     triggerNetlifyIdentityAction(action) {
       try {
@@ -158,12 +163,9 @@ export default {
         this.$sentry.captureException(error)
       }
     },
-    shrinkCard() {
-      this.$store.commit('setSideDrawerExpanded', false)
-    },
     removeCard() {
       this.card = null
-      this.shrinkCard()
+      this.toggleExpandedImage()
       this.removeQuery()
     },
     removeQuery() {
