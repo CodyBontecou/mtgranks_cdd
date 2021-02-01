@@ -89,6 +89,7 @@ export default {
           (card) => card.slug === this.$route.query.card
         )
       )
+      this.$store.commit('TOGGLE_EXPANDED')
     } else {
       this.$store.commit('setCard', null)
     }
