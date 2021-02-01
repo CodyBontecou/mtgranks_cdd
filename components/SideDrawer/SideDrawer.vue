@@ -6,17 +6,6 @@
         v-show="sideDrawerExpanded"
         class="fixed shadow-2xl top-0 left-0 h-full bg-charcoal text-white w-drawer overflow-y-scroll"
       >
-        <div class="flex flex-col m-20 order-1">
-          <div class="flex justify-between">
-            <NuxtLink to="/">
-              <ThinLeftArrow />
-            </NuxtLink>
-            <NuxtLink to="/">
-              <div class="font-bold text-24">mtgranks</div>
-            </NuxtLink>
-            <ThreeVerticalDots />
-          </div>
-        </div>
         <div class="flex justify-center mt-3 md:mt-4">
           <SearchInput :cards="cards" class="-mb-20 md:mb-0 text-black" />
         </div>
