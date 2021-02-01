@@ -86,6 +86,10 @@
       <HorizontalReview v-if="expanded" :rating="rating" class="mt-4" />
       <VerticalReview v-else :rating="rating" />
     </div>
+
+    <client-only>
+      <Disqus class="m-4 order-3" />
+    </client-only>
   </div>
 </template>
 

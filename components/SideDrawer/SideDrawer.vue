@@ -29,6 +29,9 @@
             class="ml-8 md:ml-0 md:mt-4"
           />
         </div>
+        <client-only>
+          <Disqus class="m-4" />
+        </client-only>
       </div>
     </transition>
   </div>

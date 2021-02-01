@@ -23,6 +23,7 @@ export default {
 
   plugins: [
     { src: '~/plugins/Vuelidate' },
+    { src: '~/plugins/vue-disqus' },
     // { src: '~/plugins/vuex-persist', ssr: false },
   ],
 
