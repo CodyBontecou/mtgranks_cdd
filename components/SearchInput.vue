@@ -9,14 +9,13 @@
     >
       <GreySearchIcon class="mx-2 w-6 h-6" />
       <label for="cardSearch"> </label>
-      <!-- TODO: Change placeholder text when a card exists  -->
       <input
         id="cardSearch"
         v-model="search"
         class="appearance-none focus:outline-none placeholder-gray-600 rounded-r-full w-full"
         type="text"
         autocomplete="off"
-        placeholder="Search Mtgranks"
+        :placeholder="inputPlaceholderText"
         @input="onChange"
       />
     </form>

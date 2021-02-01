@@ -178,10 +178,10 @@ export const getters = {
     return state.sets.filter((set) => set.type === 'old')
   },
   inputPlaceholderText(state) {
-    if (state.card === null || state.cards.length === 0) {
-      return 'Search for a card'
-    } else {
+    if (state.card) {
       return state.card.name
+    } else {
+      return 'Search Mtgranks'
     }
   },
   colors(state) {
