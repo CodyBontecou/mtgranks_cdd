@@ -1,13 +1,15 @@
 <template>
-  <div class="relative flex flex-col z-50 w-full mx-20">
+  <div class="relative flex flex-col z-50 w-full mx-20 md:text-18">
     <form
-      class="py-2 flex bg-white"
+      class="py-2 flex bg-white md:h-12 md:py-3 md:px-2"
       :class="{
-        'rounded-full shadow-1': results.length === 0,
-        'rounded-t-2xl': results.length !== 0,
+        'md:rounded-md rounded-full shadow-1': results.length === 0,
+        'md:rounded-t-md rounded-t-2xl': results.length !== 0,
       }"
     >
-      <GreySearchIcon class="mx-2 w-6 h-6" />
+      <GreySearchIcon
+        class="opacity-25 self-center mx-4 w-6 h-6 md:w-8 md:h-8"
+      />
       <label for="cardSearch"> </label>
       <input
         id="cardSearch"
@@ -15,7 +17,7 @@
         class="appearance-none focus:outline-none placeholder-gray-600 rounded-r-full w-full"
         type="text"
         autocomplete="off"
-        :placeholder="inputPlaceholderText"
+        placeholder="Search Mtgranks"
         @input="onChange"
       />
     </form>
@@ -39,7 +41,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 export default {
   name: 'SearchInput',
   props: {
@@ -56,7 +57,6 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['inputPlaceholderText']),
     slicedResults() {
       return this.results.slice(-5)
     },

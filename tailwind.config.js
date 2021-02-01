@@ -78,7 +78,7 @@ module.exports = {
         80: '80px',
       },
       width: {
-        drawer: '400px',
+        drawer: '325px',
       },
       // For top, right, bottom, left
       inset: {
@@ -88,7 +88,7 @@ module.exports = {
         91: '91px',
         180: '180px',
         215: '215px',
-        drawer: '400px',
+        drawer: '325px',
       },
       opacity: {
         30: '0.3',
