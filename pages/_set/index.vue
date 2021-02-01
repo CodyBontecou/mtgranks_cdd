@@ -1,13 +1,26 @@
 <template>
   <div class="md:flex mt-20">
     <Header class="z-10 md:hidden" :set="set" :card="card" page="mtgSet" />
+    <div class="fixed mr-20 right-0 cursor-pointer">
+      <User
+        v-if="isLoggedIn"
+        @click.native="triggerNetlifyIdentityAction('open')"
+      />
+      <button
+        v-else
+        class="font-semibold bg-white rounded p-2 items-center shadow-lg hover:shadow-2xl border border-ash border-opacity-25 hover:border-opacity-50"
+        @click="triggerNetlifyIdentityAction('login')"
+      >
+        Sign In
+      </button>
+    </div>
     <SideDrawer class="hidden md:block" />
     <div
       class="mx-20 md:mt-0"
       :class="{
         'mt-48': noCard,
         'md:ml-drawer': sideDrawerExpanded,
-        'mt-104': card && expanded === false,
+        'mt-84': card && expanded === false,
         'mt-176': card && expanded === true,
       }"
     >
@@ -59,6 +72,7 @@ export default {
     ...mapState({
       isPremium: (state) =>
         state.user.currentUser?.app_metadata.roles.includes('premium'),
+      isLoggedIn: (state) => state.user.currentUser,
     }),
     noCard() {
       return this.card === null
@@ -85,6 +99,24 @@ export default {
     this.$store.commit('setSet', null)
   },
   methods: {
+    triggerNetlifyIdentityAction(action) {
+      try {
+        if (action === 'login' || action === 'signup') {
+          window.netlifyIdentity.open(action)
+          window.netlifyIdentity.on(action, (user) => {
+            this.setUser(user)
+            window.netlifyIdentity.close()
+          })
+        } else if (action === 'open') {
+          window.netlifyIdentity.open()
+          window.netlifyIdentity.on('logout', () => {
+            window.netlifyIdentity.close()
+          })
+        }
+      } catch (error) {
+        this.$sentry.captureException(error)
+      }
+    },
     cardsByColor(color) {
       if (!color.isChecked) {
         return []
