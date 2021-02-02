@@ -8,7 +8,7 @@
       />
       <button
         v-else
-        class="font-medium bg-white rounded p-2 items-center shadow-lg hover:shadow-2xl border border-ash border-opacity-25 hover:border-opacity-50"
+        class="font-medium bg-white rounded p-2 items-center hover:shadow-2xl border border-ash border-opacity-25"
         @click="triggerNetlifyIdentityAction('login')"
       >
         Sign In
@@ -127,7 +127,10 @@ export default {
         try {
           return this.cards.filter((card) => {
             try {
-              return this.cardColor(card).length > 1
+              const set = this.sets.find((set) => {
+                return set.code.toLowerCase() === card.set
+              })
+              return set.isChecked && this.cardColor(card).length > 1
             } catch (e) {
               console.log(card)
             }
@@ -137,7 +140,13 @@ export default {
           console.log(e)
         }
       }
-      return this.cards.filter((card) => this.cardColor(card) === color.raw)
+      return this.cards.filter((card) => {
+        const set = this.sets.find((set) => {
+          return set.code.toLowerCase() === card.set
+        })
+        return set.isChecked && this.cardColor(card) === color.raw
+        // return this.cardColor(card) === color.raw
+      })
     },
     cardColor(card) {
       try {
