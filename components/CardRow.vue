@@ -4,7 +4,7 @@
     @click="activateCard"
   >
     <RatingBubble :rating="randomizedRating" />
-    <span class="cardName ml-6 mb-2 justify-self-end">{{ cardName }}</span>
+    <span class="cardName ml-6 mb-1 justify-self-end">{{ cardName }}</span>
   </div>
 </template>
 
