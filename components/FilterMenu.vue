@@ -12,8 +12,11 @@
         >
           {{ $t('filters') }}
           <RightArrow
-            class="h-4 w-4 ml-1 -mr-1 transform transition-transform duration-150 ease-in-out"
-            :class="filters.isExpanded ? '-rotate-90' : 'rotate-0'"
+            class="h-4 w-4 ml-1 transform transition-transform duration-150 ease-in-out"
+            :class="{
+              'rotate-90': filters.isExpanded,
+              'rotate-0': !filters.isExpanded,
+            }"
           />
         </button>
       </div>
