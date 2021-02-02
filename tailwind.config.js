@@ -13,6 +13,7 @@ module.exports = {
         mandarin: '#F4A261',
         peach: '#E76F51',
         earth: '#2D9CDB',
+        white: '#f7f7f7',
       },
       spacing: {
         6: '1.5rem',
@@ -21,6 +22,7 @@ module.exports = {
         22: '22px',
         38: '38px',
         66: '66px',
+        84: '24rem',
         104: '26rem',
         106: '106px',
         170: '170px',
@@ -86,8 +88,11 @@ module.exports = {
         18: '18px',
         23: '23px',
         91: '91px',
+        92: '92px',
         180: '180px',
         215: '215px',
+        227: '227px',
+        275: '275px',
         drawer: '325px',
       },
       opacity: {

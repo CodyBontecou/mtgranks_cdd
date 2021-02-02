@@ -72,24 +72,26 @@
     <!--  Card  -->
     <div
       v-if="card"
-      class="mx-20 z-40 flex order-2"
+      class="mx-20 z-40 flex flex-col order-2 justify-center"
       :class="{
-        'flex-col items-center justify-center': expanded,
+        'items-center': expanded,
         'justify-center': !expanded,
       }"
     >
-      <CardImg
-        :card="card"
-        class="flex-shrink-0"
-        :class="{ 'mr-8': !expanded }"
-      />
-      <HorizontalReview v-if="expanded" :rating="rating" class="mt-4" />
-      <VerticalReview v-else :rating="rating" />
+      <div class="flex" :class="{ 'flex-col': expanded }">
+        <CardImg
+          :card="card"
+          class="flex-shrink-0"
+          :class="{ 'mr-8': !expanded }"
+        />
+        <HorizontalReview v-if="expanded" :rating="rating" class="mt-4" />
+        <VerticalReview v-else :rating="rating" />
+      </div>
+      <client-only>
+        <Disqus v-show="showComments" class="m-4 self-col" />
+      </client-only>
+      <button @click="showComments = !showComments">show comments</button>
     </div>
-
-    <client-only>
-      <Disqus class="m-4 order-3" />
-    </client-only>
   </div>
 </template>
 
@@ -107,6 +109,7 @@ export default {
   },
   data() {
     return {
+      showComments: false,
       rating: {
         rator: {
           name: 'Justlolaman',
