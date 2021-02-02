@@ -49,7 +49,7 @@ export default {
   methods: {
     ...mapActions(['setSideDrawerExpanded']),
     activateCard() {
-      this.active = true
+      this.active = !this.active
       this.setSideDrawerExpanded(true)
     },
   },

@@ -9,6 +9,18 @@ function generateCardSlug(card) {
 export const state = () => ({
   sets: [
     {
+      name: 'Kaldheim',
+      code: 'KHM',
+      icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/khm.svg',
+      cardCount: '220',
+      color: 'black-gold',
+      type: 'new',
+      slug: 'kaldheim',
+      isChecked: true,
+      label: 'KHM',
+      filterType: 'set',
+    },
+    {
       name: 'Zendikar Rising',
       code: 'ZNR',
       icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/znr.svg',
