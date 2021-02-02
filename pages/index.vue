@@ -19,7 +19,7 @@
         <Column
           v-for="(color, i) in colors"
           :key="i"
-          class="mx-2"
+          class="mx-1"
           :cards="cardsByColor(color)"
           :color="color"
         />

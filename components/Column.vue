@@ -5,7 +5,6 @@
       v-for="(card, i) in cards"
       :key="card.id"
       :card="card"
-      class="mb-2"
       :class="{
         'mb-12': i === cards.length - 1,
       }"

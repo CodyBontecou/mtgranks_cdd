@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex items-end hover:text-gray-600 cursor-pointer"
+    class="flex items-end hover:text-gray-600 cursor-pointer rounded p-1 btn"
     @click="activateCard"
   >
-    <RatingBubble :rating="randomizedRating" />
+    <RatingBubble class="shadow-lg" :rating="randomizedRating" />
     <span class="cardName ml-6 mb-1 justify-self-end">{{ cardName }}</span>
   </div>
 </template>
@@ -61,5 +61,16 @@ export default {
   font-size: 15px;
   line-height: 19px;
   font-weight: 500;
+}
+.btn:hover {
+  transform: translateY(-0.15rem);
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+.btn:active {
+  transform: translateY(-0.05rem);
+  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
+}
+.btn::after {
+  transition: all 0.1s;
 }
 </style>
