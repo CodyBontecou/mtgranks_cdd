@@ -31,10 +31,10 @@
     <a
       :href="tcgPriceLink"
       target="_blank"
-      class="p-1 absolute text-black font-medium text-12 rounded bg-white opacity-75 hover:opacity-100 cursor-pointer md:right-18 md:bottom-180"
+      class="p-1 absolute text-black font-medium text-12 rounded bg-white opacity-75 hover:opacity-100 cursor-pointer md:left-227 md:bottom-180"
       :class="{
-        'right-10 bottom-91 price-bubble-small': !expanded,
-        'right-23 bottom-215': expanded,
+        'left-92 bottom-91 price-bubble-small': !expanded,
+        'left-275 bottom-215': expanded,
       }"
     >
       ${{ card.prices.usd }}
