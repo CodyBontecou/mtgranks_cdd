@@ -27,7 +27,7 @@
       @click="toggleFace"
     >
       <SwitchVertical
-        class="h-2 w-2 text-black fill-current"
+        class="h-2 w-2 text-black fill-current md:h-5 md:w-5"
         :class="{
           'h-5 w-5': expanded,
         }"
