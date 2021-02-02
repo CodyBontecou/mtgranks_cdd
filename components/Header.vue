@@ -135,27 +135,8 @@ export default {
   },
   methods: {
     ...mapActions({
-      setUser: 'user/setUser',
       toggleExpandedImage: 'toggleExpandedImage',
     }),
-    triggerNetlifyIdentityAction(action) {
-      try {
-        if (action === 'login' || action === 'signup') {
-          window.netlifyIdentity.open(action)
-          window.netlifyIdentity.on(action, (user) => {
-            this.setUser(user)
-            window.netlifyIdentity.close()
-          })
-        } else if (action === 'open') {
-          window.netlifyIdentity.open()
-          window.netlifyIdentity.on('logout', () => {
-            window.netlifyIdentity.close()
-          })
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
     removeCard() {
       this.card = null
       this.toggleExpandedImage()

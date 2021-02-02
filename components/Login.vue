@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'Login',
@@ -25,6 +25,9 @@ export default {
     }),
   },
   methods: {
+    ...mapActions({
+      setUser: 'user/setUser',
+    }),
     triggerNetlifyIdentityAction(action) {
       try {
         if (action === 'login' || action === 'signup') {
