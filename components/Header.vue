@@ -25,13 +25,7 @@
 
     <!--  Top bar HOME -->
     <div v-if="page === 'home'" class="flex justify-center items-center">
-      <div class="absolute ml-20 left-0">
-        <User
-          v-if="isLoggedIn"
-          @click.native="triggerNetlifyIdentityAction('open')"
-        />
-        <User v-else @click.native="triggerNetlifyIdentityAction('login')" />
-      </div>
+      <Login />
       <div class="font-bold text-36 leading-42">mtgranks</div>
       <div class="absolute mr-20 right-0 flex">
         <GlobeIcon class="fill-current text-earth" />
@@ -62,7 +56,7 @@
     </span>
 
     <!--  Set Name -->
-    <div v-if="set !== null" class="order-last">
+    <div class="order-last">
       <!--  Search Bar -->
       <div class="flex justify-center mt-3">
         <SearchInput :cards="cards" class="-mb-20 text-black" />
@@ -123,7 +117,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      set: 'set',
       expanded: 'expanded',
       cards: 'cards',
       currentUser: 'user/currentUser',

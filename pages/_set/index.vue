@@ -1,24 +1,12 @@
 <template>
   <div class="md:flex mt-20">
     <Header class="z-10 md:hidden" :set="set" :card="card" page="mtgSet" />
-    <div class="fixed mr-20 right-0 cursor-pointer">
-      <User
-        v-if="isLoggedIn"
-        @click.native="triggerNetlifyIdentityAction('open')"
-      />
-      <button
-        v-else
-        class="font-medium bg-white rounded p-2 items-center hover:shadow-2xl border border-ash border-opacity-25"
-        @click="triggerNetlifyIdentityAction('login')"
-      >
-        Sign In
-      </button>
-    </div>
+    <Login />
     <SideDrawer class="hidden md:block" />
     <div
       class="mx-20 md:mt-0"
       :class="{
-        'mt-48': noCard,
+        'mt-48': !card,
         'md:ml-drawer': sideDrawerExpanded,
         'mt-84': card && expanded === false,
         'mt-176': card && expanded === true,
@@ -51,13 +39,6 @@ import { mapGetters, mapState } from 'vuex'
 export default {
   layout: 'wideHeader',
   async fetch() {
-    this.$store.commit(
-      'setSet',
-      this.sets.find((set) => set.slug === this.$route.params.set)
-    )
-    // if (this.cards.length === 0 || this.cards[0].set_name !== this.set.name) {
-    //   await this.$store.dispatch('getCards', this.set.code)
-    // }
     await this.$store.dispatch('_getCards')
   },
   computed: {
@@ -66,7 +47,6 @@ export default {
       'cards',
       'colors',
       'sets',
-      'set',
       'expanded',
       'sideDrawerExpanded',
     ]),
@@ -75,9 +55,6 @@ export default {
         state.user.currentUser?.app_metadata.roles.includes('premium'),
       isLoggedIn: (state) => state.user.currentUser,
     }),
-    noCard() {
-      return this.card === null
-    },
     noCards() {
       return this.cards.length === 0
     },
@@ -95,30 +72,12 @@ export default {
       this.$store.commit('setCard', null)
     }
   },
-  destroyed() {
-    this.$store.commit('setCards', [])
-    this.$store.commit('setCard', null)
-    this.$store.commit('setSet', null)
-  },
+  // destroyed() {
+  //   this.$store.commit('setCards', [])
+  //   this.$store.commit('setCard', null)
+  //   this.$store.commit('setSet', null)
+  // },
   methods: {
-    triggerNetlifyIdentityAction(action) {
-      try {
-        if (action === 'login' || action === 'signup') {
-          window.netlifyIdentity.open(action)
-          window.netlifyIdentity.on(action, (user) => {
-            this.setUser(user)
-            window.netlifyIdentity.close()
-          })
-        } else if (action === 'open') {
-          window.netlifyIdentity.open()
-          window.netlifyIdentity.on('logout', () => {
-            window.netlifyIdentity.close()
-          })
-        }
-      } catch (error) {
-        console.log(error)
-      }
-    },
     cardsByColor(color) {
       if (!color.isChecked) {
         return []
@@ -145,7 +104,6 @@ export default {
           return set.code.toLowerCase() === card.set
         })
         return set.isChecked && this.cardColor(card) === color.raw
-        // return this.cardColor(card) === color.raw
       })
     },
     cardColor(card) {
@@ -182,6 +140,7 @@ export default {
       )
       const boolean = !event.isChecked
       this.$store.commit('toggleSet', { set, boolean })
+      this.$store.dispatch('_getCards')
     },
   },
   head: {
