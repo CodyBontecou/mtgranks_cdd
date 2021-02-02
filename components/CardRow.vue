@@ -41,7 +41,7 @@ export default {
     active() {
       this.$store.commit('setCard', this.card)
       this.$router.push({
-        name: 'set___en',
+        name: 'index___en',
         query: { card: this.card.slug },
       })
     },
