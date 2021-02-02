@@ -1,6 +1,6 @@
 <template>
   <div
-    class="z-10 fixed top-0 mt-6 h-12 w-6 py-4 bg-white rounded-r items-center justify-center bg-white shadow-lg hover:shadow-2xl border border-ash border-opacity-25 hover:border-opacity-50 cursor-pointer"
+    class="z-10 fixed top-0 mt-6 h-12 w-6 py-4 bg-white rounded-r items-center justify-center bg-white shadow-2xl hover:shadow-lg border border-ash border-opacity-25 cursor-pointer"
     :class="{
       'left-0': !sideDrawerExpanded,
       'left-drawer': sideDrawerExpanded,

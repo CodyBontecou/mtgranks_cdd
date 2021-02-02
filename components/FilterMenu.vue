@@ -1,7 +1,7 @@
 <template>
   <div class="font-medium text-xs">
     <div
-      class="relative rounded p-2 flex flex-row-reverse bg-white items-center justify-center shadow-lg hover:shadow-2xl border border-ash border-opacity-25 hover:border-opacity-50 cursor-pointer"
+      class="relative rounded p-2 flex flex-row-reverse bg-white items-center justify-center shadow-2xl hover:shadow-lg border border-ash border-opacity-25 cursor-pointer"
     >
       <div class="self-end" @click="filters.isExpanded = !filters.isExpanded">
         <button
