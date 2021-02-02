@@ -1,7 +1,7 @@
 <template>
   <div v-show="cardsLoaded">
     <h1 class="text-18 mb-6 font-semibold">{{ color.label }}</h1>
-    <CardRow
+    <LazyCardRow
       v-for="(card, i) in cards"
       :key="card.id"
       :card="card"
