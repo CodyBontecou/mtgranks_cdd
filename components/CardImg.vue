@@ -15,9 +15,20 @@
       :class="{
         'max-h-card-large': expanded === true,
       }"
-      :src="card.card_faces[0].image_uris.border_crop"
+      :src="cardFace"
       :alt="`Image of ${card.name}.`"
     />
+    <div
+      v-if="card.card_faces"
+      class="absolute rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer p-2"
+      :class="{
+        'left-10 bottom-91': !expanded,
+        'left-23 bottom-215': expanded,
+      }"
+      @click="toggleFace"
+    >
+      <ExpandIcon />
+    </div>
     <div
       class="absolute md:hidden rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer p-2"
       :class="{
@@ -53,11 +64,26 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      face: 0,
+    }
+  },
   computed: {
     ...mapGetters(['expanded', 'tcgPriceLink']),
+    cardFace() {
+      return this.card.card_faces[this.face].image_uris.border_crop
+    },
   },
   methods: {
     ...mapActions(['toggleExpandedImage']),
+    toggleFace() {
+      if (this.face === 0) {
+        this.face = 1
+      } else {
+        this.face = 0
+      }
+    },
   },
 }
 </script>
