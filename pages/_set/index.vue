@@ -1,6 +1,6 @@
 <template>
   <div class="md:flex mt-20">
-    <Header class="z-10 md:hidden" :set="set" :card="card" page="mtgSet" />
+    <Header class="z-10 md:hidden" page="mtgSet" />
     <Login />
     <SideDrawer class="hidden md:block" />
     <div
