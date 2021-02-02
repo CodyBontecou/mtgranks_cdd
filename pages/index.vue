@@ -1,12 +1,12 @@
 <template>
   <div class="md:flex mt-20">
     <Header class="z-10 md:hidden" page="mtgSet" />
-    <Login />
+    <Login class="hidden md:block" />
     <SideDrawer class="hidden md:block" />
     <div
       class="mx-20 md:mt-0"
       :class="{
-        'mt-48': !card,
+        'mt-40': !card,
         'md:ml-drawer': sideDrawerExpanded,
         'mt-84': card && expanded === false,
         'mt-176': card && expanded === true,

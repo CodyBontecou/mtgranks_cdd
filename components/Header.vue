@@ -2,33 +2,18 @@
   <div
     class="flex flex-col justify-between w-full notch"
     :class="{
-      'fixed top-0 bg-charcoal text-white divider': page === 'mtgSet',
-      'bg-transparent text-black': page === 'home',
+      'fixed top-0 bg-ash text-white': page === 'mtgSet',
       'text-white': page === 'premium',
     }"
   >
     <!--  Top bar mtgSet -->
     <div v-if="page === 'mtgSet'" class="flex flex-col m-20 order-1">
       <div class="flex justify-between">
-        <NuxtLink v-if="card === null" to="/">
-          <ThinLeftArrow />
-        </NuxtLink>
         <div v-if="card" class="cursor-pointer" @click="removeCard">
           <CloseIcon />
         </div>
-        <NuxtLink to="/">
-          <div class="font-bold text-24">mtgranks</div>
-        </NuxtLink>
-        <ThreeVerticalDots />
-      </div>
-    </div>
-
-    <!--  Top bar HOME -->
-    <div v-if="page === 'home'" class="flex justify-center items-center">
-      <Login />
-      <div class="font-bold text-36 leading-42">mtgranks</div>
-      <div class="absolute mr-20 right-0 flex">
-        <GlobeIcon class="fill-current text-earth" />
+        <div v-else class="font-bold text-24">mtgranks</div>
+        <Login />
       </div>
     </div>
 
@@ -41,24 +26,15 @@
       <ThreeVerticalDots />
     </div>
 
-    <!--  Bubbles and opaque Mtgranks logo  -->
-    <div v-if="page === 'mtgSet'" class="large-circle"></div>
-    <div v-if="page === 'mtgSet'" class="small-circle"></div>
-    <span
-      v-if="page === 'mtgSet'"
-      class="opaque-logo absolute text-white font-bold"
-      :class="{
-        'small-screen': card === null,
-        'medium-screen': card !== null,
-      }"
-    >
-      mtgranks
-    </span>
-
     <!--  Set Name -->
     <div class="order-last">
       <!--  Search Bar -->
-      <div class="flex justify-center mt-3">
+      <div
+        class="flex justify-center mt-3"
+        :class="{
+          'mt-4': !card,
+        }"
+      >
         <SearchInput :cards="cards" class="-mb-20 text-black" />
       </div>
     </div>
@@ -84,7 +60,7 @@
       <client-only>
         <Disqus v-show="showComments" class="m-4 self-col" />
       </client-only>
-      <button @click="showComments = !showComments">show comments</button>
+      <!--      <button @click="showComments = !showComments">show comments</button>-->
     </div>
   </div>
 </template>
@@ -134,12 +110,8 @@ export default {
     },
   },
   methods: {
-    ...mapActions({
-      toggleExpandedImage: 'toggleExpandedImage',
-    }),
     removeCard() {
       this.card = null
-      this.toggleExpandedImage()
       this.removeQuery()
     },
     removeQuery() {

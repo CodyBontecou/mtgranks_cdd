@@ -65,7 +65,7 @@ export default {
 <style>
 .slide-enter-active,
 .slide-leave-active {
-  transition: transform 0.5s ease;
+  transition: transform 0.5s ease-out;
 }
 
 .slide-enter,

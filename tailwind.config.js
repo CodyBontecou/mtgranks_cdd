@@ -14,6 +14,7 @@ module.exports = {
         peach: '#E76F51',
         earth: '#2D9CDB',
         white: '#f7f7f7',
+        gold: '#E9C46A',
       },
       spacing: {
         6: '1.5rem',
@@ -27,7 +28,7 @@ module.exports = {
         106: '106px',
         170: '170px',
         176: '44rem',
-        divider: '325px',
+        divider: '400px',
         'divider-compact': '50px',
         drawer: '400px',
       },
@@ -80,7 +81,7 @@ module.exports = {
         80: '80px',
       },
       width: {
-        drawer: '325px',
+        drawer: '400px',
       },
       // For top, right, bottom, left
       inset: {
@@ -93,7 +94,7 @@ module.exports = {
         215: '215px',
         227: '227px',
         275: '275px',
-        drawer: '325px',
+        drawer: '400px',
       },
       opacity: {
         30: '0.3',
