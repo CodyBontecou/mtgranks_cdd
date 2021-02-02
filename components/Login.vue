@@ -39,6 +39,7 @@ export default {
         } else if (action === 'open') {
           window.netlifyIdentity.open()
           window.netlifyIdentity.on('logout', () => {
+            this.setUser(null)
             window.netlifyIdentity.close()
           })
         }
