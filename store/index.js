@@ -19,6 +19,7 @@ export const state = () => ({
       isChecked: true,
       label: 'KHM',
       filterType: 'set',
+      retrieved: false,
     },
     {
       name: 'Zendikar Rising',
@@ -31,6 +32,7 @@ export const state = () => ({
       isChecked: false,
       label: 'ZNR',
       filterType: 'set',
+      retrieved: false,
     },
     {
       name: 'Ikoria: Lair of Behemoths',
@@ -43,6 +45,7 @@ export const state = () => ({
       isChecked: false,
       label: 'IKO',
       filterType: 'set',
+      retrieved: false,
     },
     {
       name: 'Core 2021',
@@ -55,6 +58,7 @@ export const state = () => ({
       isChecked: false,
       label: 'M21',
       filterType: 'set',
+      retrieved: false,
     },
     {
       name: 'Theros Beyond Death',
@@ -67,6 +71,7 @@ export const state = () => ({
       isChecked: false,
       label: 'THB',
       filterType: 'set',
+      retrieved: false,
     },
     {
       name: 'Throne of Eldraine',
@@ -79,6 +84,7 @@ export const state = () => ({
       isChecked: false,
       label: 'ELD',
       filterType: 'set',
+      retrieved: false,
     },
     {
       name: 'Core 2020',
@@ -91,6 +97,7 @@ export const state = () => ({
       isChecked: false,
       label: 'M20',
       filterType: 'set',
+      retrieved: false,
     },
     {
       name: 'War of the Spark',
@@ -103,6 +110,7 @@ export const state = () => ({
       isChecked: false,
       label: 'WAR',
       filterType: 'set',
+      retrieved: false,
     },
   ],
   cards: [],
@@ -140,30 +148,38 @@ export const actions = {
       console.log(e)
     }
   },
+
   async _getCards({ commit, dispatch, state }) {
     let url
     let data = []
 
     for (const set of state.sets) {
-      url = `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
-      try {
-        const response = await this.$axios.$get(url)
-        data = data.concat(response.data)
-        if (response.has_more) {
-          const additionalData = await dispatch(
-            'getPaginatedCards',
-            response.next_page
-          )
-          data = data.concat(additionalData)
+      if (set.isChecked && !set.retrieved) {
+        url = `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
+        try {
+          const response = await this.$axios.$get(url)
+          data = data.concat(response.data)
+          if (response.has_more) {
+            const additionalData = await dispatch(
+              'getPaginatedCards',
+              response.next_page
+            )
+            data = data.concat(additionalData)
+          }
+          set.retrieved = true
+        } catch (e) {
+          console.log(e)
         }
-      } catch (e) {
-        console.log(e)
       }
     }
 
-    data.forEach((card) => (card.slug = generateCardSlug(card)))
-    commit('setCards', data)
+    if (data.length > 0) {
+      data.forEach((card) => (card.slug = generateCardSlug(card)))
+      // commit('setCards', data)
+      commit('updateCards', data)
+    }
   },
+
   async getPaginatedCards({ dispatch }, url) {
     const response = await this.$axios.$get(url)
     let data = response.data
@@ -195,6 +211,9 @@ export const mutations = {
   setCards(state, cards) {
     state.cards = cards
   },
+  updateCards(state, cards) {
+    state.cards = state.cards.concat(cards)
+  },
   setSet(state, set) {
     state.set = set
   },
@@ -214,9 +233,6 @@ export const mutations = {
   toggleSet(state, { set, boolean }) {
     const s = state.sets.find((elem) => elem.label === set.label)
     s.isChecked = boolean
-  },
-  updateCards(state, cards) {
-    state.cards = cards
   },
 }
 
