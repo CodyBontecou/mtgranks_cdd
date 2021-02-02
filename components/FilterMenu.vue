@@ -62,7 +62,7 @@
                 v-model="option.isChecked"
                 type="checkbox"
                 class="flex-shrink-0 cursor-pointer form-checkbox text-charcoal border-charcoal hover:opacity-75 opacity-50"
-                @click="$emit('colorToggled', option)"
+                @click="$emit('filterToggled', option)"
               />
             </label>
             <div class="my-2 border-t border-ash rounded opacity-25"></div>
@@ -84,13 +84,13 @@ export default {
             name: 'Colors',
             isExpanded: false,
             options: [
-              { label: 'Red', isChecked: true },
-              { label: 'Green', isChecked: true },
-              { label: 'Blue', isChecked: true },
-              { label: 'Black', isChecked: true },
-              { label: 'White', isChecked: true },
-              { label: 'Colorless', isChecked: true },
-              { label: 'Multi', isChecked: true },
+              { label: 'Red', isChecked: true, filterType: 'color' },
+              { label: 'Green', isChecked: true, filterType: 'color' },
+              { label: 'Blue', isChecked: true, filterType: 'color' },
+              { label: 'Black', isChecked: true, filterType: 'color' },
+              { label: 'White', isChecked: true, filterType: 'color' },
+              { label: 'Colorless', isChecked: true, filterType: 'color' },
+              { label: 'Multi', isChecked: true, filterType: 'color' },
             ],
           },
           {
@@ -108,6 +108,7 @@ export default {
                 slug: 'zendikar-rising',
                 isChecked: true,
                 label: 'ZNR',
+                filterType: 'set',
               },
               {
                 name: 'Ikoria: Lair of Behemoths',
@@ -120,6 +121,7 @@ export default {
                 slug: 'ikoria-lair-of-behemoths',
                 isChecked: true,
                 label: 'IKO',
+                filterType: 'set',
               },
               {
                 name: 'Core 2021',
@@ -132,6 +134,7 @@ export default {
                 slug: 'core-2021',
                 isChecked: true,
                 label: 'M21',
+                filterType: 'set',
               },
               {
                 name: 'Theros Beyond Death',
@@ -144,6 +147,7 @@ export default {
                 slug: 'theros-beyond-death',
                 isChecked: true,
                 label: 'THB',
+                filterType: 'set',
               },
               {
                 name: 'Throne of Eldraine',
@@ -156,6 +160,7 @@ export default {
                 slug: 'throne-of-eldraine',
                 isChecked: true,
                 label: 'ELD',
+                filterType: 'set',
               },
               {
                 name: 'Core 2020',
@@ -168,6 +173,7 @@ export default {
                 slug: 'core-2020',
                 isChecked: true,
                 label: 'M20',
+                filterType: 'set',
               },
               {
                 name: 'War of the Spark',
@@ -180,6 +186,7 @@ export default {
                 slug: 'war-of-the-spark',
                 isChecked: true,
                 label: 'WAR',
+                filterType: 'set',
               },
             ],
           },

@@ -10,9 +10,7 @@
       <GreySearchIcon
         class="opacity-25 self-center mx-4 w-6 h-6 md:w-8 md:h-8"
       />
-      <label for="cardSearch"> </label>
       <input
-        id="cardSearch"
         v-model="search"
         class="appearance-none focus:outline-none placeholder-gray-600 rounded-r-full w-full"
         type="text"

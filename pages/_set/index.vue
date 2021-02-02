@@ -38,7 +38,7 @@
       </div>
       <FilterMenu
         class="fixed bottom-0 right-0 mr-20 mb-4"
-        @colorToggled="updateColors"
+        @filterToggled="updateFilters"
       />
       <!--      v-if="isPremium"-->
     </div>
@@ -146,7 +146,14 @@ export default {
         console.log(e)
       }
     },
-    updateColors(event) {
+    updateFilters(event) {
+      if (event.filterType === 'color') {
+        this.updateColor(event)
+      } else if (event.filterType === 'set') {
+        console.log('set')
+      }
+    },
+    updateColor(event) {
       const color = this.$store.state.colors.find(
         (elem) => elem.label === event.label
       )
