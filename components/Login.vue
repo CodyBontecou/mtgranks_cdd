@@ -9,7 +9,7 @@
       class="font-medium bg-white rounded p-2 items-center hover:shadow-2xl border border-ash border-opacity-25"
       @click="triggerNetlifyIdentityAction('login')"
     >
-      Sign In
+      <span class="opacity-75">Sign In</span>
     </button>
   </div>
 </template>

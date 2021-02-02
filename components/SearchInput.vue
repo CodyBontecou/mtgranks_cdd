@@ -12,7 +12,7 @@
       />
       <input
         v-model="search"
-        class="appearance-none focus:outline-none placeholder-gray-600 rounded-r-full w-full"
+        class="appearance-none bg-white focus:outline-none placeholder-gray-600 rounded-r-full w-full"
         type="text"
         autocomplete="off"
         placeholder="Search Mtgranks"
