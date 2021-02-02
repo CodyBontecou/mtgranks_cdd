@@ -16,6 +16,9 @@ export const state = () => ({
       color: 'black-gold',
       type: 'new',
       slug: 'zendikar-rising',
+      isChecked: true,
+      label: 'ZNR',
+      filterType: 'set',
     },
     {
       name: 'Ikoria: Lair of Behemoths',
@@ -25,6 +28,9 @@ export const state = () => ({
       color: 'orange-red',
       type: 'new',
       slug: 'ikoria-lair-of-behemoths',
+      isChecked: true,
+      label: 'IKO',
+      filterType: 'set',
     },
     {
       name: 'Core 2021',
@@ -34,6 +40,9 @@ export const state = () => ({
       color: 'black-green',
       type: 'new',
       slug: 'core-2021',
+      isChecked: true,
+      label: 'M21',
+      filterType: 'set',
     },
     {
       name: 'Theros Beyond Death',
@@ -43,6 +52,9 @@ export const state = () => ({
       color: 'ash',
       type: 'old',
       slug: 'theros-beyond-death',
+      isChecked: true,
+      label: 'THB',
+      filterType: 'set',
     },
     {
       name: 'Throne of Eldraine',
@@ -52,6 +64,9 @@ export const state = () => ({
       color: 'teal',
       type: 'old',
       slug: 'throne-of-eldraine',
+      isChecked: true,
+      label: 'ELD',
+      filterType: 'set',
     },
     {
       name: 'Core 2020',
@@ -61,6 +76,9 @@ export const state = () => ({
       color: 'mandarin',
       type: 'old',
       slug: 'core-2020',
+      isChecked: true,
+      label: 'M20',
+      filterType: 'set',
     },
     {
       name: 'War of the Spark',
@@ -70,6 +88,9 @@ export const state = () => ({
       color: 'peach',
       type: 'old',
       slug: 'war-of-the-spark',
+      isChecked: true,
+      label: 'WAR',
+      filterType: 'set',
     },
   ],
   cards: [],
@@ -106,6 +127,30 @@ export const actions = {
     } catch (e) {
       console.log(e)
     }
+  },
+  async _getCards({ commit, dispatch, state }) {
+    let url
+    let data = []
+
+    for (const set of state.sets) {
+      url = `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
+      try {
+        const response = await this.$axios.$get(url)
+        data = data.concat(response.data)
+        if (response.has_more) {
+          const additionalData = await dispatch(
+            'getPaginatedCards',
+            response.next_page
+          )
+          data = data.concat(additionalData)
+        }
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    data.forEach((card) => (card.slug = generateCardSlug(card)))
+    commit('setCards', data)
   },
   async getPaginatedCards({ dispatch }, url) {
     const response = await this.$axios.$get(url)
@@ -153,6 +198,10 @@ export const mutations = {
   toggleColor(state, { color, boolean }) {
     const c = state.colors.find((elem) => elem.label === color.label)
     c.isChecked = boolean
+  },
+  toggleSet(state, { set, boolean }) {
+    const s = state.sets.find((elem) => elem.label === set.label)
+    s.isChecked = boolean
   },
   updateCards(state, cards) {
     state.cards = cards

@@ -55,9 +55,10 @@ export default {
       'setSet',
       this.sets.find((set) => set.slug === this.$route.params.set)
     )
-    if (this.cards.length === 0 || this.cards[0].set_name !== this.set.name) {
-      await this.$store.dispatch('getCards', this.set.code)
-    }
+    // if (this.cards.length === 0 || this.cards[0].set_name !== this.set.name) {
+    //   await this.$store.dispatch('getCards', this.set.code)
+    // }
+    await this.$store.dispatch('_getCards')
   },
   computed: {
     ...mapGetters([
@@ -124,7 +125,13 @@ export default {
       }
       if (color.label === 'Multi') {
         try {
-          return this.cards.filter((card) => this.cardColor(card).length > 1)
+          return this.cards.filter((card) => {
+            try {
+              return this.cardColor(card).length > 1
+            } catch (e) {
+              console.log(card)
+            }
+          })
         } catch (e) {
           console.error('Issue with color.label === "Multi"')
           console.log(e)
@@ -134,7 +141,7 @@ export default {
     },
     cardColor(card) {
       try {
-        if (card !== null && 'card_faces' in card) {
+        if ('card_faces' in card && 'colors' in card.card_faces[0]) {
           return card.card_faces[0].colors.join()
         } else if (card !== null) {
           return card.colors.join()
@@ -142,7 +149,7 @@ export default {
           return ''
         }
       } catch (e) {
-        console.error('Issue with "card_faces" in card')
+        console.error('Issue with "card_faces" or "colors" in card')
         console.log(e)
       }
     },
@@ -150,7 +157,7 @@ export default {
       if (event.filterType === 'color') {
         this.updateColor(event)
       } else if (event.filterType === 'set') {
-        console.log('set')
+        this.updateSets(event)
       }
     },
     updateColor(event) {
@@ -159,6 +166,13 @@ export default {
       )
       const boolean = !event.isChecked
       this.$store.commit('toggleColor', { color, boolean })
+    },
+    updateSets(event) {
+      const set = this.$store.state.sets.find(
+        (elem) => elem.label === event.label
+      )
+      const boolean = !event.isChecked
+      this.$store.commit('toggleSet', { set, boolean })
     },
   },
   head: {
