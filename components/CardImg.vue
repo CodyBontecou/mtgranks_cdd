@@ -20,14 +20,18 @@
     />
     <div
       v-if="card.card_faces"
-      class="absolute rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer p-2"
+      class="absolute rounded-full bg-white opacity-100 cursor-pointer p-2 top-0 left-0"
       :class="{
-        'left-10 bottom-91': !expanded,
-        'left-23 bottom-215': expanded,
+        'top-10 left-10': expanded,
       }"
       @click="toggleFace"
     >
-      <ExpandIcon />
+      <SwitchVertical
+        class="h-2 w-2 text-black fill-current"
+        :class="{
+          'h-5 w-5': expanded,
+        }"
+      />
     </div>
     <div
       class="absolute md:hidden rounded-full bg-white opacity-75 hover:opacity-100 cursor-pointer p-2"
