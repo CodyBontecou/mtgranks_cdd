@@ -1,6 +1,6 @@
 <template>
   <div class="md:flex mt-20">
-    <Header class="z-10 md:hidden" page="mtgSet" />
+    <Header class="z-40 md:hidden" page="mtgSet" />
     <Login class="hidden md:block" />
     <SideDrawer class="hidden md:block" />
     <div
@@ -17,7 +17,7 @@
       </div>
       <div
         class="flex flex-wrap justify-center"
-        :class="{ 'centered-columns': sideDrawerExpanded }"
+        :class="{ 'md:centered-columns': sideDrawerExpanded }"
       >
         <Column
           v-for="(color, i) in colors"
