@@ -14,7 +14,7 @@
     />
 
     <div class="w-full my-6 py-3 border-t border-b border-gray-1">
-      <div class="flex items-center justify-around mx-20">
+      <div class="flex items-center justify-between mx-20">
         <!-- Rating Bubble -->
         <div class="flex flex-col text-center mr-4 cursor-pointer">
           <div class="card--detail__toggle-container-filled">
@@ -44,15 +44,33 @@
           <span class="card--detail__toggle-text">${{ card.prices.usd }}</span>
         </a>
         <!--   Flip card image -->
+        <!--        TODO: Always show this. Just disable if no card_faces-->
         <div
-          v-if="card.card_faces"
-          class="flex flex-col text-center cursor-pointer p-2 rounded group"
+          class="flex flex-col text-center p-2 rounded group"
+          :class="{
+            'cursor-pointer': card.card_faces,
+            'cursor-default': !card.card_faces,
+          }"
           @click="toggleFace"
         >
-          <div class="card--detail__toggle-container group-hover:bg-gray-3">
+          <div
+            class="card--detail__toggle-container"
+            :class="{
+              'bg-white group-hover:bg-gray-3': card.card_faces,
+              'opacity-50': !card.card_faces,
+            }"
+          >
             <SwitchVertical class="card--detail__toggle-icon" />
           </div>
           <span class="card--detail__toggle-text">Flip</span>
+        </div>
+
+        <!--   Share -->
+        <div class="flex flex-col text-center cursor-pointer p-2 rounded group">
+          <div class="card--detail__toggle-container group-hover:bg-gray-3">
+            <Share class="card--detail__toggle-icon" />
+          </div>
+          <span class="card--detail__toggle-text">Share</span>
         </div>
       </div>
     </div>
@@ -84,10 +102,12 @@ export default {
   methods: {
     ...mapActions(['toggleExpandedImage']),
     toggleFace() {
-      if (this.face === 0) {
-        this.face = 1
-      } else {
-        this.face = 0
+      if ('card_faces' in this.card) {
+        if (this.face === 0) {
+          this.face = 1
+        } else {
+          this.face = 0
+        }
       }
     },
   },
@@ -96,10 +116,10 @@ export default {
 
 <style>
 .card--detail__toggle-container {
-  @apply rounded-full bg-white cursor-pointer p-2 w-10 h-10 flex items-center justify-center border border-persian-green;
+  @apply rounded-full bg-white p-2 w-10 h-10 flex items-center justify-center border border-persian-green;
 }
 .card--detail__toggle-container-filled {
-  @apply rounded-full bg-persian-green cursor-pointer p-2 w-10 h-10 flex items-center justify-center;
+  @apply rounded-full bg-persian-green p-2 w-10 h-10 flex items-center justify-center;
 }
 .card--detail__toggle-icon {
   @apply text-persian-green;

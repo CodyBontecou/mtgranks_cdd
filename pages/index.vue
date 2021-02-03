@@ -75,11 +75,6 @@ export default {
       this.$store.commit('setCard', null)
     }
   },
-  // destroyed() {
-  //   this.$store.commit('setCards', [])
-  //   this.$store.commit('setCard', null)
-  //   this.$store.commit('setSet', null)
-  // },
   methods: {
     cardsByColor(color) {
       if (!color.isChecked) {
