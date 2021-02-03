@@ -175,7 +175,6 @@ export const actions = {
 
     if (data.length > 0) {
       data.forEach((card) => (card.slug = generateCardSlug(card)))
-      // commit('setCards', data)
       commit('updateCards', data)
     }
   },

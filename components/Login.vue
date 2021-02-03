@@ -1,19 +1,15 @@
 <template>
   <div
-    class="fixed bg-white mr-20 right-0 cursor-pointer p-1 rounded-full shadow-2xl hover:shadow-lg border border-opacity-25"
+    class="fixed bg-white mr-20 right-0 cursor-pointer rounded-full shadow-2xl hover:shadow-lg border border-opacity-25"
     :class="{
       'border-ash text-ash': !isLoggedIn,
       'border-blue-400 text-blue-400': isLoggedIn,
     }"
   >
-    <User @click.native="triggerNetlifyIdentityAction('open')" />
-    <!--    <button-->
-    <!--      v-else-->
-    <!--      class="text-black font-medium bg-white rounded p-2 items-center hover:shadow-2xl border border-ash border-opacity-25"-->
-    <!--      @click="triggerNetlifyIdentityAction('login')"-->
-    <!--    >-->
-    <!--      <span class="opacity-75">Sign In</span>-->
-    <!--    </button>-->
+    <User
+      class="w-6 h-6"
+      @click.native="triggerNetlifyIdentityAction('open')"
+    />
   </div>
 </template>
 

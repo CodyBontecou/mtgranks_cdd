@@ -7,13 +7,17 @@ module.exports = {
         gray: {
           1: '#f2f2f2',
           2: '#343436',
+          3: '#F1F3F4',
+        },
+        blue: {
+          1: '#1A73E8',
         },
         ash: '#264653',
         teal: '#2A9D8F',
         mandarin: '#F4A261',
         peach: '#E76F51',
         earth: '#2D9CDB',
-        white: '#f7f7f7',
+        white: '#ffffff',
         gold: '#E9C46A',
       },
       spacing: {
@@ -79,6 +83,7 @@ module.exports = {
       maxWidth: {
         32: '32px',
         80: '80px',
+        drawer: '400px',
       },
       width: {
         drawer: '400px',
@@ -103,6 +108,7 @@ module.exports = {
   },
   variants: {
     textColor: ['responsive', 'hover', 'focus', 'group-hover'],
+    backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
   },
   plugins: [require('@tailwindcss/custom-forms')],
   purge: {

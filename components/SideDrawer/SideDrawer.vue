@@ -4,31 +4,14 @@
     <transition name="slide">
       <div
         v-show="sideDrawerExpanded"
-        class="fixed shadow-2xl top-0 left-0 h-full bg-charcoal text-white w-drawer overflow-y-scroll"
+        class="fixed shadow-2xl top-0 left-0 h-full bg-charcoal text-white w-4/5 max-w-drawer overflow-y-scroll"
       >
         <div class="flex justify-center mt-3 md:mt-4">
           <SearchInput :cards="cards" class="-mb-20 md:mb-0 text-black" />
         </div>
-        <div
-          v-if="card"
-          class="m-20 z-40 flex md:flex-col md:items-center order-2 md:order-3"
-          :class="{
-            'flex-col items-center': sideDrawerExpanded,
-            'justify-center': !sideDrawerExpanded,
-          }"
-        >
-          <CardImg :card="card" />
-          <HorizontalReview
-            v-if="sideDrawerExpanded"
-            :rating="rating"
-            class="mt-4"
-          />
-          <VerticalReview
-            v-else
-            :rating="rating"
-            class="ml-8 md:ml-0 md:mt-4"
-          />
-        </div>
+
+        <CardDetails />
+
         <client-only>
           <Disqus v-show="showComments" class="m-4 self-col" />
         </client-only>
