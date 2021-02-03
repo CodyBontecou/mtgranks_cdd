@@ -13,9 +13,8 @@
         <CardDetails />
 
         <client-only>
-          <Disqus v-show="showComments" class="m-4 self-col" />
+          <Disqus class="m-4 self-col" />
         </client-only>
-        <button @click="showComments = !showComments">show comments</button>
       </div>
     </transition>
   </div>
@@ -27,7 +26,6 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      showComments: false,
       rating: {
         rator: {
           name: 'Justlolaman',
