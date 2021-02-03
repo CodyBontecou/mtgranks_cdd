@@ -44,7 +44,6 @@
           <span class="card--detail__toggle-text">${{ card.prices.usd }}</span>
         </a>
         <!--   Flip card image -->
-        <!--        TODO: Always show this. Just disable if no card_faces-->
         <div
           class="flex flex-col text-center p-2 rounded group"
           :class="{
@@ -66,7 +65,10 @@
         </div>
 
         <!--   Share -->
-        <div class="flex flex-col text-center cursor-pointer p-2 rounded group">
+        <div
+          class="flex flex-col text-center cursor-pointer p-2 rounded group"
+          @click="copyURL"
+        >
           <div class="card--detail__toggle-container group-hover:bg-gray-3">
             <Share class="card--detail__toggle-icon" />
           </div>
@@ -91,6 +93,7 @@ export default {
   data() {
     return {
       face: 0,
+      shared: false,
     }
   },
   computed: {
@@ -109,6 +112,12 @@ export default {
           this.face = 0
         }
       }
+    },
+    copyURL() {
+      const url = `https://mtgranks.com${this.$route.fullPath}`
+      navigator.clipboard.writeText(url).then(() => {
+        alert('Copied to clipboard')
+      })
     },
   },
 }
