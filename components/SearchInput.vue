@@ -81,7 +81,7 @@ export default {
       const cardObject = this.cards.find((card) => card.name === cardName)
       this.$store.commit('setCard', cardObject)
       this.$router.push({
-        name: 'set___en',
+        name: 'index___en',
         query: { card: cardObject.slug },
       })
       this.resetResults()

@@ -15,7 +15,7 @@
       <div v-if="noCards">
         <Loading :class="{ 'ml-48': sideDrawerExpanded }" />
       </div>
-      <div class="flex flex-wrap justify-center">
+      <div class="flex flex-wrap justify-center centered-columns">
         <Column
           v-for="(color, i) in colors"
           :key="i"
@@ -164,3 +164,9 @@ export default {
   },
 }
 </script>
+
+<style>
+.centered-columns {
+  width: calc(100vw - 400px);
+}
+</style>
