@@ -44,12 +44,12 @@ export default {
       )
     },
   },
-  mounted() {
-    setTimeout(() => {
-      if (!window.DISQUS) {
-        this.isMsgVisible = true
-      }
-    }, 8000)
-  },
+  // mounted() {
+  //   setTimeout(() => {
+  //     if (!window.DISQUS) {
+  //       this.isMsgVisible = true
+  //     }
+  //   }, 8000)
+  // },
 }
 </script>
