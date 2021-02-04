@@ -47,9 +47,15 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['setSideDrawerExpanded']),
+    ...mapActions({
+      setSideDrawerExpanded: 'setSideDrawerExpanded',
+      setConfig: 'comments/setConfig',
+    }),
     activateCard() {
       this.active = !this.active
+      this.setConfig({
+        identifier: `${this.card.name}&${this.card.set}`,
+      })
       this.setSideDrawerExpanded(true)
     },
   },
