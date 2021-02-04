@@ -24,8 +24,10 @@
         />
       </div>
       <FilterMenu
-        v-show="!sideDrawerExpanded"
         class="fixed bottom-0 right-0 mr-20 mb-4"
+        :class="{
+          'hidden md:block': sideDrawerExpanded,
+        }"
         @filterToggled="updateFilters"
       />
       <!--      v-if="isPremium"-->
