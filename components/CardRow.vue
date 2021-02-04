@@ -4,7 +4,9 @@
     @click="activateCard"
   >
     <RatingBubble class="shadow-lg" :rating="randomizedRating" />
-    <span class="cardName ml-6 mb-1 justify-self-end">{{ cardName }}</span>
+    <span class="text-18 font-medium ml-6 mb-1 justify-self-end">{{
+      cardName
+    }}</span>
   </div>
 </template>
 
@@ -61,11 +63,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.cardName {
-  font-size: 15px;
-  line-height: 19px;
-  font-weight: 500;
-}
-</style>
