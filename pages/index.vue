@@ -3,7 +3,7 @@
     <Login />
     <SideDrawer />
     <div
-      class="m-20 md:mt-0"
+      class="m-5 md:m-20 md:mt-0"
       :class="{
         'md:ml-drawer': sideDrawerExpanded,
       }"
