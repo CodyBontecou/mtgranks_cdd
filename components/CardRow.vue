@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-end hover:text-gray-600 cursor-pointer rounded p-1 btn z-0"
+    class="flex items-end hover:text-gray-600 cursor-pointer rounded p-1 hover:shadow"
     @click="activateCard"
   >
     <RatingBubble class="shadow-lg" :rating="randomizedRating" />
@@ -61,16 +61,5 @@ export default {
   font-size: 15px;
   line-height: 19px;
   font-weight: 500;
-}
-.btn:hover {
-  transform: translateY(-0.15rem);
-  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
-}
-.btn:active {
-  transform: translateY(-0.05rem);
-  box-shadow: 0 0.1rem 0.3rem rgba(0, 0, 0, 0.2);
-}
-.btn::after {
-  transition: all 0.1s;
 }
 </style>
