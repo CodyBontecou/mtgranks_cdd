@@ -15,7 +15,7 @@
         <div class="mt-6 border-t border-gray-1 border-opacity-50"></div>
 
         <client-only>
-          <Disqus class="m-4 self-col" />
+          <Disqus :identifier="pageIdentifier" class="m-4 self-col" />
         </client-only>
       </div>
     </transition>
@@ -41,6 +41,9 @@ export default {
   },
   computed: {
     ...mapGetters(['card', 'cards', 'sideDrawerExpanded']),
+    pageIdentifier() {
+      return this.$route.fullPath
+    },
   },
 }
 </script>
