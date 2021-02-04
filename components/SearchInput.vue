@@ -19,7 +19,7 @@
 
       <!--    Close button    -->
       <div
-        v-show="card"
+        v-show="sideDrawerExpanded"
         class="flex flex-col items-center justify-center p-1 hover:text-persian-green group border-l border-gray-4 cursor-pointer"
         @click="toggleSideDrawerExpanded"
       >
@@ -70,7 +70,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['toggleSideDrawerExpanded']),
+    ...mapActions(['toggleSideDrawerExpanded', 'sideDrawerExpanded']),
     onChange() {
       this.isOpen = true
       this.filterResults()
