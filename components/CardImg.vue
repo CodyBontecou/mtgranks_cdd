@@ -13,7 +13,9 @@
       :alt="`Image of ${card.name}.`"
     />
 
-    <div class="w-full my-6 py-3 border-t border-b border-gray-1">
+    <div
+      class="w-full my-6 py-3 border-t border-b border-gray-1 border-opacity-50"
+    >
       <div class="flex items-center justify-between mx-20">
         <!-- Rating Bubble -->
         <div class="flex flex-col text-center mr-4 cursor-pointer">
@@ -23,15 +25,15 @@
           <span class="card--detail__toggle-text">Rating</span>
         </div>
         <!-- Expand Image Size -->
-        <div
+        <!--        <div
           class="flex flex-col text-center mr-4 cursor-pointer p-2 rounded group"
           @click="toggleExpandedImage"
         >
-          <div class="card--detail__toggle-container group-hover:bg-gray-3">
-            <ExpandIcon class="card--detail__toggle-icon" />
+          <div class="card&#45;&#45;detail__toggle-container group-hover:bg-gray-3">
+            <ExpandIcon class="card&#45;&#45;detail__toggle-icon" />
           </div>
-          <span class="card--detail__toggle-text">Expand</span>
-        </div>
+          <span class="card&#45;&#45;detail__toggle-text">Expand</span>
+        </div>-->
         <!--   Buy Card Link -->
         <a
           :href="tcgPriceLink"

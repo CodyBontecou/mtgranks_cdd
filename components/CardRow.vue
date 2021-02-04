@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-end hover:text-gray-600 cursor-pointer rounded p-1 btn"
+    class="flex items-end hover:text-gray-600 cursor-pointer rounded p-1 btn z-0"
     @click="activateCard"
   >
     <RatingBubble class="shadow-lg" :rating="randomizedRating" />

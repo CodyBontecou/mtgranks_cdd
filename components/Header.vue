@@ -4,6 +4,7 @@
     :class="{
       'fixed top-0 bg-ash text-white': page === 'mtgSet',
       'text-white': page === 'premium',
+      'h-screen overflow-y-hidden': card,
     }"
   >
     <!--  Top bar mtgSet -->

@@ -1,16 +1,18 @@
 <template>
-  <div class="-mt-6 flex flex-row-reverse font-medium text-xs">
-    <SideDrawerToggle />
+  <div class="-mt-6 flex flex-row-reverse font-medium text-xs z-40">
+    <SideDrawerToggle class="hidden md:block" />
     <transition name="slide">
       <div
         v-show="sideDrawerExpanded"
-        class="fixed shadow-2xl top-0 left-0 h-full bg-charcoal text-white w-4/5 max-w-drawer overflow-y-scroll"
+        class="fixed shadow-2xl top-0 left-0 h-full bg-charcoal text-white w-full md:w-4/5 md:max-w-drawer overflow-y-scroll"
       >
-        <div class="flex justify-center mt-3 md:mt-4">
-          <SearchInput :cards="cards" class="-mb-20 md:mb-0 text-black" />
+        <div class="flex mt-3">
+          <SearchInput :cards="cards" class="text-black" />
         </div>
 
-        <CardDetails />
+        <CardDetails class="mt-6" />
+
+        <div class="mt-6 border-t border-gray-1 border-opacity-50"></div>
 
         <client-only>
           <Disqus class="m-4 self-col" />

@@ -1,15 +1,13 @@
 <template>
-  <div class="relative flex flex-col z-50 w-full mx-20 md:text-18">
+  <div class="relative flex flex-col z-50 w-full mx-20 text-18">
     <form
-      class="py-2 flex bg-white md:h-12 md:py-3 md:px-2"
+      class="py-2 flex bg-white py-3 px-2"
       :class="{
-        'md:rounded-md rounded-full shadow-1': results.length === 0,
-        'md:rounded-t-md rounded-t-2xl': results.length !== 0,
+        'rounded-md': results.length === 0,
+        'rounded-t-md': results.length !== 0,
       }"
     >
-      <GreySearchIcon
-        class="opacity-25 self-center mx-4 w-6 h-6 md:w-8 md:h-8"
-      />
+      <GreySearchIcon class="opacity-25 self-center mx-4 w-8 h-8" />
       <input
         v-model="search"
         class="appearance-none bg-white focus:outline-none placeholder-gray-600 rounded-r-full w-full"
@@ -18,6 +16,15 @@
         placeholder="Search Mtgranks"
         @input="onChange"
       />
+
+      <!--    Close button    -->
+      <div
+        v-show="card"
+        class="flex flex-col items-center justify-center p-1 hover:text-persian-green group border-l border-gray-4 cursor-pointer"
+        @click="toggleSideDrawerExpanded"
+      >
+        <CloseIcon class="h-6 w-6 text-gray-4 group-hover:text-persian-green" />
+      </div>
     </form>
     <ul
       v-show="isOpen"
@@ -39,6 +46,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'SearchInput',
   props: {
@@ -55,11 +64,13 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['card']),
     slicedResults() {
       return this.results.slice(-5)
     },
   },
   methods: {
+    ...mapActions(['toggleSideDrawerExpanded']),
     onChange() {
       this.isOpen = true
       this.filterResults()

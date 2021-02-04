@@ -8,6 +8,7 @@ module.exports = {
           1: '#f2f2f2',
           2: '#343436',
           3: '#F1F3F4',
+          4: '#DDDDDD',
         },
         blue: {
           1: '#1A73E8',
@@ -109,6 +110,7 @@ module.exports = {
   variants: {
     textColor: ['responsive', 'hover', 'focus', 'group-hover'],
     backgroundColor: ['responsive', 'hover', 'focus', 'group-hover'],
+    textOpacity: ['responsive', 'hover', 'focus', 'group-hover'],
   },
   plugins: [require('@tailwindcss/custom-forms')],
   purge: {

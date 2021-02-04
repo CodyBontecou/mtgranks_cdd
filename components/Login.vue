@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed bg-white mr-20 right-0 cursor-pointer rounded-full shadow-2xl hover:shadow-lg border border-opacity-25"
+    class="fixed bg-white mr-20 right-0 top-0 mt-20 cursor-pointer rounded-full shadow-2xl hover:shadow-lg border border-opacity-25"
     :class="{
       'border-ash text-ash': !isLoggedIn,
       'border-blue-400 text-blue-400': isLoggedIn,
@@ -29,12 +29,10 @@ export default {
     }),
     triggerNetlifyIdentityAction(action) {
       window.netlifyIdentity.on('signup', (user) => {
-        console.log(user)
         this.setUser(user)
         window.netlifyIdentity.close()
       })
       window.netlifyIdentity.on('login', (user) => {
-        console.log(user)
         this.setUser(user)
         window.netlifyIdentity.close()
       })

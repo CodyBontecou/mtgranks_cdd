@@ -1,15 +1,11 @@
 <template>
   <div class="md:flex mt-20">
-    <Header class="z-40 md:hidden" page="mtgSet" />
-    <Login class="hidden md:block" />
-    <SideDrawer class="hidden md:block" />
+    <Login />
+    <SideDrawer />
     <div
-      class="mx-20 md:mt-0"
+      class="m-20 md:mt-0"
       :class="{
-        'mt-40': !card,
         'md:ml-drawer': sideDrawerExpanded,
-        'mt-84': card && expanded === false,
-        'mt-176': card && expanded === true,
       }"
     >
       <div v-if="noCards">
@@ -28,6 +24,7 @@
         />
       </div>
       <FilterMenu
+        v-show="!sideDrawerExpanded"
         class="fixed bottom-0 right-0 mr-20 mb-4"
         @filterToggled="updateFilters"
       />
