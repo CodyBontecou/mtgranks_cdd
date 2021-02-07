@@ -24,6 +24,7 @@ export default {
   plugins: [
     { src: '~/plugins/Vuelidate' },
     { src: '~/plugins/vue-disqus' },
+    { src: '~/plugins/cypress', ssr: false },
     // { src: '~/plugins/vuex-persist', ssr: false },
   ],
 
@@ -43,6 +44,7 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     'nuxt-i18n',
+    '@nuxtjs/router-extras',
     '@nuxtjs/sitemap',
   ],
 
