@@ -95,3 +95,6 @@ storybook-static
 
 # Tailwindcss
 tailwind-full.config.js
+
+# Cypress
+cypress/integration/examples
