@@ -1,10 +1,12 @@
 context('Navigation', () => {
   it('Navigation to index/set/:set___en loads expected data', () => {
     cy.visit('http://localhost:3000/set/kaldheim/')
+
+    let cards
     cy.window()
-      .its('$nuxt')
-      .then((nuxt) => {
-        console.log(nuxt.$store.getters.cards.length)
+      .then((win) => (cards = win.store.getters.cards))
+      .then(() => {
+        expect(cards.length).to.equal(285)
       })
   })
 
