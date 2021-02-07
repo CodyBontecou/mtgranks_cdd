@@ -3,7 +3,7 @@
     <h1 class="text-18 mb-6 font-semibold">{{ color.label }}</h1>
     <LazyCardRow
       v-for="(card, i) in cards"
-      :key="card.id"
+      :key="`${card.id}-${card.set}-${i}`"
       :card="card"
       :class="{
         'mb-12': i === cards.length - 1,
