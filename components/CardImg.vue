@@ -36,6 +36,7 @@
         </div>-->
         <!--   Buy Card Link -->
         <a
+          id="buy-card"
           :href="tcgPriceLink"
           target="_blank"
           class="flex flex-col text-center mr-4 cursor-pointer p-2 rounded group"
@@ -47,6 +48,7 @@
         </a>
         <!--   Flip card image -->
         <div
+          id="flip-card"
           class="flex flex-col text-center p-2 rounded group"
           :class="{
             'cursor-pointer': card.card_faces,
@@ -68,6 +70,7 @@
 
         <!--   Share -->
         <div
+          id="copy-url"
           class="flex flex-col text-center cursor-pointer p-2 rounded group"
           @click="copyURL"
         >
