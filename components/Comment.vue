@@ -27,10 +27,12 @@ export default {
       card: 'card',
       set: 'set',
     }),
-    computed: {
-      identifier() {
-        return `${this.card.name}&${this.card.set}`
-      },
+    identifier() {
+      if (this.card) {
+        return this.card.name + '-' + this.card.set
+      } else {
+        return 'set-' + this.set.name
+      }
     },
     url() {
       return 'https://mtgranks.netlify.app' + this.$route.path

@@ -153,6 +153,9 @@ export const mutations = {
     const s = state.filters[option.filterType].options.find(
       (elem) => elem.label === option.label
     )
+    if (option.filterType === 'sets') {
+      state.filters.sets.options.forEach((set) => (set.isChecked = false))
+    }
     s.isChecked = boolean
   },
   SET_RETRIEVED: (state, set) =>
