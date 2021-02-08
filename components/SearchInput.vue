@@ -19,7 +19,6 @@
 
       <!--    Close button    -->
       <div
-        v-show="sideDrawerExpanded"
         class="flex flex-col items-center justify-center p-1 hover:text-persian-green group border-l border-gray-4 cursor-pointer"
         @click="toggleSideDrawerExpanded"
       >
@@ -64,13 +63,13 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['card']),
+    ...mapGetters(['card', 'set']),
     slicedResults() {
       return this.results.slice(-5)
     },
   },
   methods: {
-    ...mapActions(['toggleSideDrawerExpanded', 'sideDrawerExpanded']),
+    ...mapActions(['toggleSideDrawerExpanded']),
     onChange() {
       this.isOpen = true
       this.filterResults()
@@ -92,8 +91,11 @@ export default {
       const cardObject = this.cards.find((card) => card.name === cardName)
       this.$store.commit('setCard', cardObject)
       this.$router.push({
-        name: 'index___en',
-        query: { card: cardObject.slug },
+        name: 'index/set/:set/:card?___en',
+        params: {
+          card: this.card.slug,
+          set: this.set.slug,
+        },
       })
       this.resetResults()
       this.search = cardObject.name
