@@ -78,6 +78,15 @@ export default {
       }
     }
   },
+  middleware({ params, payload, store }) {
+    if (payload) {
+      store.commit('setSet', payload.set)
+      store.commit('setCards', payload.cards)
+      if (params.card) {
+        store.commit('_setCard', payload.card)
+      }
+    }
+  },
   computed: {
     ...mapGetters({
       card: 'card',
