@@ -16,7 +16,7 @@ export const state = () => ({
       color: 'black-gold',
       type: 'new',
       slug: 'kaldheim',
-      isChecked: true,
+      isChecked: false,
       label: 'KHM',
       filterType: 'set',
       retrieved: false,
@@ -118,15 +118,6 @@ export const state = () => ({
   card: null,
   expanded: false,
   sideDrawerExpanded: false,
-  colors: [
-    { raw: '', isChecked: true, label: 'Colorless' },
-    { raw: 'R', isChecked: true, label: 'Red' },
-    { raw: 'G', isChecked: true, label: 'Green' },
-    { raw: 'U', isChecked: true, label: 'Blue' },
-    { raw: 'B', isChecked: true, label: 'Black' },
-    { raw: 'W', isChecked: true, label: 'White' },
-    { raw: null, isChecked: true, label: 'Multi' },
-  ],
 })
 
 export const actions = {
@@ -149,11 +140,11 @@ export const actions = {
     }
   },
 
-  async _getCards({ commit, dispatch, state }) {
+  async _getCards({ commit, dispatch, rootGetters }) {
     let url
     let data = []
 
-    for (const set of state.sets) {
+    for (const set of rootGetters['filters/checkedSets']) {
       if (set.isChecked && !set.retrieved) {
         url = `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
         try {
@@ -166,7 +157,7 @@ export const actions = {
             )
             data = data.concat(additionalData)
           }
-          set.retrieved = true
+          commit('filters/SET_RETRIEVED', set)
         } catch (e) {
           console.log(e)
         }
@@ -201,20 +192,37 @@ export const actions = {
   toggleExpandedImage: ({ commit }) => {
     commit('TOGGLE_EXPANDED_IMAGE')
   },
+  _setCard: ({ commit }, payload) => {
+    commit('SET_CARD', payload)
+  },
+  setActiveSets: ({ commit }, payload) => {
+    commit('SET_ACTIVE_SETS', payload)
+  },
 }
 
 export const mutations = {
   setCard(state, card) {
     state.card = card
   },
+  SET_CARD(state, card) {
+    state.card = card
+  },
   setCards(state, cards) {
     state.cards = cards
   },
   updateCards(state, cards) {
-    state.cards = state.cards.concat(cards)
+    state.cards = state.cards
+      .concat(cards)
+      .sort((a, b) => a.name.localeCompare(b.name))
   },
   setSet(state, set) {
     state.set = set
+  },
+  SET_ACTIVE_SETS(state, setSlug) {
+    const setObject = state.sets.find((s) => s.slug === setSlug)
+    if (setObject) {
+      setObject.isChecked = true
+    }
   },
   TOGGLE_EXPANDED(state) {
     state.sideDrawerExpanded = !state.sideDrawerExpanded
@@ -225,58 +233,15 @@ export const mutations = {
   TOGGLE_EXPANDED_IMAGE(state) {
     state.expanded = !state.expanded
   },
-  toggleColor(state, { color, boolean }) {
-    const c = state.colors.find((elem) => elem.label === color.label)
-    c.isChecked = boolean
-  },
-  toggleSet(state, { set, boolean }) {
-    const s = state.sets.find((elem) => elem.label === set.label)
-    s.isChecked = boolean
-  },
 }
 
 export const getters = {
-  card(state) {
-    return state.card
-  },
-  cards(state) {
-    return state.cards
-  },
-  set(state) {
-    return state.set
-  },
-  sets(state) {
-    return state.sets
-  },
-  expanded(state) {
-    return state.expanded
-  },
-  sideDrawerExpanded(state) {
-    return state.sideDrawerExpanded
-  },
-  filters(state) {
-    return state.filters
-  },
-  newSets(state) {
-    return state.sets.filter((set) => set.type === 'new')
-  },
-  oldSets(state) {
-    return state.sets.filter((set) => set.type === 'old')
-  },
-  inputPlaceholderText(state) {
-    if (state.card) {
-      return state.card.name
-    } else {
-      return 'Search Mtgranks'
-    }
-  },
-  colors(state) {
-    return state.colors
-  },
-  colorLabels(state) {
-    return state.colorLabels
-  },
-  tcgPriceLink(state) {
-    return state.card.purchase_uris.tcgplayer.replace('scryfall', 'mtgranks')
-  },
+  card: (state) => state.card,
+  cards: (state) => state.cards,
+  set: (state) => state.set,
+  sets: (state) => state.sets,
+  expanded: (state) => state.expanded,
+  sideDrawerExpanded: (state) => state.sideDrawerExpanded,
+  tcgPriceLink: (state) =>
+    state.card.purchase_uris.tcgplayer.replace('scryfall', 'mtgranks'),
 }

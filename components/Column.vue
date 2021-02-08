@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-
 export default {
   name: 'Column',
   props: {
@@ -28,7 +26,6 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['colorLabels']),
     cardsLoaded() {
       return this.cards.length > 0
     },

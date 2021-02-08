@@ -13,6 +13,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
@@ -21,8 +23,14 @@ export default {
     }
   },
   computed: {
-    identifier() {
-      return this.$route.fullPath
+    ...mapGetters({
+      card: 'card',
+      set: 'set',
+    }),
+    computed: {
+      identifier() {
+        return `${this.card.name}&${this.card.set}`
+      },
     },
     url() {
       return 'https://mtgranks.netlify.app' + this.$route.path
@@ -44,12 +52,5 @@ export default {
       )
     },
   },
-  // mounted() {
-  //   setTimeout(() => {
-  //     if (!window.DISQUS) {
-  //       this.isMsgVisible = true
-  //     }
-  //   }, 8000)
-  // },
 }
 </script>

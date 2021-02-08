@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   name: 'CardRow',
@@ -28,6 +28,7 @@ export default {
     }
   },
   computed: {
+    ...mapGetters(['set']),
     cardName() {
       if (this.card.name.length > 19) {
         return this.card.name.substring(0, 16) + '...'
@@ -43,22 +44,27 @@ export default {
     active() {
       this.$store.commit('setCard', this.card)
       this.$router.push({
-        name: 'index___en',
-        query: { card: this.card.slug },
+        name: 'index/set/:set/:card?___en',
+        params: {
+          card: this.card.slug,
+          set: this.set.slug,
+        },
       })
     },
   },
   methods: {
     ...mapActions({
       setSideDrawerExpanded: 'setSideDrawerExpanded',
-      setConfig: 'comments/setConfig',
+      setIdentifier: 'comments/setIdentifier',
     }),
     activateCard() {
       this.active = !this.active
-      this.setConfig({
+      this.setIdentifier({
         identifier: `${this.card.name}&${this.card.set}`,
       })
-      this.setSideDrawerExpanded(true)
+      if (!this.sideDrawerExpanded) {
+        this.setSideDrawerExpanded(true)
+      }
     },
   },
 }

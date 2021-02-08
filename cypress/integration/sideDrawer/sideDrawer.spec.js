@@ -52,9 +52,10 @@ context('SideDrawer', () => {
     cy.get('#copy-url').click()
     cy.task('getClipboard').should(
       'eq',
-      'http://localhost:3000/set/kaldheim/ascendant-spirit'
+      'https://mtgranks.com/set/kaldheim/ascendant-spirit'
     )
   })
 
-  it('Generates and displays unique comment box for Disqus', () => {})
+  it('Displays the appropriate rating and rating description')
+  it('Generates and displays unique comment box for Disqus')
 })

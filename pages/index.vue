@@ -1,6 +1,6 @@
 <template>
   <div class="md:flex mt-20">
-    <Login />
+    <!--    <Login />-->
     <SideDrawer />
     <div
       class="m-5 md:m-20 md:mt-0"
@@ -8,16 +8,17 @@
         'md:ml-drawer': sideDrawerExpanded,
       }"
     >
-      <div v-if="noCards">
+      <div v-if="$fetchState.pending">
         <Loading :class="{ 'ml-48': sideDrawerExpanded }" />
       </div>
       <div
+        v-if="cards.length !== 0 || !$fetchState.pending"
         class="flex flex-wrap justify-center"
         :class="{ 'md:centered-columns': sideDrawerExpanded }"
       >
         <Column
-          v-for="(color, i) in colors"
-          :key="i"
+          v-for="(color, i) in checkedColors"
+          :key="`${set}-${color}-${i}`"
           class="mx-1"
           :cards="cardsByColor(color)"
           :color="color"
@@ -30,63 +31,89 @@
         }"
         @filterToggled="updateFilters"
       />
-      <!--      v-if="isPremium"-->
     </div>
   </div>
 </template>
 
+<router>
+alias:
+  -
+    path: /set/:set/:card?
+  -
+    path: /set/:set
+</router>
+
 <script>
-import { mapGetters, mapState } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   layout: 'wideHeader',
   async fetch() {
-    await this.$store.dispatch('_getCards')
+    let setSlug = this.$route.params.set
+    if (!setSlug) {
+      setSlug = 'kaldheim'
+    }
+
+    const option = this.filters.sets.options.find((set) => set.slug === setSlug)
+    if (option !== this.set) {
+      this.$store.commit('setSet', option)
+    }
+
+    if (!this.set.isChecked) {
+      const boolean = true
+      this.toggleOption({ option, boolean })
+    }
+
+    if (this.cards.length === 0 || this.cards[0].set_name !== this.set.name) {
+      await this.$store.dispatch('_getCards')
+    }
+
+    if (this.$route.params.card) {
+      await this.$store.dispatch(
+        '_setCard',
+        this.cards.find((card) => card.slug === this.$route.params.card)
+      )
+      if (!this.sideDrawerExpanded) {
+        this.setSideDrawerExpanded(true)
+      }
+    }
   },
   computed: {
-    ...mapGetters([
-      'card',
-      'cards',
-      'colors',
-      'sets',
-      'expanded',
-      'sideDrawerExpanded',
-    ]),
-    ...mapState({
-      isPremium: (state) =>
-        state.user.currentUser?.app_metadata.roles.includes('premium'),
-      isLoggedIn: (state) => state.user.currentUser,
+    ...mapGetters({
+      card: 'card',
+      cards: 'cards',
+      set: 'set',
+      sets: 'sets',
+      sideDrawerExpanded: 'sideDrawerExpanded',
+      checkedSets: 'filters/checkedSets',
+      filters: 'filters/filters',
+      checkedColors: 'filters/checkedColors',
     }),
     noCards() {
       return this.cards.length === 0
     },
   },
-  mounted() {
-    if (this.$route.query.card) {
-      this.$store.commit(
-        'setCard',
-        this.$store.state.cards.find(
-          (card) => card.slug === this.$route.query.card
-        )
-      )
-      this.$store.commit('TOGGLE_EXPANDED')
-    } else {
-      this.$store.commit('setCard', null)
-    }
-  },
   methods: {
+    ...mapActions({
+      toggleSideDrawerExpanded: 'toggleSideDrawerExpanded',
+      _setCard: '_setCard',
+      setActiveSets: 'setActiveSets',
+      setSideDrawerExpanded: 'setSideDrawerExpanded',
+      toggleOption: 'filters/toggleOption',
+    }),
     cardsByColor(color) {
       if (!color.isChecked) {
         return []
       }
+
       if (color.label === 'Multi') {
         try {
           return this.cards.filter((card) => {
             try {
-              const set = this.sets.find((set) => {
+              const set = this.checkedSets.find((set) => {
                 return set.code.toLowerCase() === card.set
               })
-              return set.isChecked && this.cardColor(card).length > 1
+              return set && this.cardColor(card).length > 1
             } catch (e) {
               console.log(card)
             }
@@ -96,11 +123,12 @@ export default {
           console.log(e)
         }
       }
+
       return this.cards.filter((card) => {
-        const set = this.sets.find((set) => {
+        const set = this.checkedSets.find((set) => {
           return set.code.toLowerCase() === card.set
         })
-        return set.isChecked && this.cardColor(card) === color.raw
+        return set && this.cardColor(card) === color.raw
       })
     },
     cardColor(card) {
@@ -118,26 +146,20 @@ export default {
       }
     },
     updateFilters(event) {
-      if (event.filterType === 'color') {
-        this.updateColor(event)
-      } else if (event.filterType === 'set') {
+      if (event.filterType === 'sets') {
         this.updateSets(event)
       }
     },
-    updateColor(event) {
-      const color = this.$store.state.colors.find(
-        (elem) => elem.label === event.label
-      )
-      const boolean = !event.isChecked
-      this.$store.commit('toggleColor', { color, boolean })
-    },
     updateSets(event) {
-      const set = this.$store.state.sets.find(
+      const set = this.filters.sets.options.find(
         (elem) => elem.label === event.label
       )
-      const boolean = !event.isChecked
-      this.$store.commit('toggleSet', { set, boolean })
-      this.$store.dispatch('_getCards')
+      this.$router.push({
+        name: 'index/set/:set___en',
+        params: {
+          set: set.slug,
+        },
+      })
     },
   },
   head: {
