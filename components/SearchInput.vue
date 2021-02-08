@@ -15,6 +15,7 @@
         autocomplete="off"
         placeholder="Search Mtgranks"
         @input="onChange"
+        @compositionupdate="compositionUpdate($event)"
       />
 
       <!--    Close button    -->
@@ -102,6 +103,9 @@ export default {
     },
     resetResults() {
       this.results = []
+    },
+    compositionUpdate(event) {
+      this.search = event.data
     },
   },
 }
