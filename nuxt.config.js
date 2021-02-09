@@ -196,6 +196,7 @@ export default {
     hostname: 'https://mtgranks.netlify.app/',
   },
   generate: {
+    interval: 300,
     async routes() {
       const routesToGenerate = []
       let i
