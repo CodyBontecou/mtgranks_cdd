@@ -101,6 +101,18 @@ export default {
     noCards() {
       return this.cards.length === 0
     },
+    title() {
+      if (this.card) {
+        return (
+          this.card.name +
+          ' | ' +
+          this.set.name +
+          ' | Limited Card Review | Mtgranks'
+        )
+      } else {
+        return this.set.name + ' | Limited Set Review | Mtgranks'
+      }
+    },
   },
   methods: {
     ...mapActions({
@@ -160,6 +172,9 @@ export default {
       }
     },
     updateSets(event) {
+      this.setSideDrawerExpanded(false)
+      // TODO: Remove card when the page changes.
+      // this._setCard(null) -- causes issues
       const set = this.filters.sets.options.find(
         (elem) => elem.label === event.label
       )
@@ -171,24 +186,27 @@ export default {
       })
     },
   },
-  head: {
-    meta: [
-      {
-        hid: 'theme-color',
-        name: 'theme-color',
-        content: '#264653',
-      },
-      {
-        hid: 'msapplication-navbutton-color',
-        name: 'msapplication-navbutton-color',
-        content: '#264653',
-      },
-      {
-        hid: 'apple-mobile-web-app-status-bar-style',
-        name: 'apple-mobile-web-app-status-bar-style',
-        content: '#264653',
-      },
-    ],
+  head() {
+    return {
+      title: this.title,
+      meta: [
+        {
+          hid: 'theme-color',
+          name: 'theme-color',
+          content: '#264653',
+        },
+        {
+          hid: 'msapplication-navbutton-color',
+          name: 'msapplication-navbutton-color',
+          content: '#264653',
+        },
+        {
+          hid: 'apple-mobile-web-app-status-bar-style',
+          name: 'apple-mobile-web-app-status-bar-style',
+          content: '#264653',
+        },
+      ],
+    }
   },
 }
 </script>

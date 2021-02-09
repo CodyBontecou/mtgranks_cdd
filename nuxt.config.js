@@ -119,7 +119,7 @@ export default {
   target: 'static',
 
   head: {
-    title: 'mtgranks',
+    title: 'Limited Set Review | Mtgranks | Magic the Gathering',
     meta: [
       { charset: 'utf-8' },
       {
@@ -128,7 +128,7 @@ export default {
       },
       { hid: 'description', name: 'description', content: '' },
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    link: [{ rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
     script: [
       {
         src: 'https://identity.netlify.com/v1/netlify-identity-widget.js',
@@ -196,7 +196,6 @@ export default {
     hostname: 'https://mtgranks.netlify.app/',
   },
   generate: {
-    interval: 300,
     async routes() {
       const routesToGenerate = []
       let i
