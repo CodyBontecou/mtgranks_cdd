@@ -126,7 +126,32 @@ export default {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, viewport-fit=cover',
       },
-      { hid: 'description', name: 'description', content: '' },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          'Mtgranks provides Magic the Gathering card ratings for the limited sealed and draft formats. Cards are given a rating alongside a description explaining the power and weakness of each card. Content is provided by famous MTG pros.',
+      },
+      {
+        hid: 'twitter:image',
+        name: 'twitter:image',
+        content: '/og_meta.png',
+      },
+      {
+        hid: 'twitter:image:alt',
+        name: 'twitter:image:alt',
+        content: 'Mtgranks Magic the Gathering limited set reviews.',
+      },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: '/og_meta.png',
+      },
+      {
+        hid: 'og:image:alt',
+        property: 'og:image:alt',
+        content: 'Mtgranks Magic the Gathering limited set reviews.',
+      },
     ],
     link: [{ rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
     script: [
@@ -203,13 +228,26 @@ export default {
 
       for (i = 0; i < setObjects.length; i++) {
         const set = setObjects[i]
+        const cards = []
 
         await axios
           .get(
             `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
           )
           .then((res) => {
-            const cards = res.data.data
+            cards.push(...res.data.data)
+            return axios.get(res.data.next_page)
+          })
+          .then((response) => {
+            cards.push(...response.data.data)
+
+            if (i === 0) {
+              routesToGenerate.push({
+                route: '/',
+                payload: { set, cards },
+              })
+            }
+
             const setRoutes = {
               route: '/set/' + set.slug,
               payload: { set, cards },
@@ -223,11 +261,12 @@ export default {
               }
             })
 
+            console.log(cardRoutes.length)
+
             routesToGenerate.push(setRoutes)
             routesToGenerate.push(...cardRoutes)
           })
       }
-
       return routesToGenerate
     },
   },
