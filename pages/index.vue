@@ -8,11 +8,8 @@
         'md:ml-drawer': sideDrawerExpanded,
       }"
     >
-      <div v-if="$fetchState.pending">
-        <Loading :class="{ 'ml-48': sideDrawerExpanded }" />
-      </div>
       <div
-        v-if="cards.length !== 0 || !$fetchState.pending"
+        v-if="cards.length !== 0"
         class="flex flex-wrap justify-center"
         :class="{ 'md:centered-columns': sideDrawerExpanded }"
       >
@@ -48,45 +45,60 @@ import { mapActions, mapGetters } from 'vuex'
 
 export default {
   layout: 'wideHeader',
-  async fetch() {
-    let setSlug = this.$route.params.set
-    if (!setSlug) {
-      setSlug = 'kaldheim'
-    }
-
-    const option = this.filters.sets.options.find((set) => set.slug === setSlug)
-    if (option !== this.set) {
-      this.$store.commit('setSet', option)
-    }
-
-    if (!this.set.isChecked) {
-      const boolean = true
-      this.toggleOption({ option, boolean })
-    }
-
-    if (this.cards.length === 0 || this.cards[0].set_name !== this.set.name) {
-      await this.$store.dispatch('_getCards')
-    }
-
-    if (this.$route.params.card) {
-      await this.$store.dispatch(
-        '_setCard',
-        this.cards.find((card) => card.slug === this.$route.params.card)
-      )
-      if (!this.sideDrawerExpanded) {
-        this.setSideDrawerExpanded(true)
-      }
-    }
-  },
-  middleware({ params, payload, store }) {
+  // async fetch() {
+  async asyncData({ params, payload, store }) {
     if (payload) {
       store.commit('setSet', payload.set)
       store.commit('setCards', payload.cards)
       if (params.card) {
         store.commit('_setCard', payload.card)
       }
+    } else {
+      console.log('fetch called')
+      let setSlug = params.set
+      if (!setSlug) {
+        setSlug = 'kaldheim'
+      }
+
+      const option = store.getters.filters.sets.options.find(
+        (set) => set.slug === setSlug
+      )
+      if (option !== store.getters.set) {
+        store.commit('setSet', option)
+      }
+
+      if (!store.getters.set.isChecked) {
+        const boolean = true
+        store.mutations.toggleOption({ option, boolean })
+      }
+
+      if (
+        store.getters.cards.length === 0 ||
+        store.getters.cards[0].set_name !== store.getters.set.name
+      ) {
+        await store.actions.dispatch('_getCards')
+      }
+
+      if (params.card) {
+        await store.actions.dispatch(
+          '_setCard',
+          this.cards.find((card) => card.slug === params.card)
+        )
+        if (!store.getters.sideDrawerExpanded) {
+          store.mutations.setSideDrawerExpanded(true)
+        }
+      }
     }
   },
+  // middleware({ params, payload, store }) {
+  //   if (payload) {
+  //     store.commit('setSet', payload.set)
+  //     store.commit('setCards', payload.cards)
+  //     if (params.card) {
+  //       store.commit('_setCard', payload.card)
+  //     }
+  //   }
+  // },
   computed: {
     ...mapGetters({
       card: 'card',
@@ -109,8 +121,10 @@ export default {
           this.set.name +
           ' | Limited Card Review | Mtgranks'
         )
-      } else {
+      } else if (this.set) {
         return this.set.name + ' | Limited Set Review | Mtgranks'
+      } else {
+        return 'Limited Set Reviews | Mtgranks | Magic the Gathering'
       }
     },
   },
