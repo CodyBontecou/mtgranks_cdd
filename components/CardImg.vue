@@ -86,9 +86,17 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import DollarIcon from '~/components/DollarIcon'
+import Share from '~/components/Share'
+import SwitchVertical from '~/components/SwitchVertical'
 
 export default {
   name: 'CardImg',
+  components: {
+    DollarIcon: DollarIcon,
+    Share: Share,
+    SwitchVertical: SwitchVertical,
+  },
   props: {
     card: {
       type: Object,

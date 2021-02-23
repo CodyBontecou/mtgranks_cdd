@@ -47,9 +47,15 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import GreySearchIcon from '~/components/GreySearchIcon'
+import CloseIcon from '~/components/CloseIcon'
 
 export default {
   name: 'SearchInput',
+  components: {
+    CloseIcon: CloseIcon,
+    GreySearchIcon: GreySearchIcon,
+  },
   props: {
     cards: {
       type: Array,

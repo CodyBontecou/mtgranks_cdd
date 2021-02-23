@@ -1,7 +1,7 @@
 <template>
   <div v-show="cardsLoaded">
     <h1 class="text-18 mb-6 font-semibold">{{ color.label }}</h1>
-    <LazyCardRow
+    <CardRow
       v-for="(card, i) in cards"
       :key="`${card.id}-${card.set}-${i}`"
       :card="card"
@@ -13,8 +13,12 @@
 </template>
 
 <script>
+import CardRow from '~/components/CardRow'
+
 export default {
-  name: 'Column',
+  components: {
+    CardRow: CardRow,
+  },
   props: {
     cards: {
       type: Array,

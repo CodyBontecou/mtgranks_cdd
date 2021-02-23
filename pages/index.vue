@@ -42,10 +42,17 @@ alias:
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import Column from '~/components/Column'
+import SideDrawer from '~/components/SideDrawer/SideDrawer'
+import FilterMenu from '~/components/FilterMenu'
 
 export default {
   layout: 'wideHeader',
-  // async fetch() {
+  components: {
+    Column: Column,
+    SideDrawer: SideDrawer,
+    FilterMenu: FilterMenu,
+  },
   async asyncData({ params, payload, store }) {
     if (payload) {
       store.commit('setSet', payload.set)
@@ -54,13 +61,12 @@ export default {
         store.commit('_setCard', payload.card)
       }
     } else {
-      console.log('fetch called')
       let setSlug = params.set
       if (!setSlug) {
         setSlug = 'kaldheim'
       }
 
-      const option = store.getters.filters.sets.options.find(
+      const option = store.getters['filters/filters'].sets.options.find(
         (set) => set.slug === setSlug
       )
       if (option !== store.getters.set) {
@@ -69,36 +75,27 @@ export default {
 
       if (!store.getters.set.isChecked) {
         const boolean = true
-        store.mutations.toggleOption({ option, boolean })
+        await store.dispatch('filters/toggleOption', { option, boolean })
       }
 
       if (
         store.getters.cards.length === 0 ||
         store.getters.cards[0].set_name !== store.getters.set.name
       ) {
-        await store.actions.dispatch('_getCards')
+        await store.dispatch('_getCards')
       }
 
       if (params.card) {
-        await store.actions.dispatch(
+        await store.dispatch(
           '_setCard',
-          this.cards.find((card) => card.slug === params.card)
+          store.getters.cards.find((card) => card.slug === params.card)
         )
         if (!store.getters.sideDrawerExpanded) {
-          store.mutations.setSideDrawerExpanded(true)
+          await store.dispatch('setSideDrawerExpanded', true)
         }
       }
     }
   },
-  // middleware({ params, payload, store }) {
-  //   if (payload) {
-  //     store.commit('setSet', payload.set)
-  //     store.commit('setCards', payload.cards)
-  //     if (params.card) {
-  //       store.commit('_setCard', payload.card)
-  //     }
-  //   }
-  // },
   computed: {
     ...mapGetters({
       card: 'card',

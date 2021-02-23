@@ -169,7 +169,7 @@ export default {
     { src: '~/plugins/cypress', ssr: false },
   ],
 
-  components: true,
+  components: false,
 
   buildModules: [
     // https://go.nuxtjs.dev/tailwindcss
@@ -190,8 +190,6 @@ export default {
   router: {},
 
   axios: {},
-
-  build: {},
 
   storybook: {},
 
@@ -248,14 +246,14 @@ export default {
             }
 
             const setRoutes = {
-              route: '/set/' + set.slug,
+              route: '/set/' + set.slug + '/',
               payload: { set, cards },
             }
 
             const cardRoutes = cards.map((card) => {
               card.slug = generateSlug(card.name)
               return {
-                route: '/set/' + set.slug + '/' + card.slug,
+                route: '/set/' + set.slug + '/' + card.slug + '/',
                 payload: { set, card, cards },
               }
             })
@@ -264,8 +262,31 @@ export default {
             routesToGenerate.push(...cardRoutes)
           })
       }
-      console.log(routesToGenerate)
       return routesToGenerate
+    },
+  },
+
+  build: {
+    parallel: true,
+    hardSource: true,
+    cache: true,
+    html: {
+      minify: {
+        collapseBooleanAttributes: true,
+        decodeEntities: true,
+        minifyCSS: false,
+        minifyJS: false,
+        processConditionalComments: true,
+        removeEmptyAttributes: true,
+        removeRedundantAttributes: true,
+        trimCustomFragments: true,
+        useShortDoctype: true,
+      },
+    },
+    loaders: {
+      vue: {
+        prettify: false,
+      },
     },
   },
 }

@@ -22,8 +22,18 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import CardDetails from '~/components/CardDetails'
+import Comment from '~/components/Comment'
+import SideDrawerToggle from '~/components/SideDrawer/SideDrawerToggle'
+import SearchInput from '~/components/SearchInput'
 
 export default {
+  components: {
+    CardDetails: CardDetails,
+    Comment: Comment,
+    SearchInput: SearchInput,
+    SideDrawerToggle: SideDrawerToggle,
+  },
   data() {
     return {
       rating: {

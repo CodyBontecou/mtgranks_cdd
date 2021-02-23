@@ -78,8 +78,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import RightArrow from '~/components/RightArrow'
 
 export default {
+  components: {
+    RightArrow: RightArrow,
+  },
   computed: {
     ...mapGetters({
       filters: 'filters/filters',

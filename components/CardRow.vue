@@ -12,9 +12,13 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import RatingBubble from '~/components/RatingBubble'
 
 export default {
   name: 'CardRow',
+  components: {
+    RatingBubble: RatingBubble,
+  },
   props: {
     card: {
       type: Object,

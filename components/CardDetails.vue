@@ -9,9 +9,13 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import CardImg from '~/components/CardImg'
 
 export default {
   name: 'CardDetails',
+  components: {
+    CardImg: CardImg,
+  },
   data() {
     return {
       rating: {
