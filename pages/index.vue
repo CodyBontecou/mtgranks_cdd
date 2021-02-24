@@ -61,38 +61,37 @@ export default {
         store.commit('_setCard', payload.card)
       }
     } else {
-      let setSlug = params.set
-      if (!setSlug) {
-        setSlug = 'kaldheim'
-      }
-
-      const option = store.getters['filters/filters'].sets.options.find(
-        (set) => set.slug === setSlug
-      )
-      if (option !== store.getters.set) {
-        store.commit('setSet', option)
-      }
-
-      if (!store.getters.set.isChecked) {
-        const boolean = true
-        await store.dispatch('filters/toggleOption', { option, boolean })
-      }
-
       if (
         store.getters.cards.length === 0 ||
         store.getters.cards[0].set_name !== store.getters.set.name
       ) {
         await store.dispatch('_getCards')
       }
+    }
+    let setSlug = params.set
+    if (!setSlug) {
+      setSlug = 'kaldheim'
+    }
 
-      if (params.card) {
-        await store.dispatch(
-          '_setCard',
-          store.getters.cards.find((card) => card.slug === params.card)
-        )
-        if (!store.getters.sideDrawerExpanded) {
-          await store.dispatch('setSideDrawerExpanded', true)
-        }
+    const option = store.getters['filters/filters'].sets.options.find(
+      (set) => set.slug === setSlug
+    )
+    if (option !== store.getters.set) {
+      store.commit('setSet', option)
+    }
+
+    if (!store.getters.set.isChecked) {
+      const boolean = true
+      await store.dispatch('filters/toggleOption', { option, boolean })
+    }
+
+    if (params.card) {
+      await store.dispatch(
+        '_setCard',
+        store.getters.cards.find((card) => card.slug === params.card)
+      )
+      if (!store.getters.sideDrawerExpanded) {
+        await store.dispatch('setSideDrawerExpanded', true)
       }
     }
   },

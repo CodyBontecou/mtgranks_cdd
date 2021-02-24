@@ -171,16 +171,10 @@ export default {
 
   components: false,
 
-  buildModules: [
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-    '@/modules/sitemapRouteGenerator',
-  ],
+  buildModules: ['@nuxtjs/tailwindcss', '@/modules/sitemapRouteGenerator'],
 
   modules: [
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     'nuxt-i18n',
     '@nuxtjs/router-extras',
@@ -217,6 +211,7 @@ export default {
     hostname: 'https://mtgranks.netlify.app/',
   },
   generate: {
+    interval: 200,
     crawler: false,
     async routes() {
       const routesToGenerate = []
@@ -238,7 +233,6 @@ export default {
             cards.push(...response.data.data)
 
             if (i === 0) {
-              console.log(set.name)
               routesToGenerate.push({
                 route: '/',
                 payload: { set, cards },
