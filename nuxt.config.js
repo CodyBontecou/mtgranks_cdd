@@ -154,11 +154,6 @@ export default {
       },
     ],
     link: [{ rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
-    script: [
-      {
-        src: 'https://identity.netlify.com/v1/netlify-identity-widget.js',
-      },
-    ],
   },
 
   css: [],
