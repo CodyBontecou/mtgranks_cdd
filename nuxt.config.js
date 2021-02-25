@@ -178,7 +178,11 @@ export default {
 
   components: false,
 
-  buildModules: ['@nuxtjs/tailwindcss', '@/modules/sitemapRouteGenerator'],
+  buildModules: [
+    '@nuxtjs/tailwindcss',
+    '@/modules/sitemapRouteGenerator',
+    'nuxt-vite',
+  ],
 
   modules: [
     '@nuxtjs/axios',
