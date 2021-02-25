@@ -68,6 +68,7 @@ export default {
         await store.dispatch('_getCards')
       }
     }
+
     let setSlug = params.set
     if (!setSlug) {
       setSlug = 'kaldheim'

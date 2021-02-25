@@ -107,6 +107,18 @@ const setObjects = [
   },
 ]
 
+const validKeys = [
+  'name',
+  'lang',
+  'image_uris',
+  'card_faces',
+  'colors',
+  'set',
+  'set_name',
+  'prices',
+  'purchase_uris',
+]
+
 function generateSlug(string) {
   return string
     .replace(/[/:.,']/g, '')
@@ -206,7 +218,6 @@ export default {
     hostname: 'https://mtgranks.netlify.app/',
   },
   generate: {
-    interval: 200,
     crawler: false,
     async routes() {
       const routesToGenerate = []
@@ -240,6 +251,9 @@ export default {
             }
 
             const cardRoutes = cards.map((card) => {
+              Object.keys(card).forEach(
+                (key) => validKeys.includes(key) || delete card[key]
+              )
               card.slug = generateSlug(card.name)
               return {
                 route: '/set/' + set.slug + '/' + card.slug + '/',
@@ -256,8 +270,8 @@ export default {
   },
 
   build: {
+    standalone: true,
     parallel: true,
-    hardSource: true,
     cache: true,
     html: {
       minify: {
