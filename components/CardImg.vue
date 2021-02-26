@@ -19,8 +19,16 @@
       <div class="flex items-center justify-between mx-20">
         <!-- Rating Bubble -->
         <div class="flex flex-col text-center mr-4 cursor-pointer">
-          <div class="card--detail__toggle-container-filled">
-            <span class="card--detail__toggle-icon-white text-lg"> A </span>
+          <div
+            class="card--detail__toggle-container-filled"
+            :class="{
+              'bg-charcoal border border-white': highRating === false,
+              'bg-persian-green': highRating === true,
+            }"
+          >
+            <span class="card--detail__toggle-icon-white text-lg">
+              {{ card.rating[0].rating }}
+            </span>
           </div>
           <span class="card--detail__toggle-text">Rating</span>
         </div>
@@ -114,6 +122,21 @@ export default {
     cardFace() {
       return this.card.card_faces[this.face].image_uris.border_crop
     },
+    highRating() {
+      /**
+       * Checks if 'A' or 'B' ratings are within the
+       * ratingList.
+       * Primarily used to determine styling.
+       */
+      return this.ratingList.some((r) => ['A', 'B'].includes(r))
+    },
+    ratingList() {
+      /**
+       * Returns the card rating split into a list.
+       * example: "A+" => ["A", "+"]
+       */
+      return [...this.card.rating[0].rating]
+    },
   },
   methods: {
     ...mapActions(['toggleExpandedImage']),
@@ -141,7 +164,7 @@ export default {
   @apply rounded-full bg-white p-2 w-10 h-10 flex items-center justify-center border border-persian-green;
 }
 .card--detail__toggle-container-filled {
-  @apply rounded-full bg-persian-green p-2 w-10 h-10 flex items-center justify-center;
+  @apply rounded-full p-2 w-10 h-10 flex items-center justify-center;
 }
 .card--detail__toggle-icon {
   @apply text-persian-green;

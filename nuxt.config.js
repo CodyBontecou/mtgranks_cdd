@@ -1,4 +1,6 @@
 import axios from 'axios'
+const getKhmRatings = () =>
+  import('./data/lolahman/khm.json').then((m) => m.default || m)
 
 const setObjects = [
   {
@@ -14,97 +16,97 @@ const setObjects = [
     filterType: 'set',
     retrieved: false,
   },
-  {
-    name: 'Zendikar Rising',
-    code: 'ZNR',
-    icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/znr.svg',
-    cardCount: '220',
-    color: 'black-gold',
-    type: 'new',
-    slug: 'zendikar-rising',
-    isChecked: false,
-    label: 'ZNR',
-    filterType: 'set',
-    retrieved: false,
-  },
-  {
-    name: 'Ikoria: Lair of Behemoths',
-    code: 'IKO',
-    icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/iko.svg',
-    cardCount: '264',
-    color: 'orange-red',
-    type: 'new',
-    slug: 'ikoria-lair-of-behemoths',
-    isChecked: false,
-    label: 'IKO',
-    filterType: 'set',
-    retrieved: false,
-  },
-  {
-    name: 'Core 2021',
-    code: 'M21',
-    icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/m21.svg',
-    cardCount: '264',
-    color: 'black-green',
-    type: 'new',
-    slug: 'core-2021',
-    isChecked: false,
-    label: 'M21',
-    filterType: 'set',
-    retrieved: false,
-  },
-  {
-    name: 'Theros Beyond Death',
-    code: 'THB',
-    icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/thb.svg',
-    cardCount: '220',
-    color: 'ash',
-    type: 'old',
-    slug: 'theros-beyond-death',
-    isChecked: false,
-    label: 'THB',
-    filterType: 'set',
-    retrieved: false,
-  },
-  {
-    name: 'Throne of Eldraine',
-    code: 'ELD',
-    icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/eld.svg',
-    cardCount: '264',
-    color: 'teal',
-    type: 'old',
-    slug: 'throne-of-eldraine',
-    isChecked: false,
-    label: 'ELD',
-    filterType: 'set',
-    retrieved: false,
-  },
-  {
-    name: 'Core 2020',
-    code: 'M20',
-    icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/m20.svg',
-    cardCount: '264',
-    color: 'mandarin',
-    type: 'old',
-    slug: 'core-2020',
-    isChecked: false,
-    label: 'M20',
-    filterType: 'set',
-    retrieved: false,
-  },
-  {
-    name: 'War of the Spark',
-    code: 'WAR',
-    icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/war.svg',
-    cardCount: '264',
-    color: 'peach',
-    type: 'old',
-    slug: 'war-of-the-spark',
-    isChecked: false,
-    label: 'WAR',
-    filterType: 'set',
-    retrieved: false,
-  },
+  // {
+  //   name: 'Zendikar Rising',
+  //   code: 'ZNR',
+  //   icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/znr.svg',
+  //   cardCount: '220',
+  //   color: 'black-gold',
+  //   type: 'new',
+  //   slug: 'zendikar-rising',
+  //   isChecked: false,
+  //   label: 'ZNR',
+  //   filterType: 'set',
+  //   retrieved: false,
+  // },
+  // {
+  //   name: 'Ikoria: Lair of Behemoths',
+  //   code: 'IKO',
+  //   icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/iko.svg',
+  //   cardCount: '264',
+  //   color: 'orange-red',
+  //   type: 'new',
+  //   slug: 'ikoria-lair-of-behemoths',
+  //   isChecked: false,
+  //   label: 'IKO',
+  //   filterType: 'set',
+  //   retrieved: false,
+  // },
+  // {
+  //   name: 'Core 2021',
+  //   code: 'M21',
+  //   icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/m21.svg',
+  //   cardCount: '264',
+  //   color: 'black-green',
+  //   type: 'new',
+  //   slug: 'core-2021',
+  //   isChecked: false,
+  //   label: 'M21',
+  //   filterType: 'set',
+  //   retrieved: false,
+  // },
+  // {
+  //   name: 'Theros Beyond Death',
+  //   code: 'THB',
+  //   icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/thb.svg',
+  //   cardCount: '220',
+  //   color: 'ash',
+  //   type: 'old',
+  //   slug: 'theros-beyond-death',
+  //   isChecked: false,
+  //   label: 'THB',
+  //   filterType: 'set',
+  //   retrieved: false,
+  // },
+  // {
+  //   name: 'Throne of Eldraine',
+  //   code: 'ELD',
+  //   icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/eld.svg',
+  //   cardCount: '264',
+  //   color: 'teal',
+  //   type: 'old',
+  //   slug: 'throne-of-eldraine',
+  //   isChecked: false,
+  //   label: 'ELD',
+  //   filterType: 'set',
+  //   retrieved: false,
+  // },
+  // {
+  //   name: 'Core 2020',
+  //   code: 'M20',
+  //   icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/m20.svg',
+  //   cardCount: '264',
+  //   color: 'mandarin',
+  //   type: 'old',
+  //   slug: 'core-2020',
+  //   isChecked: false,
+  //   label: 'M20',
+  //   filterType: 'set',
+  //   retrieved: false,
+  // },
+  // {
+  //   name: 'War of the Spark',
+  //   code: 'WAR',
+  //   icon: 'https://c2.scryfall.com/file/scryfall-symbols/sets/war.svg',
+  //   cardCount: '264',
+  //   color: 'peach',
+  //   type: 'old',
+  //   slug: 'war-of-the-spark',
+  //   isChecked: false,
+  //   label: 'WAR',
+  //   filterType: 'set',
+  //   retrieved: false,
+  // },
 ]
 
 const validKeys = [
@@ -222,10 +224,14 @@ export default {
     async routes() {
       const routesToGenerate = []
       let i
+      const khmRatings = await getKhmRatings()
+      const khmSet = khmRatings[0]['Set']
+
+      console.log(khmRatings[0]['Name'])
 
       for (i = 0; i < setObjects.length; i++) {
         const set = setObjects[i]
-        const cards = []
+        let cards = []
 
         await axios
           .get(
@@ -237,6 +243,49 @@ export default {
           })
           .then((response) => {
             cards.push(...response.data.data)
+
+            cards = cards.map((card) => {
+              Object.keys(card).forEach(
+                (key) => validKeys.includes(key) || delete card[key]
+              )
+              card.slug = generateSlug(card.name)
+              if (set.code === khmSet) {
+                khmRatings.forEach((rating) => {
+                  if (rating['Name'] === card.name) {
+                    card.rating = [
+                      {
+                        rator: {
+                          name: 'Justlolaman',
+                        },
+                        rating: rating['JustLolaman'],
+                        reason:
+                          'Best cards in the format. Bombs. Completely changes the game in your\n' +
+                          '      favor. Will almost single handedly win you the game.',
+                      },
+                      {
+                        rator: {
+                          name: 'M0bieus',
+                        },
+                        rating: rating['M0bieus'],
+                        reason:
+                          'Best cards in the format. Bombs. Completely changes the game in your\n' +
+                          '      favor. Will almost single handedly win you the game.',
+                      },
+                      {
+                        rator: {
+                          name: 'Scottynada',
+                        },
+                        rating: rating['Scottynada'],
+                        reason:
+                          'Best cards in the format. Bombs. Completely changes the game in your\n' +
+                          '      favor. Will almost single handedly win you the game.',
+                      },
+                    ]
+                  }
+                })
+              }
+              return card
+            })
 
             if (i === 0) {
               routesToGenerate.push({
@@ -251,16 +300,13 @@ export default {
             }
 
             const cardRoutes = cards.map((card) => {
-              Object.keys(card).forEach(
-                (key) => validKeys.includes(key) || delete card[key]
-              )
-              card.slug = generateSlug(card.name)
               return {
                 route: '/set/' + set.slug + '/' + card.slug + '/',
                 payload: { set, card, cards },
               }
             })
 
+            console.log(cards[0])
             routesToGenerate.push(setRoutes)
             routesToGenerate.push(...cardRoutes)
           })

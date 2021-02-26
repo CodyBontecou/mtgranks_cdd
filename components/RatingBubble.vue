@@ -24,7 +24,7 @@ export default {
   computed: {
     highRating() {
       /**
-       * Checks it 'A' or 'B' ratings are within the
+       * Checks if 'A' or 'B' ratings are within the
        * ratingList.
        * Primarily used to determine styling.
        */

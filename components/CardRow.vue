@@ -3,10 +3,10 @@
     class="flex items-end hover:text-gray-600 cursor-pointer rounded p-1 hover:shadow"
     @click="activateCard"
   >
-    <RatingBubble class="shadow-lg" :rating="randomizedRating" />
-    <span class="text-18 font-medium ml-6 mb-1 justify-self-end">{{
-      cardName
-    }}</span>
+    <RatingBubble class="shadow-lg" :rating="computedRating" />
+    <span class="text-18 font-medium ml-6 mb-1 justify-self-end">
+      {{ cardName }}
+    </span>
   </div>
 </template>
 
@@ -31,6 +31,9 @@ export default {
       ratings: ['A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F'],
     }
   },
+  mounted() {
+    console.log(this.card)
+  },
   computed: {
     ...mapGetters(['set']),
     cardName() {
@@ -42,6 +45,14 @@ export default {
     },
     randomizedRating() {
       return this.ratings[Math.floor(Math.random() * this.ratings.length)]
+    },
+    computedRating() {
+      try {
+        return this.card.rating[0].rating
+      } catch (e) {
+        console.log(e)
+        return 'N/A'
+      }
     },
   },
   watch: {
