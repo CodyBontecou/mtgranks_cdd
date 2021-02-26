@@ -222,97 +222,101 @@ export default {
   generate: {
     crawler: false,
     async routes() {
-      const routesToGenerate = []
-      let i
-      const khmRatings = await getKhmRatings()
-      const khmSet = khmRatings[0]['Set']
-
-      console.log(khmRatings[0]['Name'])
-
-      for (i = 0; i < setObjects.length; i++) {
-        const set = setObjects[i]
-        let cards = []
-
-        await axios
-          .get(
-            `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
-          )
-          .then((res) => {
-            cards.push(...res.data.data)
-            return axios.get(res.data.next_page)
-          })
-          .then((response) => {
-            cards.push(...response.data.data)
-
-            cards = cards.map((card) => {
-              Object.keys(card).forEach(
-                (key) => validKeys.includes(key) || delete card[key]
-              )
-              card.slug = generateSlug(card.name)
-              if (set.code === khmSet) {
-                khmRatings.forEach((rating) => {
-                  if (rating['Name'] === card.name) {
-                    card.rating = [
-                      {
-                        rator: {
-                          name: 'Justlolaman',
-                        },
-                        rating: rating['JustLolaman'],
-                        reason:
-                          'Best cards in the format. Bombs. Completely changes the game in your\n' +
-                          '      favor. Will almost single handedly win you the game.',
-                      },
-                      {
-                        rator: {
-                          name: 'M0bieus',
-                        },
-                        rating: rating['M0bieus'],
-                        reason:
-                          'Best cards in the format. Bombs. Completely changes the game in your\n' +
-                          '      favor. Will almost single handedly win you the game.',
-                      },
-                      {
-                        rator: {
-                          name: 'Scottynada',
-                        },
-                        rating: rating['Scottynada'],
-                        reason:
-                          'Best cards in the format. Bombs. Completely changes the game in your\n' +
-                          '      favor. Will almost single handedly win you the game.',
-                      },
-                    ]
-                  }
-                })
-              }
-              return card
-            })
-
-            if (i === 0) {
-              routesToGenerate.push({
-                route: '/',
-                payload: { set, cards },
-              })
-            }
-
-            const setRoutes = {
-              route: '/set/' + set.slug + '/',
-              payload: { set, cards },
-            }
-
-            const cardRoutes = cards.map((card) => {
-              return {
-                route: '/set/' + set.slug + '/' + card.slug + '/',
-                payload: { set, card, cards },
-              }
-            })
-
-            console.log(cards[0])
-            routesToGenerate.push(setRoutes)
-            routesToGenerate.push(...cardRoutes)
-          })
-      }
-      return routesToGenerate
+      console.log('routes called')
+      return []
     },
+    // async routes() {
+    //   const routesToGenerate = []
+    //   let i
+    //   const khmRatings = await getKhmRatings()
+    //   const khmSet = khmRatings[0]['Set']
+    //
+    //   console.log(khmRatings[0]['Name'])
+    //
+    //   for (i = 0; i < setObjects.length; i++) {
+    //     const set = setObjects[i]
+    //     let cards = []
+    //
+    //     await axios
+    //       .get(
+    //         `https://api.scryfall.com/cards/search?q=set:${set.code}+is:booster`
+    //       )
+    //       .then((res) => {
+    //         cards.push(...res.data.data)
+    //         return axios.get(res.data.next_page)
+    //       })
+    //       .then((response) => {
+    //         cards.push(...response.data.data)
+    //
+    //         cards = cards.map((card) => {
+    //           Object.keys(card).forEach(
+    //             (key) => validKeys.includes(key) || delete card[key]
+    //           )
+    //           card.slug = generateSlug(card.name)
+    //           if (set.code === khmSet) {
+    //             khmRatings.forEach((rating) => {
+    //               if (rating['Name'] === card.name) {
+    //                 card.rating = [
+    //                   {
+    //                     rator: {
+    //                       name: 'Justlolaman',
+    //                     },
+    //                     rating: rating['JustLolaman'],
+    //                     reason:
+    //                       'Best cards in the format. Bombs. Completely changes the game in your\n' +
+    //                       '      favor. Will almost single handedly win you the game.',
+    //                   },
+    //                   {
+    //                     rator: {
+    //                       name: 'M0bieus',
+    //                     },
+    //                     rating: rating['M0bieus'],
+    //                     reason:
+    //                       'Best cards in the format. Bombs. Completely changes the game in your\n' +
+    //                       '      favor. Will almost single handedly win you the game.',
+    //                   },
+    //                   {
+    //                     rator: {
+    //                       name: 'Scottynada',
+    //                     },
+    //                     rating: rating['Scottynada'],
+    //                     reason:
+    //                       'Best cards in the format. Bombs. Completely changes the game in your\n' +
+    //                       '      favor. Will almost single handedly win you the game.',
+    //                   },
+    //                 ]
+    //               }
+    //             })
+    //           }
+    //           return card
+    //         })
+    //
+    //         if (i === 0) {
+    //           routesToGenerate.push({
+    //             route: '/',
+    //             payload: { set, cards },
+    //           })
+    //         }
+    //
+    //         const setRoutes = {
+    //           route: '/set/' + set.slug + '/',
+    //           payload: { set, cards },
+    //         }
+    //
+    //         const cardRoutes = cards.map((card) => {
+    //           return {
+    //             route: '/set/' + set.slug + '/' + card.slug + '/',
+    //             payload: { set, card, cards },
+    //           }
+    //         })
+    //
+    //         console.log(cards[0])
+    //         routesToGenerate.push(setRoutes)
+    //         routesToGenerate.push(...cardRoutes)
+    //       })
+    //   }
+    //   return routesToGenerate
+    // },
   },
 
   build: {
