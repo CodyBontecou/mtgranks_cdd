@@ -50,7 +50,8 @@ export default {
       try {
         return this.card.rating[0].rating
       } catch (e) {
-        console.log(e)
+        // console.log(this.card)
+        // console.log(e)
         return 'N/A'
       }
     },

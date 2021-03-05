@@ -109,6 +109,34 @@ const setObjects = [
   // },
 ]
 
+const ratingReasons = [
+  {
+    rating: 'A',
+    reason:
+      'Best cards in the format. Bombs. Completely changes the game in your favor. Will almost single handedly win you the game.',
+  },
+  {
+    rating: 'B',
+    reason:
+      "These cards are amazing. Efficient removal. Overstatted creatures. Powerful manasinks. Anything that is above the curve for it's manacost.",
+  },
+  {
+    rating: 'C',
+    reason:
+      'Cards that are fine on curve. You are not very excited to play them but not sad to play them either. Most of your deck will probably consist of cards in this rank. Sometimes, cards in this rank will not make the cut for the final deck.',
+  },
+  {
+    rating: 'D',
+    reason:
+      'Ranges from medium to bad filler; cards in this tier get cut a lot and require specific decks to be good playables - if your deck really needs a 2 drop, you have specific synergy with the card or the card fills a weakness the deck has for example.',
+  },
+  {
+    rating: 'F',
+    reason:
+      "Unplayable. These cards can't even fill out the gaping holes in your curve. Cards that hurt you more than they help you.",
+  },
+]
+
 const validKeys = [
   'name',
   'lang',
@@ -227,8 +255,6 @@ export default {
       const khmRatings = await getKhmRatings()
       const khmSet = khmRatings[0]['Set']
 
-      console.log(khmRatings[0]['Name'])
-
       for (i = 0; i < setObjects.length; i++) {
         const set = setObjects[i]
         let cards = []
@@ -251,34 +277,36 @@ export default {
               card.slug = generateSlug(card.name)
               if (set.code === khmSet) {
                 khmRatings.forEach((rating) => {
-                  if (rating['Name'] === card.name) {
+                  const ratingSlug = generateSlug(rating['Name'])
+                  console.log(ratingSlug)
+                  if (card.slug.includes(ratingSlug)) {
                     card.rating = [
                       {
                         rator: {
                           name: 'Justlolaman',
                         },
                         rating: rating['JustLolaman'],
-                        reason:
-                          'Best cards in the format. Bombs. Completely changes the game in your\n' +
-                          '      favor. Will almost single handedly win you the game.',
+                        reason: ratingReasons.find((r) =>
+                          r.rating.includes(rating['JustLolaman'][0].charAt(0))
+                        )['reason'],
                       },
                       {
                         rator: {
                           name: 'M0bieus',
                         },
                         rating: rating['M0bieus'],
-                        reason:
-                          'Best cards in the format. Bombs. Completely changes the game in your\n' +
-                          '      favor. Will almost single handedly win you the game.',
+                        reason: ratingReasons.find((r) =>
+                          r.rating.includes(rating['M0bieus'][0].charAt(0))
+                        )['reason'],
                       },
                       {
                         rator: {
                           name: 'Scottynada',
                         },
                         rating: rating['Scottynada'],
-                        reason:
-                          'Best cards in the format. Bombs. Completely changes the game in your\n' +
-                          '      favor. Will almost single handedly win you the game.',
+                        reason: ratingReasons.find((r) =>
+                          r.rating.includes(rating['Scottynada'][0].charAt(0))
+                        )['reason'],
                       },
                     ]
                   }
@@ -306,7 +334,6 @@ export default {
               }
             })
 
-            console.log(cards[0])
             routesToGenerate.push(setRoutes)
             routesToGenerate.push(...cardRoutes)
           })
