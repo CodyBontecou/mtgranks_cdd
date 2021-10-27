@@ -5,7 +5,7 @@ context('Navigation', () => {
     cy.window()
       .then((win) => (cards = win.store.getters.cards))
       .then(() => {
-        expect(cards.length).to.equal(285)
+        expect(cards.length).to.equal(280)
       })
   })
 
