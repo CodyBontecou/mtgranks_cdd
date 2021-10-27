@@ -336,8 +336,8 @@ export default {
               //         },
               //       ]
               //     }
-                })
-              }
+              //   })
+              // }
               return card
             })
 
