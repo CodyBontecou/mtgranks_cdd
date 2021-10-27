@@ -2,7 +2,7 @@
   <div v-if="card" class="z-40 flex flex-col order-2 justify-center">
     <CardImg :card="card" />
     <p class="mx-20 text-sm text-white leading-160 font-medium">
-      {{ card.rating[0].reason }}
+      {{ ratingReason }}
     </p>
   </div>
 </template>
@@ -21,6 +21,11 @@ export default {
       expanded: 'expanded',
       card: 'card',
     }),
+    ratingReason() {
+      try {
+        return this.card.rating[0].reason
+      } catch (e) {}
+    },
   },
 }
 </script>
