@@ -1,5 +1,19 @@
 import * as sets from '../data/util/sets.json'
 
+const validKeys = [
+  'name',
+  'lang',
+  'image_uris',
+  'card_faces',
+  'colors',
+  'set',
+  'set_name',
+  'prices',
+  'purchase_uris',
+]
+
+const ratings = ['A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F']
+
 function generateCardSlug(card) {
   return card.name
     .replace(/[/:.,']/g, '')
@@ -62,7 +76,38 @@ export const actions = {
     }
 
     if (data.length > 0) {
-      data.forEach((card) => (card.slug = generateCardSlug(card)))
+      data.forEach((card) => {
+        Object.keys(card).forEach(
+          (key) => validKeys.includes(key) || delete card[key]
+        )
+        card.slug = generateCardSlug(card)
+        card.rating = [
+          {
+            rator: {
+              name: 'Justlolaman',
+            },
+            rating: ratings[Math.floor(Math.random() * ratings.length)],
+            reason:
+              'This is where the reasoning behind the card rating will go.',
+          },
+          {
+            rator: {
+              name: 'M0bieus',
+            },
+            rating: ratings[Math.floor(Math.random() * ratings.length)],
+            reason:
+              'This is where the reasoning behind the card rating will go.',
+          },
+          {
+            rator: {
+              name: 'Scottynada',
+            },
+            rating: ratings[Math.floor(Math.random() * ratings.length)],
+            reason:
+              'This is where the reasoning behind the card rating will go.',
+          },
+        ]
+      })
       commit('updateCards', data)
     }
   },

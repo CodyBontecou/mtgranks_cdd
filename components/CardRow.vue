@@ -31,9 +31,6 @@ export default {
       ratings: ['A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F'],
     }
   },
-  mounted() {
-    // console.log(this.card)
-  },
   computed: {
     ...mapGetters(['set']),
     cardName() {
@@ -50,8 +47,6 @@ export default {
       try {
         return this.card.rating[0].rating
       } catch (e) {
-        // console.log(this.card)
-        // console.log(e)
         return ''
       }
     },

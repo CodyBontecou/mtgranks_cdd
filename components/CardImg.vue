@@ -27,7 +27,7 @@
             }"
           >
             <span class="card--detail__toggle-icon-white text-lg">
-              {{ card.rating[0].rating }}
+              {{ computedRating }}
             </span>
           </div>
           <span class="card--detail__toggle-text">Rating</span>
@@ -135,7 +135,19 @@ export default {
        * Returns the card rating split into a list.
        * example: "A+" => ["A", "+"]
        */
-      return [...this.card.rating[0].rating]
+      if (this.card.rating) {
+        // return this.card.rating[0].rating.split('')
+        return [...this.card.rating[0].rating]
+      } else {
+        return []
+      }
+    },
+    computedRating() {
+      try {
+        return this.card.rating[0].rating
+      } catch (e) {
+        return ''
+      }
     },
   },
   methods: {
