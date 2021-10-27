@@ -109,6 +109,8 @@ const setObjects = [
   },
 ]
 
+const ratings = ['A+', 'A', 'B+', 'B', 'C+', 'C', 'D+', 'D', 'F']
+
 const ratingReasons = [
   {
     rating: 'A',
