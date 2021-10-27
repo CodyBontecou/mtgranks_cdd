@@ -24,7 +24,9 @@ export default {
     ratingReason() {
       try {
         return this.card.rating[0].reason
-      } catch (e) {}
+      } catch (e) {
+        return 'This is where the reasoning behind the card rating will go.'
+      }
     },
   },
 }
