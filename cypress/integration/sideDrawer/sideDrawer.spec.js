@@ -49,7 +49,7 @@ context('SideDrawer', () => {
   it('Copy URL button copies the URL to the users clipboard', () => {
     cy.visit('http://localhost:3000/set/kaldheim/ascendant-spirit')
 
-    cy.get('#copy-url').click()
+    cy.get('#copy-url').realClick()
     cy.task('getClipboard').should(
       'eq',
       'https://mtgranks.com/set/kaldheim/ascendant-spirit'
