@@ -54,21 +54,6 @@ export default {
     FilterMenu: FilterMenu,
   },
   async asyncData({ params, payload, store }) {
-    if (payload) {
-      store.commit('setSet', payload.set)
-      store.commit('setCards', payload.cards)
-      if (params.card) {
-        store.commit('_setCard', payload.card)
-      }
-    } else {
-      if (
-        store.getters.cards.length === 0 ||
-        store.getters.cards[0].set_name !== store.getters.set.name
-      ) {
-        await store.dispatch('_getCards')
-      }
-    }
-
     let setSlug = params.set
     if (!setSlug) {
       setSlug = 'kaldheim'
@@ -93,6 +78,20 @@ export default {
       )
       if (!store.getters.sideDrawerExpanded) {
         await store.dispatch('setSideDrawerExpanded', true)
+      }
+    }
+    if (payload) {
+      store.commit('setSet', payload.set)
+      store.commit('setCards', payload.cards)
+      if (params.card) {
+        store.commit('_setCard', payload.card)
+      }
+    } else {
+      if (
+        store.getters.cards.length === 0 ||
+        store.getters.cards[0].set_name !== store.getters.set.name
+      ) {
+        await store.dispatch('_getCards')
       }
     }
   },
@@ -147,7 +146,7 @@ export default {
               })
               return set && this.cardColor(card).length > 1
             } catch (e) {
-              console.log(card)
+              // console.log(card)
             }
           })
         } catch (e) {
