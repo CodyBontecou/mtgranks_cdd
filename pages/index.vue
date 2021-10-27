@@ -71,15 +71,6 @@ export default {
       await store.dispatch('filters/toggleOption', { option, boolean })
     }
 
-    if (params.card) {
-      await store.dispatch(
-        '_setCard',
-        store.getters.cards.find((card) => card.slug === params.card)
-      )
-      if (!store.getters.sideDrawerExpanded) {
-        await store.dispatch('setSideDrawerExpanded', true)
-      }
-    }
     if (payload) {
       store.commit('setSet', payload.set)
       store.commit('setCards', payload.cards)
@@ -92,6 +83,16 @@ export default {
         store.getters.cards[0].set_name !== store.getters.set.name
       ) {
         await store.dispatch('_getCards')
+      }
+    }
+
+    if (params.card) {
+      await store.dispatch(
+        '_setCard',
+        store.getters.cards.find((card) => card.slug === params.card)
+      )
+      if (!store.getters.sideDrawerExpanded) {
+        await store.dispatch('setSideDrawerExpanded', true)
       }
     }
   },
