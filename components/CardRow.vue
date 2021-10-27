@@ -32,7 +32,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.card)
+    // console.log(this.card)
   },
   computed: {
     ...mapGetters(['set']),
@@ -52,7 +52,7 @@ export default {
       } catch (e) {
         // console.log(this.card)
         // console.log(e)
-        return 'N/A'
+        return ''
       }
     },
   },
