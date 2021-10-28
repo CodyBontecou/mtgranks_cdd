@@ -367,4 +367,21 @@ export default {
       return routesToGenerate
     },
   },
+
+  build: {
+    standalone: true,
+    parallel: true,
+    cache: true,
+    html: {
+      minify: {
+        minifyCSS: false,
+        minifyJS: false,
+      },
+    },
+    loaders: {
+      vue: {
+        prettify: false,
+      },
+    },
+  },
 }
