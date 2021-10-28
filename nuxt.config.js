@@ -1,6 +1,5 @@
 import axios from 'axios'
-const getKhmRatings = () =>
-  import('./data/lolahman/khm.json').then((m) => m.default || m)
+import * as khmRatings from './data/lolahman/khm.json'
 
 const setObjects = [
   {
@@ -254,7 +253,6 @@ export default {
     async routes() {
       const routesToGenerate = []
       let i
-      const khmRatings = await getKhmRatings()
       const khmSet = khmRatings[0]['Set']
 
       for (i = 0; i < setObjects.length; i++) {
@@ -367,23 +365,6 @@ export default {
           })
       }
       return routesToGenerate
-    },
-  },
-
-  build: {
-    standalone: true,
-    parallel: true,
-    cache: true,
-    html: {
-      minify: {
-        minifyCSS: false,
-        minifyJS: false,
-      },
-    },
-    loaders: {
-      vue: {
-        prettify: false,
-      },
     },
   },
 }

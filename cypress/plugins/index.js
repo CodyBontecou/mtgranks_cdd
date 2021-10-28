@@ -15,7 +15,9 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-const clipboardy = require('clipboardy')
+// const clipboardy = require('clipboardy')
+import clipboardy from 'clipboardy'
+
 module.exports = (on) => {
   on('task', {
     getClipboard() {
