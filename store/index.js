@@ -1,4 +1,4 @@
-import * as sets from '../data/util/sets.json'
+import sets from '../data/util/sets.json'
 
 const validKeys = [
   'name',

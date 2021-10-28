@@ -1,5 +1,44 @@
 [
   {
+    "name": "Innistrad: Midnight Hunt",
+    "code": "MID",
+    "icon": "https://c2.scryfall.com/file/scryfall-symbols/sets/mid.svg",
+    "cardCount": "266",
+    "color": "black-gold",
+    "type": "new",
+    "slug": "innistrad-midnight-hunt",
+    "isChecked": false,
+    "label": "MID",
+    "filterType": "sets",
+    "retrieved": false
+  },
+  {
+    "name": "Adventures in the Forgotten Realms",
+    "code": "AFR",
+    "icon": "https://c2.scryfall.com/file/scryfall-symbols/sets/afr.svg",
+    "cardCount": "266",
+    "color": "black-gold",
+    "type": "new",
+    "slug": "adventures-in-the-forgotten-realms",
+    "isChecked": false,
+    "label": "AFR",
+    "filterType": "sets",
+    "retrieved": false
+  },
+  {
+    "name": "Strixhaven: School of Mages",
+    "code": "STX",
+    "icon": "https://c2.scryfall.com/file/scryfall-symbols/sets/stx.svg",
+    "cardCount": "280",
+    "color": "black-gold",
+    "type": "new",
+    "slug": "strixhaven-school-of-mages",
+    "isChecked": false,
+    "label": "STX",
+    "filterType": "sets",
+    "retrieved": false
+  },
+  {
      "name": "Kaldheim",
      "code": "KHM",
      "icon": "https://c2.scryfall.com/file/scryfall-symbols/sets/khm.svg",
@@ -9,7 +48,7 @@
      "slug": "kaldheim",
      "isChecked": false,
      "label": "KHM",
-     "filterType": "set",
+     "filterType": "sets",
      "retrieved": false
   },
   {
@@ -22,7 +61,7 @@
      "slug": "zendikar-rising",
      "isChecked": false,
      "label": "ZNR",
-     "filterType": "set",
+     "filterType": "sets",
      "retrieved": false
   },
   {
@@ -35,7 +74,7 @@
      "slug": "ikoria-lair-of-behemoths",
      "isChecked": false,
      "label": "IKO",
-     "filterType": "set",
+     "filterType": "sets",
      "retrieved": false
   },
   {
@@ -48,7 +87,7 @@
      "slug": "core-2021",
      "isChecked": false,
      "label": "M21",
-     "filterType": "set",
+     "filterType": "sets",
      "retrieved": false
   },
   {
@@ -61,7 +100,7 @@
      "slug": "theros-beyond-death",
      "isChecked": false,
      "label": "THB",
-     "filterType": "set",
+     "filterType": "sets",
      "retrieved": false
   },
   {
@@ -74,7 +113,7 @@
      "slug": "throne-of-eldraine",
      "isChecked": false,
      "label": "ELD",
-     "filterType": "set",
+     "filterType": "sets",
      "retrieved": false
   },
   {
@@ -87,7 +126,7 @@
      "slug": "core-2020",
      "isChecked": false,
      "label": "M20",
-     "filterType": "set",
+     "filterType": "sets",
      "retrieved": false
   },
   {
@@ -100,7 +139,7 @@
      "slug": "war-of-the-spark",
      "isChecked": false,
      "label": "WAR",
-     "filterType": "set",
+     "filterType": "sets",
      "retrieved": false
   }
 ]

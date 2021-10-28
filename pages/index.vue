@@ -41,6 +41,7 @@ alias:
 </router>
 
 <script>
+import setsData from '../data/util/sets.json'
 import { mapActions, mapGetters } from 'vuex'
 import Column from '~/components/Column'
 import SideDrawer from '~/components/SideDrawer/SideDrawer'
@@ -56,7 +57,7 @@ export default {
   async asyncData({ params, payload, store }) {
     let setSlug = params.set
     if (!setSlug) {
-      setSlug = 'kaldheim'
+      setSlug = setsData[0].slug
     }
 
     const option = store.getters['filters/filters'].sets.options.find(
@@ -68,6 +69,8 @@ export default {
 
     if (!store.getters.set.isChecked) {
       const boolean = true
+      console.log(option.filterType)
+      console.log(store.getters['filters/filters'])
       await store.dispatch('filters/toggleOption', { option, boolean })
     }
 
