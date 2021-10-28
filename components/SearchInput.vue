@@ -33,7 +33,7 @@
       <li
         v-for="(result, i) in slicedResults"
         :key="i"
-        class="p-2 flex rounded-sm autocomplete-result hover:bg-gray-200 cursor-pointer group hover:bg-gray-1"
+        class="p-2 flex rounded-sm autocomplete-result cursor-pointer group hover:bg-gray-100"
         :class="{
           'rounded-b-2xl': i === slicedResults.length - 1,
         }"
