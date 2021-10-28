@@ -101,5 +101,3 @@ cypress/integration/examples
 
 # Local Netlify folder
 .netlify
-
-yarn.lock
