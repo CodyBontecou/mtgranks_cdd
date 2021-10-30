@@ -3,7 +3,7 @@
     <div
       class="relative rounded p-2 flex flex-row-reverse bg-white items-center justify-center shadow-2xl hover:shadow-lg border border-ash border-opacity-25 cursor-pointer"
     >
-      <div class="self-end" @click="toggleFilters">
+      <div data-cy="filterMenu" class="self-end" @click="toggleFilters">
         <button
           class="flex items-center justify-between focus:outline-none hover:opacity-50 opacity-75"
           :class="{
@@ -21,13 +21,20 @@
         </button>
       </div>
 
-      <div v-if="filters.isExpanded" class="focus:outline-none flex">
+      <div
+        data-cy="filterOptions"
+        v-if="filters.isExpanded"
+        :class="{ open: filters.isExpanded }"
+        class="focus:outline-none flex"
+      >
+        <!-- Colors and Sets toggles -->
         <div
           v-for="(filter, childIndex) in filterSet"
           :key="`child-${childIndex + 1}`"
           class="mr-6 flex flex-col-reverse"
         >
           <button
+            :data-cy="filter.name"
             class="flex items-center justify-between hover:opacity-50 opacity-75 focus:outline-none"
             :class="{
               'opacity-100': filter.isExpanded,
@@ -36,15 +43,21 @@
           >
             {{ filter.name }}
             <RightArrow
-              class="h-4 w-4 ml-1 -mr-1 transform transition-transform duration-150 ease-in-out hover:opacity-75 opacity-50"
+              class="h-4 w-4 ml-1 -mr-1 transform transition-transsform duration-150 ease-in-out hover:opacity-75 opacity-50"
               :class="{
                 'opacity-100 -rotate-90': filter.isExpanded,
                 'rotate-0': !filter.isExpanded,
               }"
             />
           </button>
-          <div v-if="filter.isExpanded" class="flex flex-col">
+          <div
+            :data-cy="filter.name + '-column'"
+            v-if="filter.isExpanded"
+            :class="{ open: filters.isExpanded }"
+            class="flex flex-col"
+          >
             <label
+              :data-cy="`child-${childIndex + 1}-option-${optionIndex + 1}`"
               v-for="(option, optionIndex) in filter.options"
               :key="`child-${childIndex + 1}-option-${optionIndex + 1}`"
               class="checkbox flex items-center justify-between cursor-pointer font-normal hover:opacity-75 opacity-100"
