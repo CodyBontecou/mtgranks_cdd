@@ -15,13 +15,13 @@
 /**
  * @type {Cypress.PluginConfig}
  */
+// import clipboard from 'clipboardy'
 // const clipboardy = require('clipboardy')
-import clipboardy from 'clipboardy'
 
 module.exports = (on) => {
-  on('task', {
-    getClipboard() {
-      return clipboardy.readSync()
-    },
-  })
+  // on('task', {
+  //   getClipboard() {
+  //     return clipboardy.readSync()
+  //   },
+  // })
 }

@@ -46,7 +46,7 @@ context('SideDrawer', () => {
       )
   })
 
-  it('Copy URL button copies the URL to the users clipboard', () => {
+  it.skip('Copy URL button copies the URL to the users clipboard', () => {
     cy.visit('http://localhost:3000/set/kaldheim/ascendant-spirit')
 
     cy.get('#copy-url').realClick()
