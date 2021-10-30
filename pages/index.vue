@@ -69,8 +69,6 @@ export default {
 
     if (!store.getters.set.isChecked) {
       const boolean = true
-      console.log(option.filterType)
-      console.log(store.getters['filters/filters'])
       await store.dispatch('filters/toggleOption', { option, boolean })
     }
 
@@ -134,7 +132,6 @@ export default {
       _setCard: '_setCard',
       setActiveSets: 'setActiveSets',
       setSideDrawerExpanded: 'setSideDrawerExpanded',
-      toggleOption: 'filters/toggleOption',
     }),
     cardsByColor(color) {
       if (!color.isChecked) {
@@ -150,7 +147,7 @@ export default {
               })
               return set && this.cardColor(card).length > 1
             } catch (e) {
-              // console.log(card)
+              console.log(card)
             }
           })
         } catch (e) {
