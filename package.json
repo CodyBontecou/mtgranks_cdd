@@ -14,14 +14,11 @@
     "cypress:run": "cypress run"
   },
   "dependencies": {
-    "@babel/preset-env": "7.15.8",
     "@nuxtjs/axios": "^5.12.2",
-    "@nuxtjs/pwa": "^3.0.2",
     "@nuxtjs/router-extras": "^1.1.1",
     "@nuxtjs/sitemap": "^2.4.0",
     "nuxt": "^2.15.1",
     "nuxt-i18n": "^6.15.4",
-    "stripe": "^8.129.0",
     "vue-disqus": "^4.0.1",
     "vuelidate": "^0.7.6"
   },

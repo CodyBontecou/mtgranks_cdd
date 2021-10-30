@@ -32,6 +32,30 @@ const ratingReasons = [
   },
 ]
 
+const lohlamanRatings = [
+  {
+    rator: {
+      name: 'Justlolaman',
+    },
+    rating: ratings[Math.floor(Math.random() * ratings.length)],
+    reason: 'This is where the reasoning behind the card rating will go.',
+  },
+  {
+    rator: {
+      name: 'M0bieus',
+    },
+    rating: ratings[Math.floor(Math.random() * ratings.length)],
+    reason: 'This is where the reasoning behind the card rating will go.',
+  },
+  {
+    rator: {
+      name: 'Scottynada',
+    },
+    rating: ratings[Math.floor(Math.random() * ratings.length)],
+    reason: 'This is where the reasoning behind the card rating will go.',
+  },
+]
+
 const validKeys = [
   'name',
   'lang',
@@ -53,6 +77,12 @@ function generateSlug(string) {
 }
 
 export default {
+  // vue: {
+  //   config: {
+  //     productionTip: false,
+  //     devtools: true,
+  //   },
+  // },
   target: 'static',
 
   head: {
@@ -107,7 +137,6 @@ export default {
 
   modules: [
     '@nuxtjs/axios',
-    '@nuxtjs/pwa',
     'nuxt-i18n',
     '@nuxtjs/router-extras',
     '@nuxtjs/sitemap',
@@ -147,7 +176,6 @@ export default {
     async routes() {
       const routesToGenerate = []
       let i
-      const khmSet = khmRatings[0]['Set']
 
       for (i = 0; i < setObjects.length; i++) {
         const set = setObjects[i]
@@ -169,69 +197,7 @@ export default {
                 (key) => validKeys.includes(key) || delete card[key]
               )
               card.slug = generateSlug(card.name)
-              card.rating = [
-                {
-                  rator: {
-                    name: 'Justlolaman',
-                  },
-                  rating: ratings[Math.floor(Math.random() * ratings.length)],
-                  reason:
-                    'This is where the reasoning behind the card rating will go.',
-                },
-                {
-                  rator: {
-                    name: 'M0bieus',
-                  },
-                  rating: ratings[Math.floor(Math.random() * ratings.length)],
-                  reason:
-                    'This is where the reasoning behind the card rating will go.',
-                },
-                {
-                  rator: {
-                    name: 'Scottynada',
-                  },
-                  rating: ratings[Math.floor(Math.random() * ratings.length)],
-                  reason:
-                    'This is where the reasoning behind the card rating will go.',
-                },
-              ]
-              // if (set.code === khmSet) {
-              //   khmRatings.forEach((rating) => {
-              //     const ratingSlug = generateSlug(rating['Name'])
-              //     console.log(ratingSlug)
-              //     if (card.slug.includes(ratingSlug)) {
-              //       card.rating = [
-              //         {
-              //           rator: {
-              //             name: 'Justlolaman',
-              //           },
-              //           rating: rating['JustLolaman'],
-              //           reason: ratingReasons.find((r) =>
-              //             r.rating.includes(rating['JustLolaman'][0].charAt(0))
-              //           )['reason'],
-              //         },
-              //         {
-              //           rator: {
-              //             name: 'M0bieus',
-              //           },
-              //           rating: rating['M0bieus'],
-              //           reason: ratingReasons.find((r) =>
-              //             r.rating.includes(rating['M0bieus'][0].charAt(0))
-              //           )['reason'],
-              //         },
-              //         {
-              //           rator: {
-              //             name: 'Scottynada',
-              //           },
-              //           rating: rating['Scottynada'],
-              //           reason: ratingReasons.find((r) =>
-              //             r.rating.includes(rating['Scottynada'][0].charAt(0))
-              //           )['reason'],
-              //         },
-              //       ]
-              //     }
-              //   })
-              // }
+              card.rating = lohlamanRatings
               return card
             })
 
