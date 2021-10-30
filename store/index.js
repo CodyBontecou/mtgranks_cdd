@@ -108,7 +108,8 @@ export const actions = {
           },
         ]
       })
-      commit('updateCards', data)
+      // commit('updateCards', data)
+      commit('setCards', data)
     }
   },
 
